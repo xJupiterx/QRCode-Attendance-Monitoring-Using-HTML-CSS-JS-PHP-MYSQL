@@ -50,11 +50,9 @@
                                             <i data-feather="lock"></i>
                                         </div>
                                     </div>
-									<div class="clearfix">
-                                        <a href="try.php" class='float-end'>
-                                            <small>Forgot password?</small>
-                                        </a>
-                                    </div>
+									<a href="printdata.php" class='float-end'>
+                                        <small>Forgot password?</small>
+                                    </a>
                                 </div>
                                 <?php if(count($errors) > 0):?>
                                 <div class="form-group position-relative has-icon-left">
@@ -74,6 +72,9 @@
                                 </div>
 								<div class="clearfix">
 									<input type="submit" name="Login" value="LOGIN" class="btn btn-primary float-end">
+								</div>
+                                <div class="clearfix">
+									<input type="submit" name="subjects" value="Print Array" class="btn btn-primary float-end">
 								</div>
                             </form>
 							<br><br>

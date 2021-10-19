@@ -105,6 +105,9 @@
                     <div class="row mb-4">
                         <div class="col-md-6">
 							<div class = "card h-100">
+								<div class="card-header" style="background-color: #3acf61">
+									<a style="color: white" href="dean-qrscanner.php" method="subjects"><center><strong>Click <u>here</u> to Open QR Scanner.</strong></center></a>
+								</div>
 								<div id="calendar"></div>
 							</div>
 						</div>
@@ -321,7 +324,6 @@
 			var outer = createElement('div', this.getDayClass(day));
 			outer.addEventListener('click', function() {
 			  self.openDay(this);
-			  window.location.href="dean-qrscanner.php";
 			});
 
 			//Day Name

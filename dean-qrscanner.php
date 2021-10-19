@@ -148,18 +148,18 @@
                 <section class="section">
                     <div class="row mb-4">
                         <div class="col-md-8">
-                            <div class="card ">
-                                <div class="card-header" style="background-color: #3acf61">
+                            <div class="card">
+                                <div class='card-header' style='background-color: #3acf61;'>
                                     <center><h4 style="color: white"><strong>Scan QR Code</strong></h4></center>
                                 </div>
-                                <center><div class="square"></div></center>
+                                <center><div class='square' style='padding:20px'></div></center>
                                 <div class="card-footer" style="background-color: #3acf61; height: 60px; position: sticky; padding: 20px;">
                                     <center><p style="color: #b31d2c"><strong>Scanning...</strong></p></center>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card">
+                            <div class="card" style="position:relative; height:200px">
                                 <div class="card-header" style="background-color: #3acf61">
                                     <h4 style="color:white"><center>Subject - Section Selector</center></h4>
                                 </div>
@@ -173,37 +173,16 @@
                                                         <p style= "font-size:16px;"><strong>Select Subject:</strong></p>
                                                     </center>
                                                     <div class="dropdown">
-                                                        <Select class="body_text" name="subject" onchange="getSubject(this)">
+                                                        <Select class="body_text" name="subject" onchange="getSubject()" id='SelectedSubject'>
                                                             <option value="Please Select"> Please Select </option>
-                                                            <option value="Subject 1"> Subject 1 </option>
-                                                            <option value="Subject 2"> Subject 2 </option>
-                                                            <option value="Subject 3"> Subject 3 </option>
-                                                            <option value="Subject 4"> Subject 4 </option>
-                                                            <option value="Subject 5"> Subject 5 </option>
-                                                            <option value="Subject 6"> Subject 6 </option>
-                                                            <option value="Subject 7"> Subject 7 </option>
-                                                            <option value="Subject 8"> Subject 8 </option>
-                                                            <option value="Subject 9"> Subject 9 </option>    
+                                                            <?php include("PHPRequestDatas/subjects.php"); ?> 
                                                         </select>
                                                         <br><br>
-                                                        <div id="subject" style="color:Green; font-size: 13px; font-weight:bold"> </div>
+                                                        <div id="subject" style="color:Green; font-size: 13px; font-weight:bold; position:relative"> </div>
                                                     </div>
                                                     <script language="JavaScript">
-                                                        var SSubject = new Array()
-                                                        SSubject[0] = "Please Select Subject!"
-                                                        SSubject[1] = "Subject 1 Selected!"
-                                                        SSubject[2] = "Subject 2 Selected!"
-                                                        SSubject[3] = "Subject 3 Selected!"
-                                                        SSubject[4] = "Subject 4 Selected!"
-                                                        SSubject[5] = "Subject 5 Selected!"
-                                                        SSubject[6] = "Subject 6 Selected!"
-                                                        SSubject[7] = "Subject 7 Selected!"
-                                                        SSubject[8] = "Subject 8 Selected!"
-                                                        SSubject[9] = "Subject 9 Selected!"
-
-                                                        function getSubject(slction){
-                                                        txtSelected = slction.selectedIndex;
-                                                        document.getElementById('subject').innerHTML = SSubject[txtSelected];
+                                                        function getSubject() {
+                                                            document.getElementById("subject").innerHTML = document.getElementById("SelectedSubject").value
                                                         }
                                                     </script>
                                                 </div>
@@ -214,42 +193,36 @@
                                                         <p style= "font-size:16px;"><strong>Select Section:</strong></p>
                                                     </center>
                                                     <div class="dropdown">
-                                                        <Select class="body_text" name="section" onchange="getSection(this)">
+                                                        <Select class="body_text" name="section" onchange="getSection()" id='SelectedSection'>
                                                             <option value="Please Select"> Please Select </option>
-                                                            <option value="Section 1"> Section 1 </option>
-                                                            <option value="Section 2"> Section 2 </option>
-                                                            <option value="Section 3"> Section 3 </option>
-                                                            <option value="Section 4"> Section 4 </option>
-                                                            <option value="Section 5"> Section 5 </option>
-                                                            <option value="Section 6"> Section 6 </option>
-                                                            <option value="Section 7"> Section 7 </option>
-                                                            <option value="Section 8"> Section 8 </option>
-                                                            <option value="Section 9"> Section 9 </option>    
+                                                            <?php include("PHPRequestDatas/sections.php"); ?>
                                                         </select>
                                                         <br><br>
-                                                        <div id="section" style="color:Green; font-size: 13px; font-weight:bold"> </div>
+                                                        <div id="section" style="color:Green; font-size: 13px; font-weight:bold; position:relative"> </div>
                                                     </div>
                                                     <script language="JavaScript">
-                                                        var SSection = new Array()
-                                                        SSection[0] = "Please Select Section!"
-                                                        SSection[1] = "Section 1 Selected!"
-                                                        SSection[2] = "Section 2 Selected!"
-                                                        SSection[3] = "Section 3 Selected!"
-                                                        SSection[4] = "Section 4 Selected!"
-                                                        SSection[5] = "Section 5 Selected!"
-                                                        SSection[6] = "Section 6 Selected!"
-                                                        SSection[7] = "Section 7 Selected!"
-                                                        SSection[8] = "Section 8 Selected!"
-                                                        SSection[9] = "Subject 9 Selected!"
-
-                                                        function getSection(Section){
-                                                        SectionSelected = Section.selectedIndex;
-                                                        document.getElementById('section').innerHTML = SSection[SectionSelected];
+                                                        function getSection() {
+                                                            document.getElementById("section").innerHTML = document.getElementById("SelectedSection").value
                                                         }
                                                     </script>
                                                 </div>
                                             </div>
                                         </diV>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style='height: 200px; position:relative; top:90px'>
+                                <div class="card-header" style="background-color: #7a7777">
+                                    <h4 style="color:white"><center>Student ID Manual Selector</center></h4>
+                                </div>
+                                <div class="card-body">
+                                    <br>
+                                    <div class="position-relative" style='width:100%;'>
+                                        <input type="text" name="StudID" class="form-control" id="StudID" placeholder='Enter Student ID'>
+                                    </div>
+                                    <br>
+                                    <div style='position:relative;'>
+                                        <input type="submit" name="selectStud" value="Select Student" class="btn btn-primary float-end">
                                     </div>
                                 </div>
                             </div>
@@ -267,5 +240,4 @@
     <script src="assets/js/pages/dashboard.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
-
 </html>

@@ -1,32 +1,36 @@
-<?php
-	include 'server.php';
-	if (isset($_POST["import"])) {
-		$fileName = $_FILES["file"]["tmp_name"];
-		$accesslevel = "STUDENT";
-		if ($_FILES["file"]["size"] > 0) {
-			$file = fopen($fileName, "r");
-			$find_header=1;
-			while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
-				$find_header++;
-				if( $find_header > 2 ) {
-					$sqlInsert = "INSERT into student (student_id, lastname, firstname, middlename, username, email, password, course, year, section)
-						   values ('" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[3] . "','" . $column[1] . "','" . $column[4] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "')";
-					$addStudentAcc = "INSERT INTO user (lastname,firstname,middlename,username,email,password,accesslevel)
-						   values ('" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[3] . "','" . $column[1] . "','" . $column[4] . "','$accesslevel')";
-					$result = mysqli_query($db, $sqlInsert);
-					mysqli_query($db, $addStudentAcc);
-					if (!empty($result)) {
-						$type = "success";
-						$message = "CSV Data Imported into the Database";
-					} else {
-						$type = "error";
-						$message = "Problem in Importing CSV Data";
-					}
+<?php include 'server.php'; 
+if (isset($_POST["import"])) {
+	$fileName = $_FILES["file"]["tmp_name"];
+	$accesslevel = "STUDENT";
+	if ($_FILES["file"]["size"] > 0) {
+		$file = fopen($fileName, "r");
+		$find_header=1;
+		while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
+			$find_header++;
+			if( $find_header > 2 ) {
+				$sqlInsert = "INSERT into student (student_id, lastname, firstname, middlename, username, email, password, course, year, section,
+								subject1, section1, subject2, section2, subject3, section3, subject4, section4, subject5, section5,
+								subject6, section6, subject7, section7, subject8, section8, subject9, section9, subject10, section10)
+					   values ('" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[3] . "','" . $column[1] . "','" . $column[4] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "'
+					   			,'" . $column[10] . "','" . $column[11] . "','" . $column[13] . "','" . $column[14] . "','" . $column[16] . "','" . $column[17] . "'
+								,'" . $column[19] . "','" . $column[20] . "','" . $column[22] . "','" . $column[23] . "','" . $column[25] . "','" . $column[26] . "'
+								,'" . $column[28] . "','" . $column[29] . "','" . $column[31] . "','" . $column[32] . "','" . $column[34] . "','" . $column[35] . "'
+								,'" . $column[37] . "','" . $column[38] . "')";
+				$addStudentAcc = "INSERT INTO user (lastname,firstname,middlename,username,email,password,accesslevel)
+					   values ('" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[3] . "','" . $column[1] . "','" . $column[4] . "','$accesslevel')";
+				$result = mysqli_query($db, $sqlInsert);
+				mysqli_query($db, $addStudentAcc);
+				if (!empty($result)) {
+					$type = "success";
+					$message = "CSV Data Imported into the Database";
+				} else {
+					$type = "error";
+					$message = "Problem in Importing CSV Data";
 				}
 			}
 		}
 	}
-
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +64,7 @@
 </head>
 
 <body>
-    <div id="app">
+<div id="app">
         <div id="sidebar" class='active'>
             <div class="sidebar-wrapper active">
                 <center>
@@ -88,10 +92,10 @@
                             </a>
                             <ul class="submenu " style="background-color: #e3e3e3">
                                 <li>
-                                    <a href="student_info.php">View Student's Information</a>
+                                    <a href="dean-student-info.php">View Student's Information</a>
                                 </li>
                                 <li>
-                                    <a href="dean-page.php">View Student's Attendance</a>
+                                    <a href="dean-student-attendance.php">View Student's Attendance</a>
                                 </li>
                             </ul>
                         </li>
@@ -180,18 +184,39 @@
 										
 							if (mysqli_num_rows($result) > 0) {
 						?>
-						<div class="col-md-12">
+						<div class="col-md-12" style="overflow: scroll; height:500px; width:100%;">
 							<table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
 								<thead>
 									<tr>
-										<th style = "width:8%; font-size: 14px">Student_ID</th>
-										<th style = "width:8%; font-size: 14px"><center>Last name</center></th>
-										<th style = "width:8%; font-size: 14px"><center>First name</center></th>
+										<th style = "width:10%; font-size: 14px">Student_ID</th>
+										<th style = "width:10%; font-size: 14px"><center>Last name</center></th>
+										<th style = "width:10%; font-size: 14px"><center>First name</center></th>
 										<th style = "width:10%; font-size: 14px"><center>Middle name</center></th>
 										<th style = "width:10%; font-size: 14px">Email</th>
 										<th style = "width:10%; font-size: 14px">Username</th>
 										<th style = "width:10%; font-size: 14px">Password</th>
-										<th style = "width:8%; font-size: 14px">Course-Year-Section</th>
+										<th style = "width:10%; font-size: 14px">Course-Year-Section</th>
+										<th style = "width:10%; font-size: 14px">Subject#1</th>
+										<th style = "width:10%; font-size: 14px">Section#1</th>
+										<th style = "width:10%; font-size: 14px">Subject#2</th>
+										<th style = "width:10%; font-size: 14px">Section#2</th>
+										<th style = "width:10%; font-size: 14px">Subject#3</th>
+										<th style = "width:10%; font-size: 14px">Section#3</th>
+										<th style = "width:10%; font-size: 14px">Subject#4</th>
+										<th style = "width:10%; font-size: 14px">Section#4</th>
+										<th style = "width:10%; font-size: 14px">Subject#5</th>
+										<th style = "width:10%; font-size: 14px">Section#5</th>
+										<th style = "width:10%; font-size: 14px">Subject#6</th>
+										<th style = "width:10%; font-size: 14px">Section#6</th>
+										<th style = "width:10%; font-size: 14px">Subject#7</th>
+										<th style = "width:10%; font-size: 14px">Section#7</th>
+										<th style = "width:10%; font-size: 14px">Subject#8</th>
+										<th style = "width:10%; font-size: 14px">Section#8</th>
+										<th style = "width:10%; font-size: 14px">Subject#9</th>
+										<th style = "width:10%; font-size: 14px">Section#9</th>
+										<th style = "width:10%; font-size: 14px">Subject#10</th>
+										<th style = "width:10%; font-size: 14px">Section#10</th>
+
 									</tr>
 								</thead>
 								<?php
@@ -207,6 +232,26 @@
 										<td><?php  echo $row['username']; ?></td>
 										<td><?php  echo $row['password']; ?></td>
 										<td><?php  echo $row['course']; ?><?php  echo $row['year']; ?>-<?php  echo $row['section']; ?></td>
+										<td><?php  echo $row['subject1']; ?></td>
+										<td><?php  echo $row['section1']; ?></td>
+										<td><?php  echo $row['subject2']; ?></td>
+										<td><?php  echo $row['section2']; ?></td>
+										<td><?php  echo $row['subject3']; ?></td>
+										<td><?php  echo $row['section3']; ?></td>
+										<td><?php  echo $row['subject4']; ?></td>
+										<td><?php  echo $row['section4']; ?></td>
+										<td><?php  echo $row['subject5']; ?></td>
+										<td><?php  echo $row['section5']; ?></td>
+										<td><?php  echo $row['subject6']; ?></td>
+										<td><?php  echo $row['section6']; ?></td>
+										<td><?php  echo $row['subject7']; ?></td>
+										<td><?php  echo $row['section7']; ?></td>
+										<td><?php  echo $row['subject8']; ?></td>
+										<td><?php  echo $row['section8']; ?></td>
+										<td><?php  echo $row['subject9']; ?></td>
+										<td><?php  echo $row['section9']; ?></td>
+										<td><?php  echo $row['subject10']; ?></td>
+										<td><?php  echo $row['section10']; ?></td>
 									</tr>
 								<?php
 								}
@@ -248,8 +293,9 @@
 		});
 	</script>
 	<script>
+		var message = <?php $message ?>;
 		function myFunction() {
-		  alert("Congratulations, Database successfully Updated!");
+		  alert(message);
 		}
 	</script>
 	<script>
@@ -288,7 +334,6 @@
 		  }
 		}
 	</script>
-	
 	<script>
 		$(document).ready(function () {
 		$('#myTable').DataTable({

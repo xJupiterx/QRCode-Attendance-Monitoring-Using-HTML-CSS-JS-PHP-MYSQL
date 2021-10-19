@@ -114,7 +114,6 @@
                                     <p>Register Faculty Account.</p>
                                 </div>
                                 <form action="register.php" method="POST">
-                                    <?php include('errors.php') ?>
                                     <div class="row">
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
@@ -162,12 +161,7 @@
                                     <div class="clearfix">
                                         <input onclick="myFunction()" type="submit" name="Register" value="SIGN UP" class="btn btn-primary float-end" style="margin-right: 200px;">
                                     </div>
-                                </form>
-                                <div class="divider">
-                                    <div class="divider-text">OR</div>
-                                </div>
-                                <form>
-                                    <input type="button" value="CANCEL" onclick="history.back()" class="btn btn-primary float-end" style="background-color: #d62747">
+                                    <br>
                                 </form>
                             </div>
                         </div>
