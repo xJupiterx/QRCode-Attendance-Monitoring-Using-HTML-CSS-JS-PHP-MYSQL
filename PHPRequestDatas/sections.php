@@ -28,5 +28,4 @@
         for($y = 0; $y<$scounter; $y++){
             echo "<option value='$sections[$y]'>$sections[$y]</option>";
         }
-        echo 'var js_section = '.json_encode($arr).';';
 ?>

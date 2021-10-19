@@ -10,7 +10,8 @@ $email = "";
 $password = "";
 $accesslevel = "FACULTY";
 $errors = array();
-
+$errorcount = 0; //for $_POST selectStud (dean-qrscanner function)
+$sserrorcount = 0; //for user not selecting in dropdown (dean-qrscanner function)
 $db = mysqli_connect('localhost','root','','accounts') or die('could not connect ');
 
 
@@ -289,12 +290,103 @@ if (isset($_POST['Delete_Records'])) {
 }
 
 if (isset($_POST['subjects'])) {
-	$savedSQL = 'SELECT subject1 FROM students;';
-	$savedQuery = mysqli_query($savedSQL);
+	header("location: printdata.php");
+}
 
-	while($savedResult = mysqli_fetch_array($savedQuery)) {
-		$savedArray[] = $savedResult[0];
-	  }
-	  header("location: printdata.php");
+if (isset($_POST['selectStud'])) {
+	$student_id= mysqli_real_escape_string($db,$_POST['student_id']);
+	$subject=$_POST['subject'];
+	$section=$_POST['section'];
+	$sqlSelect = "SELECT * FROM student";
+    $result = mysqli_query($db, $sqlSelect);
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_array($result)) {
+			if($row['student_id']==$student_id){
+				if (($section == 'Please Select') or ($subject == 'Please Select')) {
+					$sserrors = 'Please Select Section/ Subject!';
+					$sserrorcount = 1;
+				}
+				else{
+					//display lastname depends on student_id
+					$lastquery = "SELECT lastname FROM student WHERE student_id = '$student_id'";
+					$lquery = mysqli_query($db,$lastquery);
+					$lastnamequery = mysqli_fetch_assoc($lquery);
+					$lastname = reset($lastnamequery);
+					
+					//display firstname depends on student_id
+					$firstquery = "SELECT firstname FROM student WHERE student_id = '$student_id'";
+					$fquery = mysqli_query($db,$firstquery);
+					$firstnamequery = mysqli_fetch_assoc($fquery);
+					$firstname = reset($firstnamequery);
+					
+					//display middlename depends on student_id
+					$midquery = "SELECT middlename FROM student WHERE student_id = '$student_id'";
+					$mquery = mysqli_query($db,$midquery);
+					$middlenamequery = mysqli_fetch_assoc($mquery);
+					$middlename = reset($middlenamequery);
+					
+					//display course depends on student_id
+					$course = "SELECT course FROM student WHERE student_id = '$student_id'";
+					$course = mysqli_query($db,$course);
+					$course = mysqli_fetch_assoc($course);
+					$course = reset($course);
+					
+					//display year depends on student_id
+					$year = "SELECT year FROM student WHERE student_id = '$student_id'";
+					$year = mysqli_query($db,$year);
+					$year = mysqli_fetch_assoc($year);
+					$year = reset($year);
+					
+					//display section depends on student_id
+					$ssection = "SELECT section FROM student WHERE student_id = '$student_id'";
+					$ssection = mysqli_query($db,$ssection);
+					$ssection = mysqli_fetch_assoc($ssection);
+					$ssection = reset($ssection);
+
+					$_SESSION['sstudent_id'] = $student_id ;
+					$_SESSION['slastname'] = $lastname ;
+					$_SESSION['sfirstname'] = $firstname ;
+					$_SESSION['smiddlename'] = $middlename ;
+					$_SESSION['selectedsubject'] = $subject ;
+					$_SESSION['selectedsection'] = $section ;
+					$_SESSION['scourse'] = $course ;
+					$_SESSION['syear'] = $year ;
+					$_SESSION['ssection'] = $ssection ;
+					if($section == ($course.$year.'-'.$ssection)){
+						$outcome = 'Student '.$student_id.' matched with selected section.';
+					}
+					else{
+						$outcome = 'Student '.$student_id." didn't matched with selected section.";
+					}
+					$sqlSelect = "SELECT * FROM student";
+					$result = mysqli_query($db, $sqlSelect);
+					if (mysqli_num_rows($result) > 0) {
+						while ($row = mysqli_fetch_array($result)) {
+							if($row['student_id']==$student_id){
+								for($i = 1; $i<=10;$i++){
+									$subjectcounter = 'subject'.strval($i);
+									if($row[$subjectcounter]==$subject){
+										$soutcome = 'Student '.$student_id.' was enrolled in this subject.';
+									}
+								}
+								$soutcome = 'Student '.$student_id.' was not enrolled in this subject.';
+							}
+						}
+					}
+					$_SESSION['sectionoutcome'] = $outcome;
+					$_SESSION['subjectoutcome'] = $soutcome;
+					header("location: dean-scannedqr.php");
+				}
+			}
+		}
+		if (empty($student_id)) {
+			$errors = 'Please Enter Student ID!';
+			$errorcount = 1;
+		}
+		else{
+			$errors = "Student ID Didn't Match!";
+			$errorcount = 1;
+		}
+	}
 }
 ?>

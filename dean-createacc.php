@@ -157,7 +157,7 @@
                                                     name="password">
                                             </div>
                                         </div>
-                                    </diV>
+                                    </div>
                                     <div class="clearfix">
                                         <input onclick="myFunction()" type="submit" name="Register" value="SIGN UP" class="btn btn-primary float-end" style="margin-right: 200px;">
                                     </div>

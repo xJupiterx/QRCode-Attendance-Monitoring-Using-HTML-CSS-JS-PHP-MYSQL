@@ -142,111 +142,62 @@
 
             <div class="main-content container-fluid">
                 <div class="page-title">
-                    <h3>Attendance Recording</h3>
+                    <h3>Scanned QR Details</h3>
                 </div>
 				<br>
                 <section class="section">
-                    <form class="row mb-4" action="dean-qrscanner.php" method="POST">
+                    <div class="row mb-4">
                         <div class="col-md-8">
                             <div class="card">
                                 <div class='card-header' style='background-color: #3acf61;'>
-                                    <center><h4 style="color: white"><strong>Scan QR Code</strong></h4></center>
+                                    <center><h4 style="color: white"><strong>Student Details</strong></h4></center>
                                 </div>
-                                <center><div class='square' style='padding:20px'></div></center>
-                                <div class="card-footer" style="background-color: #3acf61; height: 60px; position: sticky; padding: 20px;">
-                                    <center><p style="color: #b31d2c"><strong>Scanning...</strong></p></center>
+                                <div class='card-body'>
+                                    <br>
+                                    <h4><center><strong>Student ID: </strong><?php echo $_SESSION['sstudent_id'] ?></center></h4>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-4 col-12">
+                                            <p><strong>Last Name: </strong><u><?php echo $_SESSION['slastname'] ?></u></p>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <p><strong>First Name: </strong><u><?php echo $_SESSION['sfirstname'] ?></u></p>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <p><strong>Middle Name: </strong><u><?php echo $_SESSION['smiddlename'] ?></u></p>
+                                        </div>
+                                    </div>
+                                    <p><strong>Course Year Section: </strong><u><?php echo $_SESSION['scourse'] ?><?php echo $_SESSION['syear'] ?>-<?php echo $_SESSION['ssection'] ?></u></p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card" style="position:relative; height:200px">
+                            <div class="card">
                                 <div class="card-header" style="background-color: #3acf61">
-                                    <h4 style="color:white"><center>Subject - Section Selector</center></h4>
+                                    <h4 style="color:white"><center>Selected Subject and Section</center></h4>
                                 </div>
                                 <div class="card-body">
                                     <br>
                                     <div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div>
-                                                    <center>
-                                                        <p style= "font-size:16px;"><strong>Select Subject:</strong></p>
-                                                    </center>
-                                                    <div class="dropdown">
-                                                        <Select class="body_text" name="subject" onchange="getSubject()" id='SelectedSubject'>
-                                                            <option value="Please Select"> Please Select </option>
-                                                            <?php include("PHPRequestDatas/subjects.php"); ?> 
-                                                        </select>
-                                                        <br><br>
-                                                        <div id="subject" style="color:Green; font-size: 13px; font-weight:bold; position:relative"> </div>
-                                                    </div>
-                                                    <script language="JavaScript">
-                                                        function getSubject() {
-                                                            document.getElementById("subject").innerHTML = document.getElementById("SelectedSubject").value
-                                                        }
-                                                    </script>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div>
-                                                    <center>
-                                                        <p style= "font-size:16px;"><strong>Select Section:</strong></p>
-                                                    </center>
-                                                    <div class="dropdown">
-                                                        <Select class="body_text" name="section" onchange="getSection()" id='SelectedSection'>
-                                                            <option value="Please Select"> Please Select </option>
-                                                            <?php include("PHPRequestDatas/sections.php"); ?>
-                                                        </select>
-                                                        <br><br>
-                                                        <div id="section" style="color:Green; font-size: 13px; font-weight:bold; position:relative"> </div>
-                                                    </div>
-                                                    <script language="JavaScript">
-                                                        function getSection() {
-                                                            document.getElementById("section").innerHTML = document.getElementById("SelectedSection").value
-                                                        }
-                                                    </script>
-                                                </div>
-                                            </div>
-                                            <?php if($sserrorcount > 0):?>
-                                                <div class="form-group position-relative has-icon-left">
-                                                    <div class="position-relative">
-                                                        <div class="form-control-icon">
-                                                            <i data-feather="alert-circle" style="color:red"></i>
-                                                        </div>
-                                                        <center><p style="color:red"><?php echo $sserrors?></p></center>
-                                                        </div>
-                                                </div>
-                                            <?php endif ?>
-                                        </div>
-                                    </div>
+                                        <p><center><strong>Selected Subject: </strong><u><?php echo $_SESSION['selectedsubject'] ?></u></center></p>
+                                        <p><center><strong>Selected Section: </strong><u><?php echo $_SESSION['selectedsection'] ?></u></center></p>
+                                    </div>                                            
                                 </div>
                             </div>
-                            <div class="card" style='height: 225px; position:relative; top:67px'>
-                                <div class="card-header" style="background-color: #7a7777">
-                                    <h4 style="color:white"><center>Student ID Manual Selector</center></h4>
+                            <div class="card">
+                                <div class="card-header" style="background-color: #3acf61">
+                                    <h4 style="color:white"><center>Selected Subject and Section</center></h4>
                                 </div>
                                 <div class="card-body">
                                     <br>
-                                    <div class="position-relative" style='width:100%;'>
-                                        <input type="text" name="student_id" class="form-control" id="student_id" placeholder='Enter Student ID'>
-                                    </div>
-                                    <?php if($errorcount > 0):?>
-                                        <div class="form-group position-relative has-icon-left">
-                                            <div class="position-relative">
-                                                <div class="form-control-icon">
-                                                    <i data-feather="alert-circle" style="color:red"></i>
-                                                </div>
-                                                <center><p style="color:red"><?php echo $errors?></p></center>
-                                            </div>
-                                        </div>
-                                    <?php endif ?>
-                                    <div class="clearfix" style='position:relative;'>
-                                        <input type="submit" name="selectStud" value="Select Student" class="btn btn-primary float-end">
-                                    </div>
+                                    <div>
+                                        <p><center><strong>Result: </strong><?php echo $_SESSION['sectionoutcome'] ?></center></p>
+                                        <p><center><strong>Result: </strong><?php echo $_SESSION['subjectoutcome'] ?></center></p>
+                                    </div>                                            
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </section>
             </div>
         </div>
