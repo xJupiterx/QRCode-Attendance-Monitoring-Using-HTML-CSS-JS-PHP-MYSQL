@@ -284,11 +284,40 @@ if (isset($_POST['Login'])) {
 	}
 }
 
-if (isset($_POST['Delete_Records'])) {
-	$userquery = "TRUNCATE TABLE student";
-	$query = mysqli_query($db,$userquery);
+if (isset($_POST["import"])) {
+	$sqlSelect = "SELECT * FROM student";
+    $result = mysqli_query($db, $sqlSelect);
+	$fileName = $_FILES["file"]["tmp_name"];
+	$accesslevel = "STUDENT";
+	if ($_FILES["file"]["size"] > 0) {
+		$file = fopen($fileName, "r");
+		$find_header=1;
+		while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
+			$find_header++;
+			if( $find_header > 2 ) {
+				$sqlInsert = "INSERT into student (student_id, lastname, firstname, middlename, username, email, password, course, year, section,
+								subject1, section1, subject2, section2, subject3, section3, subject4, section4, subject5, section5,
+								subject6, section6, subject7, section7, subject8, section8, subject9, section9, subject10, section10)
+					   values ('" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[3] . "','" . $column[1] . "','" . $column[4] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "'
+					   			,'" . $column[10] . "','" . $column[11] . "','" . $column[13] . "','" . $column[14] . "','" . $column[16] . "','" . $column[17] . "'
+								,'" . $column[19] . "','" . $column[20] . "','" . $column[22] . "','" . $column[23] . "','" . $column[25] . "','" . $column[26] . "'
+								,'" . $column[28] . "','" . $column[29] . "','" . $column[31] . "','" . $column[32] . "','" . $column[34] . "','" . $column[35] . "'
+								,'" . $column[37] . "','" . $column[38] . "')";
+				$addStudentAcc = "INSERT INTO user (lastname,firstname,middlename,username,email,password,accesslevel)
+					   values ('" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[3] . "','" . $column[1] . "','" . $column[4] . "','$accesslevel')";
+				$result = mysqli_query($db, $sqlInsert);
+				mysqli_query($db, $addStudentAcc);
+				if (!empty($result)) {
+					$type = "success";
+					$message = "CSV Data Imported into the Database";
+				} else {
+					$type = "error";
+					$message = "Problem in Importing CSV Data";
+				}
+			}
+		}
+	}
 }
-
 if (isset($_POST['subjects'])) {
 	header("location: printdata.php");
 }
