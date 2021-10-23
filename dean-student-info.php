@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Database</title>
+    <title>Student Information</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/vendors/chartjs/Chart.min.css">
 	<link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
@@ -122,7 +122,7 @@
                                 </div>
                             </div>
                         </div>
-						<div class="col-md-12">
+						<form class="col-md-12" method='post'>
 							<table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
 								<thead>
 									<tr>
@@ -132,6 +132,7 @@
 										<th style = "width:8%; font-size: 14px" onclick="sort(3)">Middle name</th>
 										<th style = "width:8%; font-size: 14px" onclick="sort(4)">Email</th>
 										<th style = "width:8%; font-size: 14px" onclick="sort(5)">Course-Year-Section</th>
+										<th style = "width:8%; font-size: 14px">Action</th>
 									</tr>
 								</thead>
 								<?php
@@ -139,19 +140,35 @@
 								?>
 								<tbody>
 									<tr>
-										<td><?php  echo $row['student_id']; ?></td>
+										<td style="color:blue">
+											<div>
+												<input type="submit" name="StudentViewer" value=<?php  echo $row['student_id']; ?> style="background-color:white; border:none; color: blue">
+											</div>
+										</td>
 										<td><?php  echo $row['lastname']; ?></td>
 										<td><?php  echo $row['firstname']; ?></td>
 										<td><?php  echo $row['middlename']; ?></td>
 										<td><?php  echo $row['email']; ?></td>
 										<td><center><?php  echo $row['course']; ?><?php  echo $row['year']; ?>-<?php  echo $row['section']; ?></center></td>
+										<td>	
+											<!-- <select style="width: 100%" onChange="window.document.location.href=this.options[this.selectedIndex].value;" value="GO">
+												<option value="dean-student-info.php">Action</option>
+												<option value="printdata.php">Edit Student Courses</option>
+												<option value="#">View Student Attendance</option>
+											</select> -->
+											<select style="width: 100%">
+												<option>Action</option>
+												<option>Edit Student Courses</option>
+												<option>View Student Attendance</option>
+											</select>
+										</td>
 									</tr>
 								<?php
 								}
 								?>
 								</tbody>
 							</table>
-						</div>
+						</form>
 					</div>
 				</section>
             </div>
@@ -264,6 +281,16 @@
 			  }
 			}
 		  }
+		}
+	</script>
+	<script>
+		$("#table tr").click(function(){
+		$(this).addClass('selected').siblings().removeClass('selected');    
+		var value=$(this).find('td:first').html();
+		});
+		function fnselect(){
+
+		alert($("tr.selected td:first" ).html());
 		}
 	</script>
 </body>

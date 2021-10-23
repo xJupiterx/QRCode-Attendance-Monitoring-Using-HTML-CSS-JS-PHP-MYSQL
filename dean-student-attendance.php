@@ -129,7 +129,7 @@
                                                     <th>First name</th>
                                                     <th>Course-Year-Section</th>
                                                     <th>Subject Code</th>
-													<th>Status</th>
+													<th>Remarks</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

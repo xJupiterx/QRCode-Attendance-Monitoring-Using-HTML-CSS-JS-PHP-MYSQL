@@ -1,7 +1,7 @@
 <?php
     include('server.php');
     $subjects = [];
-    $sqlSelect = "SELECT * FROM student";
+    $sqlSelect = "SELECT * FROM courses_enrolled";
     $result = mysqli_query($db, $sqlSelect);
     if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_array($result)) {

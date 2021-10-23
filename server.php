@@ -9,9 +9,8 @@ $username = "";
 $email = "";
 $password = "";
 $accesslevel = "FACULTY";
-$errors = array();
-$errorcount = 0; //for $_POST selectStud (dean-qrscanner function)
-$sserrorcount = 0; //for user not selecting in dropdown (dean-qrscanner function)
+$errors = []; //array for errors in login and faculty account
+$sserrorcount = 0; // scanned student error counter for dean-qrscanner
 $db = mysqli_connect('localhost','root','','accounts') or die('could not connect ');
 
 
@@ -285,9 +284,13 @@ if (isset($_POST['Login'])) {
 }
 
 if (isset($_POST["import"])) {
+	$semester=$_POST['semester'];
+	$startyear=$_POST['startyear'];
+	$endyear=$_POST['endyear'];
 	$sqlSelect = "SELECT * FROM student";
     $result = mysqli_query($db, $sqlSelect);
 	$fileName = $_FILES["file"]["tmp_name"];
+	$status = 'ACTIVE';
 	$accesslevel = "STUDENT";
 	if ($_FILES["file"]["size"] > 0) {
 		$file = fopen($fileName, "r");
@@ -295,21 +298,25 @@ if (isset($_POST["import"])) {
 		while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
 			$find_header++;
 			if( $find_header > 2 ) {
-				$sqlInsert = "INSERT into student (student_id, lastname, firstname, middlename, username, email, password, course, year, section,
-								subject1, section1, subject2, section2, subject3, section3, subject4, section4, subject5, section5,
-								subject6, section6, subject7, section7, subject8, section8, subject9, section9, subject10, section10)
-					   values ('" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[3] . "','" . $column[1] . "','" . $column[4] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "'
-					   			,'" . $column[10] . "','" . $column[11] . "','" . $column[13] . "','" . $column[14] . "','" . $column[16] . "','" . $column[17] . "'
+				$insertStudent = "INSERT into student (student_id, lastname, firstname, middlename, username, email, password, course, year, section)
+					   values ('" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[3] . "','" . $column[1] . "'
+					   			,'" . $column[4] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "')";
+				$insertCourses = "INSERT into courses_enrolled (student_id, subject1, section1, subject2, section2, subject3, section3, subject4, section4,
+								subject5, section5, subject6, section6, subject7, section7, subject8, section8, subject9, section9, subject10, section10, semester,
+								academic_year_start, academic_year_end)
+						values ('" . $column[3] . "','" . $column[10] . "','" . $column[11] . "','" . $column[13] . "','" . $column[14] . "','" . $column[16] . "','" . $column[17] . "'
 								,'" . $column[19] . "','" . $column[20] . "','" . $column[22] . "','" . $column[23] . "','" . $column[25] . "','" . $column[26] . "'
 								,'" . $column[28] . "','" . $column[29] . "','" . $column[31] . "','" . $column[32] . "','" . $column[34] . "','" . $column[35] . "'
-								,'" . $column[37] . "','" . $column[38] . "')";
-				$addStudentAcc = "INSERT INTO user (lastname,firstname,middlename,username,email,password,accesslevel)
-					   values ('" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[3] . "','" . $column[1] . "','" . $column[4] . "','$accesslevel')";
-				$result = mysqli_query($db, $sqlInsert);
+								,'" . $column[37] . "','" . $column[38] . "','" . $semester . "','" . $startyear . "','" . $endyear . "')";
+				$addStudentAcc = "INSERT INTO user (lastname,firstname,middlename,username,email,password,accesslevel,status)
+					   values ('" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[3] . "','" . $column[1] . "','" . $column[4] . "','" . $accesslevel . "','" . $status . "')";
+				$result = mysqli_query($db, $insertStudent);
 				mysqli_query($db, $addStudentAcc);
+				mysqli_query($db, $insertCourses);
 				if (!empty($result)) {
 					$type = "success";
 					$message = "CSV Data Imported into the Database";
+					header("location: dean-student-info.php");
 				} else {
 					$type = "error";
 					$message = "Problem in Importing CSV Data";
@@ -326,96 +333,289 @@ if (isset($_POST['selectStud'])) {
 	$student_id= mysqli_real_escape_string($db,$_POST['student_id']);
 	$subject=$_POST['subject'];
 	$section=$_POST['section'];
+	$timein=$_POST['time-in'];
+	$timeout=$_POST['time-out'];
 	$sqlSelect = "SELECT * FROM student";
     $result = mysqli_query($db, $sqlSelect);
+	$soutcome = 'Student ' . $student_id . ' was not enrolled in this subject.';
+	$sectionSelector = '';
 	if (mysqli_num_rows($result) > 0) {
-		while ($row = mysqli_fetch_array($result)) {
-			if($row['student_id']==$student_id){
-				if (($section == 'Please Select') or ($subject == 'Please Select')) {
-					$sserrors = 'Please Select Section/ Subject!';
-					$sserrorcount = 1;
-				}
-				else{
-					//display lastname depends on student_id
-					$lastquery = "SELECT lastname FROM student WHERE student_id = '$student_id'";
-					$lquery = mysqli_query($db,$lastquery);
-					$lastnamequery = mysqli_fetch_assoc($lquery);
-					$lastname = reset($lastnamequery);
-					
-					//display firstname depends on student_id
-					$firstquery = "SELECT firstname FROM student WHERE student_id = '$student_id'";
-					$fquery = mysqli_query($db,$firstquery);
-					$firstnamequery = mysqli_fetch_assoc($fquery);
-					$firstname = reset($firstnamequery);
-					
-					//display middlename depends on student_id
-					$midquery = "SELECT middlename FROM student WHERE student_id = '$student_id'";
-					$mquery = mysqli_query($db,$midquery);
-					$middlenamequery = mysqli_fetch_assoc($mquery);
-					$middlename = reset($middlenamequery);
-					
-					//display course depends on student_id
-					$course = "SELECT course FROM student WHERE student_id = '$student_id'";
-					$course = mysqli_query($db,$course);
-					$course = mysqli_fetch_assoc($course);
-					$course = reset($course);
-					
-					//display year depends on student_id
-					$year = "SELECT year FROM student WHERE student_id = '$student_id'";
-					$year = mysqli_query($db,$year);
-					$year = mysqli_fetch_assoc($year);
-					$year = reset($year);
-					
-					//display section depends on student_id
-					$ssection = "SELECT section FROM student WHERE student_id = '$student_id'";
-					$ssection = mysqli_query($db,$ssection);
-					$ssection = mysqli_fetch_assoc($ssection);
-					$ssection = reset($ssection);
-
-					$_SESSION['sstudent_id'] = $student_id ;
-					$_SESSION['slastname'] = $lastname ;
-					$_SESSION['sfirstname'] = $firstname ;
-					$_SESSION['smiddlename'] = $middlename ;
-					$_SESSION['selectedsubject'] = $subject ;
-					$_SESSION['selectedsection'] = $section ;
-					$_SESSION['scourse'] = $course ;
-					$_SESSION['syear'] = $year ;
-					$_SESSION['ssection'] = $ssection ;
-					if($section == ($course.$year.'-'.$ssection)){
-						$outcome = 'Student '.$student_id.' matched with selected section.';
+		if (empty($student_id)) {
+			$sserrors = "Please Enter/Scan Student ID!";
+			$sserrorcount = 1;
+		}
+		else{
+			while ($row = mysqli_fetch_array($result)) {
+				if($row['student_id']==$student_id){
+					if (($section == 'Please Select') or ($subject == 'Please Select')) {
+						$sserrors = "Please Select Section/ Subject!";
+						$sserrorcount = 1;
 					}
 					else{
-						$outcome = 'Student '.$student_id." didn't matched with selected section.";
-					}
-					$sqlSelect = "SELECT * FROM student";
-					$result = mysqli_query($db, $sqlSelect);
-					if (mysqli_num_rows($result) > 0) {
-						while ($row = mysqli_fetch_array($result)) {
-							if($row['student_id']==$student_id){
-								for($i = 1; $i<=10;$i++){
-									$subjectcounter = 'subject'.strval($i);
-									if($row[$subjectcounter]==$subject){
-										$soutcome = 'Student '.$student_id.' was enrolled in this subject.';
+						//display lastname depends on student_id
+						$lastquery = "SELECT lastname FROM student WHERE student_id = '$student_id'";
+						$lquery = mysqli_query($db,$lastquery);
+						$lastnamequery = mysqli_fetch_assoc($lquery);
+						$lastname = reset($lastnamequery);
+						
+						//display firstname depends on student_id
+						$firstquery = "SELECT firstname FROM student WHERE student_id = '$student_id'";
+						$fquery = mysqli_query($db,$firstquery);
+						$firstnamequery = mysqli_fetch_assoc($fquery);
+						$firstname = reset($firstnamequery);
+							
+						//display middlename depends on student_id
+						$midquery = "SELECT middlename FROM student WHERE student_id = '$student_id'";
+						$mquery = mysqli_query($db,$midquery);
+						$middlenamequery = mysqli_fetch_assoc($mquery);
+						$middlename = reset($middlenamequery);
+							
+						//display course depends on student_id
+						$course = "SELECT course FROM student WHERE student_id = '$student_id'";
+						$course = mysqli_query($db,$course);
+						$course = mysqli_fetch_assoc($course);
+						$course = reset($course);
+							
+						//display year depends on student_id
+						$year = "SELECT year FROM student WHERE student_id = '$student_id'";
+						$year = mysqli_query($db,$year);
+						$year = mysqli_fetch_assoc($year);
+						$year = reset($year);
+							
+						//display section depends on student_id
+						$ssection = "SELECT section FROM student WHERE student_id = '$student_id'";
+						$ssection = mysqli_query($db,$ssection);
+						$ssection = mysqli_fetch_assoc($ssection);
+						$ssection = reset($ssection);
+
+						$_SESSION['sstudent_id'] = $student_id ;
+						$_SESSION['slastname'] = $lastname ;
+						$_SESSION['sfirstname'] = $firstname ;
+						$_SESSION['smiddlename'] = $middlename ;
+						$_SESSION['selectedsubject'] = $subject ;
+						$_SESSION['selectedsection'] = $section ;
+						$_SESSION['scourse'] = $course ;
+						$_SESSION['syear'] = $year ;
+						$_SESSION['ssection'] = $ssection ;
+						if($section == ($course.$year.'-'.$ssection)){
+							$outcome = 'Student '.$student_id.' matched with selected section.';
+						}
+						else{
+							$outcome = 'Student '.$student_id." didn't matched with selected section.";
+						}
+						for($i = 1; $i<=10; $i++){
+							$courseSelector = "SELECT * FROM courses_enrolled WHERE student_id = '$student_id'";
+							mysqli_query($db, $courseSelector);
+							$subjectcounter = 'subject'.strval($i);
+							$subjectSelector = "SELECT $subjectcounter FROM courses_enrolled WHERE student_id = '$student_id'";
+							$subjectSelector = mysqli_query($db,$subjectSelector);
+							$subjectSelector = mysqli_fetch_assoc($subjectSelector);
+							$subjectSelector = reset($subjectSelector);
+
+							if(strval($subject) == strval($subjectSelector)){
+								$soutcome = 'Student ' . $student_id . ' was enrolled in this subject.';
+								$sectioncounter = 'section'.strval($i);
+								$sectionSelector = "SELECT $sectioncounter FROM courses_enrolled WHERE student_id = '$student_id'";
+								$sectionSelector = mysqli_query($db,$sectionSelector);
+								$sectionSelector = mysqli_fetch_assoc($sectionSelector);
+								$sectionSelector = reset($sectionSelector);
+								if($sectionSelector == 'Same as my Current Section'){
+									$sectionSelector = $course . $year . '-' . $ssection;
+								}
+								$_SESSION['sectionSelector'] = $sectionSelector;
+							}
+						}
+						$_SESSION['sectionoutcome'] = $outcome;
+						$_SESSION['subjectoutcome'] = $soutcome;
+						if(($timein == 'Please Select') or ($timeout == 'Please Select')){
+							$sserrors = "Please Select Time-In/ Time-Out!";
+							$sserrorcount = 1;
+						}
+						else{
+							$StudAttendTime = gmdate("H:i", time() + 3600*(7+date("I"))); //time - in ni student
+							$SATHour = substr($StudAttendTime, -5,2); // return yung hour *00*:00 ng time-in ni student
+							$SATMins = substr($StudAttendTime, -2,2); // return yung minutes 00:*00* ng time-in ni student
+							$SATHourMins = $SATHour . $SATMins; // pagsamahin yung hour at mins
+							$SATHM_int = intval($SATHourMins); // convert into string yung hour at mins para sa condition
+
+							$FACtimein = $_POST['time-in']; //time - in na sinelect ni faculty
+							$FACHour = substr($FACtimein, -5,2); // return yung hour *00*:00 ng time-in na sinelect ni faculty
+							$FACMins = substr($FACtimein, -2,2); // return yung minutes 00:*00* ng time-in na sinelect ni faculty
+							$FACHourMins = $FACHour . $FACMins; // pagsamahin yung hour at mins
+							$FACHM_int = intval($FACHourMins); // convert into string yung hour at mins para sa condition
+
+							$_SESSION['classTimeIn'] = $FACtimein;
+							$_SESSION['classTimeOut'] = $timeout;
+
+							if($SATHM_int > ($FACHM_int + 15)){
+								if($SATHM_int <($FACHM_int + 30)){
+									$timeRemarks = 'LATE';
+									$_SESSION['timeRemarks'] = $timeRemarks;
+									if($section == $sectionSelector){
+										if($_SESSION['subjectoutcome'] == 'Student '.$_SESSION['sstudent_id'].' was enrolled in this subject.'){
+											// GET SEMESTER
+											$sem = "SELECT semester FROM courses_enrolled WHERE student_id = '$student_id'";
+											$sem = mysqli_query($db,$sem);
+											$sem = mysqli_fetch_assoc($sem);
+											$sem = reset($sem);
+											// GET academic year start
+											$ays = "SELECT academic_year_start FROM courses_enrolled WHERE student_id = '$student_id'";
+											$ays = mysqli_query($db,$ays);
+											$ays = mysqli_fetch_assoc($ays);
+											$ays = reset($ays);
+											// GET academic year end
+											$aye = "SELECT academic_year_end FROM courses_enrolled WHERE student_id = '$student_id'";
+											$aye = mysqli_query($db,$aye);
+											$aye = mysqli_fetch_assoc($aye);
+											$aye = reset($aye);
+											$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
+															academic_year_start,academic_year_end)
+												values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
+															'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
+															,'" . $aye . "')";
+											mysqli_query($db, $addAttendance);
+											header("location: dean-scannedqr.php");
+											exit();
+										}
+									}
+									else{
+										echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
 									}
 								}
-								$soutcome = 'Student '.$student_id.' was not enrolled in this subject.';
+								else{
+									$timeRemarks = 'ABSENT';
+									$_SESSION['timeRemarks'] = $timeRemarks;
+									if($section == $sectionSelector){
+										if($_SESSION['subjectoutcome'] == 'Student '.$_SESSION['sstudent_id'].' was enrolled in this subject.'){
+											// GET SEMESTER
+											$sem = "SELECT semester FROM courses_enrolled WHERE student_id = '$student_id'";
+											$sem = mysqli_query($db,$sem);
+											$sem = mysqli_fetch_assoc($sem);
+											$sem = reset($sem);
+											// GET academic year start
+											$ays = "SELECT academic_year_start FROM courses_enrolled WHERE student_id = '$student_id'";
+											$ays = mysqli_query($db,$ays);
+											$ays = mysqli_fetch_assoc($ays);
+											$ays = reset($ays);
+											// GET academic year end
+											$aye = "SELECT academic_year_end FROM courses_enrolled WHERE student_id = '$student_id'";
+											$aye = mysqli_query($db,$aye);
+											$aye = mysqli_fetch_assoc($aye);
+											$aye = reset($aye);
+											$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
+															academic_year_start,academic_year_end)
+												values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
+															'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
+															,'" . $aye . "')";
+											mysqli_query($db, $addAttendance);
+											header("location: dean-scannedqr.php");
+											exit();
+										}
+									}
+									else{
+										echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+									}
+								}
+							}
+							else{
+								$timeRemarks = 'ON-TIME';
+								$_SESSION['timeRemarks'] = $timeRemarks;
+								if($section == $sectionSelector){
+									if($_SESSION['subjectoutcome'] == 'Student '.$_SESSION['sstudent_id'].' was enrolled in this subject.'){
+										// GET SEMESTER
+										$sem = "SELECT semester FROM courses_enrolled WHERE student_id = '$student_id'";
+										$sem = mysqli_query($db,$sem);
+										$sem = mysqli_fetch_assoc($sem);
+										$sem = reset($sem);
+										// GET academic year start
+										$ays = "SELECT academic_year_start FROM courses_enrolled WHERE student_id = '$student_id'";
+										$ays = mysqli_query($db,$ays);
+										$ays = mysqli_fetch_assoc($ays);
+										$ays = reset($ays);
+										// GET academic year end
+										$aye = "SELECT academic_year_end FROM courses_enrolled WHERE student_id = '$student_id'";
+										$aye = mysqli_query($db,$aye);
+										$aye = mysqli_fetch_assoc($aye);
+										$aye = reset($aye);
+										$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
+														academic_year_start,academic_year_end)
+											values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
+														'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
+														,'" . $aye . "')";
+										mysqli_query($db, $addAttendance);
+										header("location: dean-scannedqr.php");
+										exit();
+									}
+								}
+								else{
+									echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+								}
 							}
 						}
 					}
-					$_SESSION['sectionoutcome'] = $outcome;
-					$_SESSION['subjectoutcome'] = $soutcome;
-					header("location: dean-scannedqr.php");
 				}
 			}
-		}
-		if (empty($student_id)) {
-			$errors = 'Please Enter Student ID!';
-			$errorcount = 1;
-		}
-		else{
-			$errors = "Student ID Didn't Match!";
-			$errorcount = 1;
+			if (($section == 'Please Select') or ($subject == 'Please Select')) {
+				$sserrors = "Please Select Section/ Subject!";
+				$sserrorcount = 1;
+			}
+			elseif(($timein == 'Please Select') or ($timeout == 'Please Select')){
+				$sserrors = "Please Select Time-In/ Time-Out!";
+				$sserrorcount = 1;
+			}
+			else{
+				$sserrors = "Student ID Didn't Match!";
+				$sserrorcount = 1;
+			}
 		}
 	}
+}
+
+if (isset($_POST["StudentViewer"])){
+   $student_id_viewer = $_POST["StudentViewer"];
+	//display lastname depends on student_id
+	$lastquery = "SELECT lastname FROM student WHERE student_id = '$student_id_viewer'";
+	$lquery = mysqli_query($db,$lastquery);
+	$lastnamequery = mysqli_fetch_assoc($lquery);
+	$lastname = reset($lastnamequery);
+	   
+	//display firstname depends on student_id
+	$firstquery = "SELECT firstname FROM student WHERE student_id = '$student_id_viewer'";
+	$fquery = mysqli_query($db,$firstquery);
+	$firstnamequery = mysqli_fetch_assoc($fquery);
+	$firstname = reset($firstnamequery);
+	   
+	//display middlename depends on student_id
+	$midquery = "SELECT middlename FROM student WHERE student_id = '$student_id_viewer'";
+	$mquery = mysqli_query($db,$midquery);
+	$middlenamequery = mysqli_fetch_assoc($mquery);
+	$middlename = reset($middlenamequery);
+	   
+	//display course depends on student_id
+	$course = "SELECT course FROM student WHERE student_id = '$student_id_viewer'";
+	$course = mysqli_query($db,$course);
+	$course = mysqli_fetch_assoc($course);
+	$course = reset($course);
+	   
+	//display year depends on student_id
+	$year = "SELECT year FROM student WHERE student_id = '$student_id_viewer'";
+	$year = mysqli_query($db,$year);
+	$year = mysqli_fetch_assoc($year);
+	$year = reset($year);
+	   
+	//display section depends on student_id
+	$ssection = "SELECT section FROM student WHERE student_id = '$student_id_viewer'";
+	$ssection = mysqli_query($db,$ssection);
+	$ssection = mysqli_fetch_assoc($ssection);
+	$ssection = reset($ssection);
+
+	$_SESSION['sstudent_id'] = $student_id_viewer ;
+	$_SESSION['slastname'] = $lastname ;
+    $_SESSION['sfirstname'] = $firstname ;
+	$_SESSION['smiddlename'] = $middlename ;
+    $_SESSION['scourse'] = $course ;
+	$_SESSION['syear'] = $year ;
+	$_SESSION['ssection'] = $ssection ;
+	header("location: view-student-info.php");
 }
 ?>

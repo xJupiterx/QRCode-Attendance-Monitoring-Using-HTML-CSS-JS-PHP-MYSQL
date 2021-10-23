@@ -54,6 +54,26 @@
         .dropdown:hover .dropbtn {
             background-color: #3acf61;
         }
+        .button {
+        padding: 15px 25px;
+        font-size: 14px;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        color: #fff;
+        background-color: #db214c;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+        }
+
+        .button:hover {background-color: #b01539}
+
+        .button:active {
+        background-color: #ff003b;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+        }
     </style>
 </head>
 <body>
@@ -142,15 +162,40 @@
 
             <div class="main-content container-fluid">
                 <div class="page-title">
-                    <h3>Scanned QR Details</h3>
+                    <div class='row'>
+                        <div class='col-md-6' style = 'position:relative; padding:6px; left:117px; top:20px'>
+                            <h3>My On-Going Class</h3>
+                        </div>
+                        <div class = 'col-md-6' style = 'border:solid; border-color:#3acf61'>
+                            <div class = 'row'>
+                                <div class = 'col-md-4' style='position:relative; top:24px; left:10px'>
+                                    <div class="clearfix" style='position:relative; padding:3px; left:17px; bottom: 10px'>
+                                        <input type="submit" name="EndClass" value="End Class" class="button">
+                                    </div>
+                                </div>
+                                <div class = 'col-md-8'>
+                                    <div class = 'row'>
+                                        <div class = 'col-md-6'>
+                                            <p><center><strong>Subject: </strong><u><?php echo $_SESSION['selectedsubject'] ?></u></center></p>
+                                            <p><center><strong>Section: </strong><u><?php echo $_SESSION['selectedsection'] ?></u></center></p>
+                                        </div>
+                                        <div class = 'col-md-6'>
+                                            <p><center><strong>Time-In: </strong><?php echo $_SESSION['classTimeIn'] ?></center></p>
+                                            <p><center><strong>Time-Out: </strong><?php echo $_SESSION['classTimeOut'] ?></center></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 				<br>
                 <section class="section">
                     <div class="row mb-4">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class='card-header' style='background-color: #3acf61;'>
-                                    <center><h4 style="color: white"><strong>Student Details</strong></h4></center>
+                        <div class="col-md-6">
+                            <div class="card" style='height:490px'>
+                                <div class='card-header' style='background-color: gray;'>
+                                    <center><h4 style="color: white"><strong>Currently Scanned Student</strong></h4></center>
                                 </div>
                                 <div class='card-body'>
                                     <br>
@@ -158,44 +203,102 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-4 col-12">
-                                            <p><strong>Last Name: </strong><u><?php echo $_SESSION['slastname'] ?></u></p>
+                                            <p style='font-size:18px'><strong>Last Name: </strong></br><u><?php echo $_SESSION['slastname'] ?></u></p>
                                         </div>
                                         <div class="col-md-4 col-12">
-                                            <p><strong>First Name: </strong><u><?php echo $_SESSION['sfirstname'] ?></u></p>
+                                            <p style='font-size:18px'><strong>First Name: </strong></br><u><?php echo $_SESSION['sfirstname'] ?></u></p>
                                         </div>
                                         <div class="col-md-4 col-12">
-                                            <p><strong>Middle Name: </strong><u><?php echo $_SESSION['smiddlename'] ?></u></p>
+                                            <p style='font-size:18px'><strong>Middle Name: </strong></br><u><?php echo $_SESSION['smiddlename'] ?></u></p>
                                         </div>
                                     </div>
-                                    <p><strong>Course Year Section: </strong><u><?php echo $_SESSION['scourse'] ?><?php echo $_SESSION['syear'] ?>-<?php echo $_SESSION['ssection'] ?></u></p>
+                                    <p style='font-size:18px'><strong>Course/Year/Section For <?php echo $_SESSION['selectedsubject'] ?> : </strong><u><?php echo $_SESSION['sectionSelector'] ?></u></p>
+                                    <div class="divider">
+                                        <div class="divider-text" style="color: gray; font-size: 12px">Student Status</div>
+                                    </div>
+                                    <?php if($_SESSION['timeRemarks'] == 'ABSENT'): ?>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <div class="position-relative">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="alert-circle" style="color: #fef8f8; padding:1px; position: relative; left:65px; bottom:1px; height:21px; width:21px"></i>
+                                                </div>
+                                                <center><p style="background-color: #df4759; color: #fef8f8; border-color:#cf4455; padding:6px">Student <?php echo $_SESSION['sstudent_id'] ?> was <?php echo $_SESSION['timeRemarks'] ?>!</p></center>
+                                            </div>
+                                        </div>
+                                    <?php endif ?>
+                                    <?php if($_SESSION['timeRemarks'] == 'LATE'): ?>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <div class="position-relative">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="info" style="color: #fffdf5; padding:1px; position: relative; left:75px; bottom:1px; height:21px; width:21px"></i>
+                                                </div>
+                                                <center><p style="background-color: #ffc107; color:#fffdf5; border-color: #ecb40a; padding:10px">Student <?php echo $_SESSION['sstudent_id'] ?> was <?php echo $_SESSION['timeRemarks'] ?>!</p></center>
+                                            </div>
+                                        </div>
+                                    <?php endif ?>
+                                    <?php if($_SESSION['timeRemarks'] == 'ON-TIME'): ?>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <div class="position-relative">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="check-circle" style="color: #f7fcfb; padding:1px; position: relative; left:60px; bottom:1px; height:21px; width:21px"></i>
+                                                </div>
+                                                <center><p style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px">Student <?php echo $_SESSION['sstudent_id'] ?> was <?php echo $_SESSION['timeRemarks'] ?>!</p></center>
+                                            </div>
+                                        </div>
+                                    <?php endif ?>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header" style="background-color: #3acf61">
-                                    <h4 style="color:white"><center>Selected Subject and Section</center></h4>
-                                </div>
-                                <div class="card-body">
-                                    <br>
-                                    <div>
-                                        <p><center><strong>Selected Subject: </strong><u><?php echo $_SESSION['selectedsubject'] ?></u></center></p>
-                                        <p><center><strong>Selected Section: </strong><u><?php echo $_SESSION['selectedsection'] ?></u></center></p>
-                                    </div>                                            
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header" style="background-color: #3acf61">
-                                    <h4 style="color:white"><center>Selected Subject and Section</center></h4>
-                                </div>
-                                <div class="card-body">
-                                    <br>
-                                    <div>
-                                        <p><center><strong>Result: </strong><?php echo $_SESSION['sectionoutcome'] ?></center></p>
-                                        <p><center><strong>Result: </strong><?php echo $_SESSION['subjectoutcome'] ?></center></p>
-                                    </div>                                            
+                        <div class = 'col-md-6' style='position:relative'>
+                            <div class="card-header" style="background-color: #3acf61; color:white"><strong><center>Student List of Attendance</center></strong></div>
+                            <?php
+                                $sqlSelect = "SELECT * FROM student_attendance WHERE subject = '" . $_SESSION['selectedsubject'] . "' and section = '" . $_SESSION['sectionSelector'] . "';";
+                                $result = mysqli_query($db, $sqlSelect);
+                                            
+                                if (mysqli_num_rows($result) > 0) {
+                            ?>
+                            <div class="form-group position-relative has-icon-left">
+                                <div class="position-relative">
+                                    <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Student ID..">
+                                    <div class="form-control-icon">
+                                        <i data-feather="search"></i>
+                                    </div>
                                 </div>
                             </div>
+                            <form class="col-md-auto" method='post' style='overflow:scroll; width:100%; height: 400px'>
+                                <table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th style = "width:8%; font-size: 14px">Student_ID</th>
+                                            <th style = "width:8%; font-size: 14px">First name</th>
+                                            <th style = "width:8%; font-size: 14px">Last name</th>
+                                            <th style = "width:8%; font-size: 14px">Remarks</th>
+
+                                        </tr>
+                                    </thead>
+                                    <?php
+                                    while ($row = mysqli_fetch_array($result)) {
+                                    ?>
+                                    <tbody>
+                                        <tr>
+                                            <td><?php  echo $row['student_id']; ?></td>
+                                            <td><?php  echo $row['firstname']; ?></td>
+                                            <td><?php  echo $row['lastname']; ?></td>
+                                            <?php if($row['remarks']=="ON-TIME"): ?>
+                                                <td style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+                                            <?php endif ?>
+                                            <?php if($row['remarks']=="LATE"): ?>
+                                                <td style="background-color: #ffc107; color:#fffdf5; border-color: #ecb40a; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+                                            <?php endif ?>
+                                            <?php if($row['remarks']=="ABSENT"): ?>
+                                                <td style="background-color: #df4759; color: #fef8f8; border-color:#cf4455; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+                                            <?php endif ?>
+                                        </tr>
+                                    <?php } ?>
+                                    </tbody>
+                                </table>
+                            </form>
+                            <?php } ?>
                         </div>
                     </div>
                 </section>
@@ -209,5 +312,28 @@
     <script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
     <script src="assets/js/pages/dashboard.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+		function myFunction() {
+		  // Declare variables
+		  var input, filter, table, tr, td, i, txtValue;
+		  input = document.getElementById("myInput");
+		  filter = input.value.toUpperCase();
+		  table = document.getElementById("myTable");
+		  tr = table.getElementsByTagName("tr");
+
+		  // Loop through all table rows, and hide those who don't match the search query
+		  for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[0];
+			if (td) {
+			  txtValue = td.textContent || td.innerText;
+			  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			  } else {
+				tr[i].style.display = "none";
+			  }
+			}
+		  }
+		}
+	</script>
 </body>
 </html>

@@ -1,13 +1,14 @@
-<?php include("server.php"); ?>
 <!DOCTYPE html>
-<html lang="en">
-<head> </head>
+<html>
+<head>
+<script src="assets/js/sweetAlert.js"></script>
+</head>
 <body>
-<iframe name="votar" style="display:none;"></iframe>
-<form action="tip.php" method="post" target="votar">
-    <input type="submit" value="Skicka Tips">
-    <input type="hidden" name="ad_id" value="2">            
-</form>
+<input type="button" onclick="show_alert()" value="Show alert box" />
+<script type="text/javascript">
+    function show_alert() {
+        swal("Here's a message!", "It's pretty, isn't it?", "success");
+    }
+</script>
 </body>
 </html>
-

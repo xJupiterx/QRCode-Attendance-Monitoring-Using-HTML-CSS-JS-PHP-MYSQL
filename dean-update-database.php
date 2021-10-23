@@ -1,7 +1,6 @@
 <?php include 'server.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,24 +11,7 @@
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/scs.png" type="image/x-icon">
-	<style>
-		.tbl{
-			table.dataTable thead .sorting:after,
-			table.dataTable thead .sorting:before,
-			table.dataTable thead .sorting_asc:after,
-			table.dataTable thead .sorting_asc:before,
-			table.dataTable thead .sorting_asc_disabled:after,
-			table.dataTable thead .sorting_asc_disabled:before,
-			table.dataTable thead .sorting_desc:after,
-			table.dataTable thead .sorting_desc:before,
-			table.dataTable thead .sorting_desc_disabled:after,
-			table.dataTable thead .sorting_desc_disabled:before {
-			bottom: .5em;
-			}
-		}
-	</style>
 </head>
-
 <body>
 <div id="app">
         <div id="sidebar" class='active'>
@@ -126,9 +108,38 @@
 						</div>
 						<form class="card-body" action="" method="post" name="uploadCSV" enctype="multipart/form-data">
 							<br>
+                            <div class="row">
+                                <div class="dropdown col-md-6" style="border:solid; border-color:#3acf61; padding:4px">
+                                    <center><p style="font-size: 17px;"><strong>Select Semester for this File</strong></p></center>
+                                    <center><Select class="body_text" name="semester" id='SelectedSemester'>
+                                        <option value="Please Select">Please Select Semester</option>
+                                        <option value="1st Semester">1st Semester</option>
+                                        <option value="2nd Semester">2nd Semester</option>
+                                        <option value="3rd Semester">3rd Semester</option>
+                                    </select></center>
+                                    <div id="semester" style="color:Green; font-size: 13px; font-weight:bold; position:relative"> </div>
+                                </div>
+                                <div class="col-md-6" style="border:solid; border-color:#3acf61; padding:4px">
+                                    <center><p style="font-size: 17px;"><strong>Select Academic Year</strong></p></center>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <center><div class="position-relative" style="width:180px; position:relative; left:10px">
+                                                <input type="text" name="startyear" class="form-control" id="startyear" placeholder="Starting Year">
+                                            </div></center>
+                                        </div>
+                                        <div class="col-md-4" style="position:relative; width:115px; left:50px; top:7px">-TO-</div>
+                                        <div class="col-md-4">
+                                            <center><div class="position-relative" style="width:180px; position:relative; right:10px">
+                                                <input type="text" name="endyear" class="form-control" id="endyear" placeholder="Ending Year">
+                                            </div></center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br>
 							<label class="col-md-4 control-label">Please select csv file</label>
 							<input type="file" name="file" id="file" accept=".csv">
-							<button type="submit" id="submit" name="import" class="btn-submit" onclick="myFunction()" style="background-color: #9e9d9b">Import</button>
+							<button type="submit" id="submit" name="import" class="btn-submit" style="background-color: #9e9d9b" onclick="myFunction()">Import</button>
 							<br>
 							<br>
 							<div class="divider">
@@ -142,92 +153,6 @@
 						</form>
 					</div>
 				</div>
-				<section class="col-md-12">
-					<div class="card">
-						<div class="card-header">Current Student Records</div>
-						<?php
-							$sqlSelect = "SELECT * FROM student";
-							$result = mysqli_query($db, $sqlSelect);
-										
-							if (mysqli_num_rows($result) > 0) {
-						?>
-						<div class="col-md-12" style="overflow: scroll; height:500px; width:100%;">
-							<table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
-								<thead>
-									<tr>
-										<th style = "width:10%; font-size: 14px">Student_ID</th>
-										<th style = "width:10%; font-size: 14px"><center>Last name</center></th>
-										<th style = "width:10%; font-size: 14px"><center>First name</center></th>
-										<th style = "width:10%; font-size: 14px"><center>Middle name</center></th>
-										<th style = "width:10%; font-size: 14px">Email</th>
-										<th style = "width:10%; font-size: 14px">Username</th>
-										<th style = "width:10%; font-size: 14px">Password</th>
-										<th style = "width:10%; font-size: 14px">Course-Year-Section</th>
-										<th style = "width:10%; font-size: 14px">Subject#1</th>
-										<th style = "width:10%; font-size: 14px">Section#1</th>
-										<th style = "width:10%; font-size: 14px">Subject#2</th>
-										<th style = "width:10%; font-size: 14px">Section#2</th>
-										<th style = "width:10%; font-size: 14px">Subject#3</th>
-										<th style = "width:10%; font-size: 14px">Section#3</th>
-										<th style = "width:10%; font-size: 14px">Subject#4</th>
-										<th style = "width:10%; font-size: 14px">Section#4</th>
-										<th style = "width:10%; font-size: 14px">Subject#5</th>
-										<th style = "width:10%; font-size: 14px">Section#5</th>
-										<th style = "width:10%; font-size: 14px">Subject#6</th>
-										<th style = "width:10%; font-size: 14px">Section#6</th>
-										<th style = "width:10%; font-size: 14px">Subject#7</th>
-										<th style = "width:10%; font-size: 14px">Section#7</th>
-										<th style = "width:10%; font-size: 14px">Subject#8</th>
-										<th style = "width:10%; font-size: 14px">Section#8</th>
-										<th style = "width:10%; font-size: 14px">Subject#9</th>
-										<th style = "width:10%; font-size: 14px">Section#9</th>
-										<th style = "width:10%; font-size: 14px">Subject#10</th>
-										<th style = "width:10%; font-size: 14px">Section#10</th>
-
-									</tr>
-								</thead>
-								<?php
-								while ($row = mysqli_fetch_array($result)) {
-								?>
-								<tbody>
-									<tr>
-										<td><?php  echo $row['student_id']; ?></td>
-										<td><?php  echo $row['lastname']; ?></td>
-										<td><?php  echo $row['firstname']; ?></td>
-										<td><?php  echo $row['middlename']; ?></td>
-										<td><?php  echo $row['email']; ?></td>
-										<td><?php  echo $row['username']; ?></td>
-										<td><?php  echo $row['password']; ?></td>
-										<td><?php  echo $row['course']; ?><?php  echo $row['year']; ?>-<?php  echo $row['section']; ?></td>
-										<td><?php  echo $row['subject1']; ?></td>
-										<td><?php  echo $row['section1']; ?></td>
-										<td><?php  echo $row['subject2']; ?></td>
-										<td><?php  echo $row['section2']; ?></td>
-										<td><?php  echo $row['subject3']; ?></td>
-										<td><?php  echo $row['section3']; ?></td>
-										<td><?php  echo $row['subject4']; ?></td>
-										<td><?php  echo $row['section4']; ?></td>
-										<td><?php  echo $row['subject5']; ?></td>
-										<td><?php  echo $row['section5']; ?></td>
-										<td><?php  echo $row['subject6']; ?></td>
-										<td><?php  echo $row['section6']; ?></td>
-										<td><?php  echo $row['subject7']; ?></td>
-										<td><?php  echo $row['section7']; ?></td>
-										<td><?php  echo $row['subject8']; ?></td>
-										<td><?php  echo $row['section8']; ?></td>
-										<td><?php  echo $row['subject9']; ?></td>
-										<td><?php  echo $row['section9']; ?></td>
-										<td><?php  echo $row['subject10']; ?></td>
-										<td><?php  echo $row['section10']; ?></td>
-									</tr>
-								<?php
-								}
-								?>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</section>
             </div>
         </div>
     </div>
@@ -238,41 +163,13 @@
     <script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
     <script src="assets/js/pages/dashboard.js"></script>
     <script src="assets/js/main.js"></script>
-	<?php } ?>
-	<script type="text/javascript">
-		$(document).ready(
-		function() {
-			$("#frmCSVImport").on(
-			"submit",
-			function() {
-				$("#response").attr("class", "");
-				$("#response").html("");
-				var fileType = ".csv";
-				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+("+ fileType + ")$");
-				if (!regex.test($("#file").val().toLowerCase())) {
-					$("#response").addClass("error");
-					$("#response").addClass("display-block");
-					$("#response").html("Invalid File. Upload : <b>" + fileType + "</b> Files.");
-					return false;
-				}
-				return true;
-			});
-		});
-	</script>
-	<script>
-		var message = <?php $message ?>;
-		function myFunction() {
-		  alert(message);
-		}
-	</script>
-	<script>
-		$(document).ready(function () {
-		$('#myTable').DataTable({
-		"scrollY": "50vh",
-		"scrollCollapse": true,
-		});
-		$('.dataTables_length').addClass('bs-select');
-		});
-	</script>
+	<script src="assets/js/csv.js"></script>
+	<script src="assets/js/datatable.js"></script>
+    <script src="assets/js/sweetAlert.js"></script>
+    <script>
+        function myFunction(){
+            swal('Update Database', 'Database Successfully Updated', 'success');
+        }
+    </script>
 </body>
 </html>
