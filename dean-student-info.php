@@ -122,7 +122,7 @@
                                 </div>
                             </div>
                         </div>
-						<form class="col-md-12" method='post'>
+						<form class="table-responsive" method='post'>
 							<table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
 								<thead>
 									<tr>
@@ -132,7 +132,6 @@
 										<th style = "width:8%; font-size: 14px" onclick="sort(3)">Middle name</th>
 										<th style = "width:8%; font-size: 14px" onclick="sort(4)">Email</th>
 										<th style = "width:8%; font-size: 14px" onclick="sort(5)">Course-Year-Section</th>
-										<th style = "width:8%; font-size: 14px">Action</th>
 									</tr>
 								</thead>
 								<?php
@@ -150,18 +149,6 @@
 										<td><?php  echo $row['middlename']; ?></td>
 										<td><?php  echo $row['email']; ?></td>
 										<td><center><?php  echo $row['course']; ?><?php  echo $row['year']; ?>-<?php  echo $row['section']; ?></center></td>
-										<td>	
-											<!-- <select style="width: 100%" onChange="window.document.location.href=this.options[this.selectedIndex].value;" value="GO">
-												<option value="dean-student-info.php">Action</option>
-												<option value="printdata.php">Edit Student Courses</option>
-												<option value="#">View Student Attendance</option>
-											</select> -->
-											<select style="width: 100%">
-												<option>Action</option>
-												<option>Edit Student Courses</option>
-												<option>View Student Attendance</option>
-											</select>
-										</td>
 									</tr>
 								<?php
 								}

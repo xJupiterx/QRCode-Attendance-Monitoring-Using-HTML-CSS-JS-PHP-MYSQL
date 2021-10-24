@@ -161,18 +161,13 @@
             </nav>
 
             <div class="main-content container-fluid">
-                <form class="page-title" method='post'>
+                <div class="page-title">
                     <div class='row'>
                         <div class='col-md-6' style = 'position:relative; padding:6px; left:117px; top:20px'>
                             <h3>My On-Going Class</h3>
                         </div>
                         <div class = 'col-md-6' style = 'border:solid; border-color:#3acf61'>
-                            <div class = 'row'>
-                                <div class = 'col-md-4' style='position:relative; top:24px; left:10px'>
-                                    <div class="clearfix" style='position:relative; padding:3px; left:17px; bottom: 10px'>
-                                        <input type="submit" name="EndClass" value="End Class" class="button">
-                                    </div>
-                                </div>
+                            <form class = 'row' method='post'>
                                 <div class = 'col-md-8'>
                                     <div class = 'row'>
                                         <div class = 'col-md-6'>
@@ -185,10 +180,15 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class = 'col-md-4' style='position:relative; top:24px; left:10px'>
+                                    <div class="clearfix" style='position:relative; padding:3px; left:17px; bottom: 10px'>
+                                        <input type="submit" name="EndClass" value="End Class" class="button">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </form>
+                </div>
 				<br>
                 <section class="section">
                     <form class="row mb-4" method='post'>

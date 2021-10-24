@@ -414,7 +414,7 @@ if (isset($_POST['selectStud'])) {
 							$subjectSelector = mysqli_fetch_assoc($subjectSelector);
 							$subjectSelector = reset($subjectSelector);
 
-							if(strval($subject) == strval($subjectSelector)){
+							if((strval($subject) == strval($subjectSelector)) or strtoupper(strval($subject)) == strval($subjectSelector)){
 								$soutcome = 'Student ' . $student_id . ' was enrolled in this subject.';
 								$sectioncounter = 'section'.strval($i);
 								$sectionSelector = "SELECT $sectioncounter FROM courses_enrolled WHERE student_id = '$student_id'";
@@ -628,6 +628,62 @@ if (isset($_POST["StudentViewer"])){
 	$ssection = mysqli_fetch_assoc($ssection);
 	$ssection = reset($ssection);
 
+	//display all subjects and section
+	$all = "SELECT * FROM courses_enrolled WHERE student_id = '$student_id_viewer'";
+	$all = mysqli_query($db,$all);
+	$all = mysqli_fetch_assoc($all);
+	$_SESSION['subject1'] = $all['subject1'];
+	$_SESSION['subject2'] = $all['subject2'];
+	$_SESSION['subject3'] = $all['subject3'];
+	$_SESSION['subject4'] = $all['subject4'];
+	$_SESSION['subject5'] = $all['subject5'];
+	$_SESSION['subject6'] = $all['subject6'];
+	$_SESSION['subject7'] = $all['subject7'];
+	$_SESSION['subject8'] = $all['subject8'];
+	$_SESSION['subject9'] = $all['subject9'];
+	$_SESSION['subject10'] = $all['subject10'];
+	
+	$_SESSION['section1'] = $all['section1'];
+	if($all['section1'] == 'Same as my Current Section'){
+		$_SESSION['section1'] = $course . $year . '-' . $ssection;
+	}
+	$_SESSION['section2'] = $all['section2'];
+	if($all['section2'] == 'Same as my Current Section'){
+		$_SESSION['section2'] = $course . $year . '-' . $ssection;
+	}
+	$_SESSION['section3'] = $all['section3'];
+	if($all['section3'] == 'Same as my Current Section'){
+		$_SESSION['section3'] = $course . $year . '-' . $ssection;
+	}
+	$_SESSION['section4'] = $all['section4'];
+	if($all['section4'] == 'Same as my Current Section'){
+		$_SESSION['section4'] = $course . $year . '-' . $ssection;
+	}
+	$_SESSION['section5'] = $all['section5'];
+	if($all['section5'] == 'Same as my Current Section'){
+		$_SESSION['section5'] = $course . $year . '-' . $ssection;
+	}
+	$_SESSION['section6'] = $all['section6'];
+	if($all['section6'] == 'Same as my Current Section'){
+		$_SESSION['section6'] = $course . $year . '-' . $ssection;
+	}
+	$_SESSION['section7'] = $all['section7'];
+	if($all['section7'] == 'Same as my Current Section'){
+		$_SESSION['section7'] = $course . $year . '-' . $ssection;
+	}
+	$_SESSION['section8'] = $all['section8'];
+	if($all['section8'] == 'Same as my Current Section'){
+		$_SESSION['section8'] = $course . $year . '-' . $ssection;
+	}
+	$_SESSION['section9'] = $all['section9'];
+	if($all['section9'] == 'Same as my Current Section'){
+		$_SESSION['section9'] = $course . $year . '-' . $ssection;
+	}
+	$_SESSION['section10'] = $all['section10'];
+	if($all['section10'] == 'Same as my Current Section'){
+		$_SESSION['section10'] = $course . $year . '-' . $ssection;
+	}
+
 	$_SESSION['sstudent_id'] = $student_id_viewer ;
 	$_SESSION['slastname'] = $lastname ;
     $_SESSION['sfirstname'] = $firstname ;
@@ -635,6 +691,7 @@ if (isset($_POST["StudentViewer"])){
     $_SESSION['scourse'] = $course ;
 	$_SESSION['syear'] = $year ;
 	$_SESSION['ssection'] = $ssection ;
+	
 	header("location: view-student-info.php");
 }
 
@@ -650,22 +707,22 @@ if (isset($_POST["EndClass"])){
     $studselectresult = mysqli_query($db, $studselect);
 	if (mysqli_num_rows($studselectresult) > 0) {
 		while ($row1 = mysqli_fetch_array($studselectresult)) {
-			$checker = FALSE;
+			$checker = 0;
 			$row1student_id = $row1['student_id']; // student id ni row 1
-			$attenselect = "SELECT * FROM student_attendance WHERE subject = '" . $endSubject . "' and section = '" . $endSection . "' and date_of_schedule = '" . $Date . "';";
+			$attenselect = "SELECT * FROM student_attendance WHERE ((subject = '" . $endSubject . "' and section = '" . $endSection . "') and date_of_schedule = '" . $Date . "');";
 			$attenselectresult = mysqli_query($db, $attenselect);
 			$row2student_id = '';
 			while ($row2 = mysqli_fetch_array($attenselectresult)) {
 				$row2student_id = $row2['student_id']; // student id ni row 2
-				$rsem = ['semester'];
-				$rays = ['academic_year_start'];
-				$raye = ['academic_year_end'];
+				$rsem = $row2['semester'];
+				$rays = $row2['academic_year_start'];
+				$raye = $row2['academic_year_end'];
 				if($row1student_id == $row2student_id){ //means naka attendance si student
-					$checker = TRUE;
+					$checker = 1;
 					break;
 				}
 			}
-			if($checker == FALSE){
+			if($checker == 0){
 				// means si student e wala sa attendance
 				for($count = 1; $count <= 10; $count++){
 					// iisa isahin bawat section/subject sa row 1 para icheck kung si student ay
@@ -717,13 +774,13 @@ if (isset($_POST["EndClass"])){
 								//append na natin sya sa attendance table
 								$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
 													academic_year_start,academic_year_end,date_of_schedule)
-										values ('" . $row1student_id . "','" . $rfirstname. "','" . $rfirstname . "','" . $endsubject . "','" . $endsection . "',
+										values ('" . $row1student_id . "','" . $rfirstname. "','" . $rlastname . "','" . $endSubject . "','" . $endSection . "',
 													'" . $studentTimein . "','" . $rremarks . "','" . $rsem . "','" . $rays . "'
 													,'" . $raye . "','" . $Date . "')";
 								mysqli_query($db, $addAttendance);
 							}
 							else{
-								break;
+								continue;
 							}
 						}
 						else{
@@ -734,23 +791,20 @@ if (isset($_POST["EndClass"])){
 								//append na natin sya sa attendance table
 								$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
 													academic_year_start,academic_year_end,date_of_schedule)
-										values ('" . $row1student_id . "','" . $rfirstname. "','" . $rfirstname . "','" . $endsubject . "','" . $endsection . "',
+										values ('" . $row1student_id . "','" . $rfirstname. "','" . $rlastname . "','" . $endSubject . "','" . $endSection . "',
 													'" . $studentTimein . "','" . $rremarks . "','" . $rsem . "','" . $rays . "'
 													,'" . $raye . "','" . $Date . "')";
 								mysqli_query($db, $addAttendance);
 							}
 							else{
-								break;
+								continue;
 							}
 						}
 					}
 				}
 			}
-			else{
-				break;
-			}
 		}
+		header("location: dean-page.php");
 	}
-	header("location: dean-page.php");
 }
 ?>

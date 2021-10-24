@@ -9,10 +9,6 @@
                 , $row['subject6'], $row['subject7'], $row['subject8'], $row['subject9'], $row['subject10']);
                 }
     }
-    array_walk($subjects, function(&$value)
-    {
-        $value = strtoupper($value);
-    });
     $subjects = array_unique($subjects);
     $subjects = array_filter($subjects,'strlen');
     $subjects = array_values($subjects);
