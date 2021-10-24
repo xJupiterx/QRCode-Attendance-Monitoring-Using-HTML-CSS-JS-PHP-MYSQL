@@ -11,10 +11,6 @@
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/scs.png" type="image/x-icon">
-    <script type="text/javascript" src="assets/js/qrscanner/adapter.js"></script>
-    <script type="text/javascript" src="assets/js/qrscanner/vue.js"></script>
-    <script type="text/javascript" src="assets/js/qrscanner/instascan.js"></script>
-
     <style>
         .square {
             height: 60vh;
@@ -146,7 +142,7 @@
 
             <div class="main-content container-fluid">
                 <div class="page-title">
-                    <h3>Attendance Recording</h3>
+                    <h3>Scan/Select Another Student</h3>
                 </div>
 				<br>
                 <section class="section">
@@ -171,7 +167,7 @@
                         <div class="col-md-4">
                             <div class="card" style="position:relative; height:200px">
                                 <div class="card-header" style="background-color: #3acf61">
-                                    <h4 style="color:white"><center>Schedule Selector</center></h4>
+                                    <h4 style="color:white"><center>Selected Schedule</center></h4>
                                 </div>
                                 <div class="card-body">
                                     <br>
@@ -180,41 +176,23 @@
                                             <div class="col-md-6">
                                                 <div>
                                                     <center>
-                                                        <p style= "font-size:14px;"><strong>Selected Subject:</strong></p>
+                                                        <p style= "font-size:13px;"><strong>Selected Subject:</strong></p>
                                                     </center>
-                                                    <div class="dropdown">
-                                                        <Select class="body_text" name="subject" onchange="getSubject()" id='SelectedSubject'>
-                                                            <option value="Please Select"> Please Select </option>
-                                                            <?php include("PHPRequestDatas/subjects.php"); ?> 
-                                                        </select>
-                                                        <br><br>
-                                                        <div id="subject" style="color:Green; font-size: 13px; font-weight:bold; position:relative"> </div>
-                                                    </div>
-                                                    <script language="JavaScript">
-                                                        function getSubject() {
-                                                            document.getElementById("subject").innerHTML = document.getElementById("SelectedSubject").value
-                                                        }
-                                                    </script>
+                                                    <center>
+                                                        <input type="hidden" name="subject" value = "<?php echo $_SESSION['currentSubject'] ?>" >
+                                                        <p style= "font-size:14px;"><strong><u><?php echo $_SESSION['currentSubject'] ?></u></strong></p>
+                                                    </center>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div>
                                                     <center>
-                                                        <p style= "font-size:14px;"><strong>Select Section:</strong></p>
+                                                        <p style= "font-size:13px;"><strong>Selected Section:</strong></p>
                                                     </center>
-                                                    <div class="dropdown">
-                                                        <Select class="body_text" name="section" onchange="getSection()" id='SelectedSection'>
-                                                            <option value="Please Select"> Please Select </option>
-                                                            <?php include("PHPRequestDatas/sections.php"); ?>
-                                                        </select>
-                                                        <br><br>
-                                                        <div id="section" style="color:Green; font-size: 13px; font-weight:bold; position:relative"> </div>
-                                                    </div>
-                                                    <script language="JavaScript">
-                                                        function getSection() {
-                                                            document.getElementById("section").innerHTML = document.getElementById("SelectedSection").value
-                                                        }
-                                                    </script>
+                                                    <center>
+                                                        <input type="hidden" name="section" value = "<?php echo $_SESSION['currentSection'] ?>" >
+                                                        <p style= "font-size:14px;"><strong><u><?php echo $_SESSION['currentSection'] ?></u></strong></p>
+                                                    </center>
                                                 </div>
                                             </div>
                                         </div>
@@ -229,92 +207,23 @@
                                             <div class="col-md-6" style='position:relative; bottom:50px'>
                                                 <div>
                                                     <center>
-                                                        <p style= "font-size:14px;"><strong>Select Time-In:</strong></p>
+                                                        <p style= "font-size:13px;"><strong>Selected Time-In:</strong></p>
                                                     </center>
-                                                    <div class="dropdown">
-                                                        <Select class="body_text" name="time-in">
-                                                            <option value="Please Select"> Please Select </option>
-                                                            <option value="06:00"> 06:00 </option>
-                                                            <option value="06:30"> 06:30 </option>
-                                                            <option value="07:00"> 07:00 </option>
-                                                            <option value="07:30"> 07:30 </option>
-                                                            <option value="08:00"> 08:00 </option>
-                                                            <option value="08:30"> 08:30 </option>
-                                                            <option value="09:00"> 09:00 </option>
-                                                            <option value="09:30"> 09:30 </option>
-                                                            <option value="10:00"> 10:00 </option>
-                                                            <option value="10:30"> 10:30 </option>
-                                                            <option value="11:00"> 11:00 </option>
-                                                            <option value="11:30"> 11:30 </option>
-                                                            <option value="12:00"> 12:00 </option>
-                                                            <option value="12:30"> 12:30 </option>
-                                                            <option value="13:00"> 13:00 </option>
-                                                            <option value="13:30"> 13:30 </option>
-                                                            <option value="14:00"> 14:00 </option>
-                                                            <option value="14:30"> 14:30 </option>
-                                                            <option value="15:00"> 15:00 </option>
-                                                            <option value="15:30"> 15:30 </option>
-                                                            <option value="16:00"> 16:00 </option>
-                                                            <option value="16:30"> 16:30 </option>
-                                                            <option value="17:00"> 17:00 </option>
-                                                            <option value="17:30"> 17:30 </option>
-                                                            <option value="18:00"> 18:00 </option>
-                                                            <option value="18:30"> 18:30 </option>
-                                                            <option value="19:00"> 19:00 </option>
-                                                            <option value="19:30"> 19:30 </option>
-                                                            <option value="20:00"> 20:00 </option>
-                                                            <option value="20:30"> 20:30 </option>
-                                                            <option value="21:00"> 21:00 </option>
-                                                            <option value="21:30"> 21:30 </option>
-                                                            <option value="22:00"> 22:00 </option>
-                                                            <option value="22:30"> 22:30 </option>
-                                                            <option value="23:00"> 23:00 </option>
-                                                            <option value="23:30"> 23:30 </option>
-                                                        </select>
-                                                    </div>
+                                                    <center>
+                                                        <input type="hidden" name="time-in" value = "<?php echo $_SESSION['currentTimein'] ?>" >
+                                                        <p style= "font-size:14px;"><strong><u><?php echo $_SESSION['currentTimein'] ?></u></strong></p>
+                                                    </center>
                                                 </div>
                                             </div>
                                             <div class="col-md-6" style='position:relative; bottom:50px'>
                                                 <div>
                                                     <center>
-                                                        <p style= "font-size:14px;"><strong>Select Time-Out:</strong></p>
+                                                        <p style= "font-size:13px;"><strong>Selected Time-Out:</strong></p>
                                                     </center>
-                                                    <div class="dropdown">
-                                                        <Select class="body_text" name="time-out">
-                                                            <option value="Please Select"> Please Select </option>
-                                                            <option value="06:00"> 06:00 </option>
-                                                            <option value="06:30"> 06:30 </option>
-                                                            <option value="07:00"> 07:00 </option>
-                                                            <option value="07:30"> 07:30 </option>
-                                                            <option value="08:00"> 08:00 </option>
-                                                            <option value="08:30"> 08:30 </option>
-                                                            <option value="09:00"> 09:00 </option>
-                                                            <option value="09:30"> 09:30 </option>
-                                                            <option value="10:00"> 10:00 </option>
-                                                            <option value="10:30"> 10:30 </option>
-                                                            <option value="11:00"> 11:00 </option>
-                                                            <option value="11:30"> 11:30 </option>
-                                                            <option value="12:00"> 12:00 </option>
-                                                            <option value="12:30"> 12:30 </option>
-                                                            <option value="13:00"> 13:00 </option>
-                                                            <option value="13:30"> 13:30 </option>
-                                                            <option value="14:00"> 14:00 </option>
-                                                            <option value="14:30"> 14:30 </option>
-                                                            <option value="15:00"> 15:00 </option>
-                                                            <option value="15:30"> 15:30 </option>
-                                                            <option value="16:00"> 16:00 </option>
-                                                            <option value="16:30"> 16:30 </option>
-                                                            <option value="17:00"> 17:00 </option>
-                                                            <option value="17:30"> 17:30 </option>
-                                                            <option value="18:00"> 18:00 </option>
-                                                            <option value="18:30"> 18:30 </option>
-                                                            <option value="19:00"> 19:00 </option>
-                                                            <option value="19:30"> 19:30 </option>
-                                                            <option value="20:00"> 20:00 </option>
-                                                            <option value="20:30"> 20:30 </option>
-                                                        </select>
-                                                        <br><br>
-                                                    </div>
+                                                    <center>
+                                                        <input type="hidden" name="time-out" value = "<?php echo $_SESSION['currentTimeout'] ?>" >
+                                                        <p style= "font-size:14px;"><strong><u><?php echo $_SESSION['currentTimeout'] ?></u></strong></p>
+                                                    </center>
                                                 </div>
                                             </div>
                                             <?php if($sserrorcount > 0):?>
@@ -353,24 +262,5 @@
     <script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
     <script src="assets/js/pages/dashboard.js"></script>
     <script src="assets/js/main.js"></script>
-    <script>
-        let scanner = new Instascan.Scanner({ video: document.getElementById('preview')});
-       Instascan.Camera.getCameras().then(function(cameras){
-           if(cameras.length > 0 ){
-               scanner.start(cameras[0]);
-           } else{
-               alert('No cameras found');
-           }
-
-        }).catch(function(e) {
-           console.error(e);
-       });
-
-        scanner.addListener('scan',function(c){
-            document.getElementById('test1').innerHTML = c;
-           document.getElementById('text').value=c;
-       });
-
-    </script>
 </body>
 </html>

@@ -326,11 +326,13 @@ if (isset($_POST["import"])) {
 	}
 }
 if (isset($_POST['subjects'])) {
-	header("location: printdata.php");
+	header("location: printdata.html");
 }
 
 if (isset($_POST['selectStud'])) {
-	$student_id= mysqli_real_escape_string($db,$_POST['student_id']);
+	$student_id = mysqli_real_escape_string($db,$_POST['student_id']);
+	$scannedqr = mysqli_real_escape_string($db,$_POST['scannedqr']);
+	$student_id = $student_id . $scannedqr;
 	$subject=$_POST['subject'];
 	$section=$_POST['section'];
 	$timein=$_POST['time-in'];
@@ -446,7 +448,6 @@ if (isset($_POST['selectStud'])) {
 
 							$_SESSION['classTimeIn'] = $FACtimein;
 							$_SESSION['classTimeOut'] = $timeout;
-
 							if($SATHM_int > ($FACHM_int + 15)){
 								if($SATHM_int <($FACHM_int + 30)){
 									$timeRemarks = 'LATE';
@@ -468,11 +469,12 @@ if (isset($_POST['selectStud'])) {
 											$aye = mysqli_query($db,$aye);
 											$aye = mysqli_fetch_assoc($aye);
 											$aye = reset($aye);
+											$DateofAttendance = gmdate("Y/m/j");
 											$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
-															academic_year_start,academic_year_end)
+															academic_year_start,academic_year_end,date_of_schedule)
 												values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
 															'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
-															,'" . $aye . "')";
+															,'" . $aye . "','" . $DateofAttendance . "')";
 											mysqli_query($db, $addAttendance);
 											header("location: dean-scannedqr.php");
 											exit();
@@ -502,11 +504,12 @@ if (isset($_POST['selectStud'])) {
 											$aye = mysqli_query($db,$aye);
 											$aye = mysqli_fetch_assoc($aye);
 											$aye = reset($aye);
+											$DateofAttendance = gmdate("Y/m/j");
 											$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
-															academic_year_start,academic_year_end)
+															academic_year_start,academic_year_end,date_of_schedule)
 												values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
 															'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
-															,'" . $aye . "')";
+															,'" . $aye . "','" . $DateofAttendance . "')";
 											mysqli_query($db, $addAttendance);
 											header("location: dean-scannedqr.php");
 											exit();
@@ -537,11 +540,12 @@ if (isset($_POST['selectStud'])) {
 										$aye = mysqli_query($db,$aye);
 										$aye = mysqli_fetch_assoc($aye);
 										$aye = reset($aye);
+										$DateofAttendance = gmdate("Y/m/j");
 										$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
-														academic_year_start,academic_year_end)
-											values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
-														'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
-														,'" . $aye . "')";
+															academic_year_start,academic_year_end,date_of_schedule)
+												values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
+															'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
+															,'" . $aye . "','" . $DateofAttendance . "')";
 										mysqli_query($db, $addAttendance);
 										header("location: dean-scannedqr.php");
 										exit();
@@ -569,6 +573,21 @@ if (isset($_POST['selectStud'])) {
 			}
 		}
 	}
+}
+
+if (isset($_POST["SelectAnotherStudent"])){
+	$currentSubject = $_SESSION['selectedsubject'];
+	$_SESSION['currentSubject'] = $currentSubject; // passed variable for selected subject
+
+	$currentSection = $_SESSION['selectedsection'];
+	$_SESSION['currentSection'] = $currentSection; // passed variable for selected section
+
+    $currentTimein = $_SESSION['classTimeIn'];
+	$_SESSION['currentTimein'] = $currentTimein; // passed variable for selected time in
+
+    $currentTimeout = $_SESSION['classTimeOut'];
+	$_SESSION['currentTimeout'] = $currentTimeout; // passed variable for selected time out
+	header("location: dean-qrscannerAS.php");
 }
 
 if (isset($_POST["StudentViewer"])){
@@ -617,5 +636,121 @@ if (isset($_POST["StudentViewer"])){
 	$_SESSION['syear'] = $year ;
 	$_SESSION['ssection'] = $ssection ;
 	header("location: view-student-info.php");
+}
+
+if (isset($_POST["EndClass"])){
+	$endSubject = $_SESSION['selectedsubject'];
+	$endSection = $_SESSION['selectedsection'];
+    $endTimein = $_SESSION['classTimeIn'];
+    $endTimeout = $_SESSION['classTimeOut'];
+	$Date = gmdate("Y/m/j");
+	$studentTimein = 'null';
+	$rremarks = 'ABSENT';
+	$studselect = "SELECT * FROM courses_enrolled";
+    $studselectresult = mysqli_query($db, $studselect);
+	if (mysqli_num_rows($studselectresult) > 0) {
+		while ($row1 = mysqli_fetch_array($studselectresult)) {
+			$checker = FALSE;
+			$row1student_id = $row1['student_id']; // student id ni row 1
+			$attenselect = "SELECT * FROM student_attendance WHERE subject = '" . $endSubject . "' and section = '" . $endSection . "' and date_of_schedule = '" . $Date . "';";
+			$attenselectresult = mysqli_query($db, $attenselect);
+			$row2student_id = '';
+			while ($row2 = mysqli_fetch_array($attenselectresult)) {
+				$row2student_id = $row2['student_id']; // student id ni row 2
+				$rsem = ['semester'];
+				$rays = ['academic_year_start'];
+				$raye = ['academic_year_end'];
+				if($row1student_id == $row2student_id){ //means naka attendance si student
+					$checker = TRUE;
+					break;
+				}
+			}
+			if($checker == FALSE){
+				// means si student e wala sa attendance
+				for($count = 1; $count <= 10; $count++){
+					// iisa isahin bawat section/subject sa row 1 para icheck kung si student ay
+					// enrolled sa subject at section pero di umattend sa klase.
+					$subcounter = 'subject' . $count;
+					$subselector = $row1[$subcounter]; // kukunin bawat subject sa row 1
+					$seccounter = 'section' . $count;
+					$secselector = $row1[$seccounter]; // kukunin bawat section sa row 1
+							
+					if($subselector == $endSubject){
+						//pag pumasok dito means nagmatch subject ni student sa subject ni prof
+						//display first name depends on student_id
+						$rfirstname = "SELECT firstname FROM student WHERE student_id = '" . $row1student_id . "';";
+						$rfirstname = mysqli_query($db,$rfirstname);
+						$rfirstname = mysqli_fetch_assoc($rfirstname);
+						$rfirstname = reset($rfirstname);
+
+						//display last name depends on student_id
+						$rlastname = "SELECT lastname FROM student WHERE student_id = '" . $row1student_id . "';";
+						$rlastname = mysqli_query($db,$rlastname);
+						$rlastname = mysqli_fetch_assoc($rlastname);
+						$rlastname = reset($rlastname);
+						if($secselector == 'Same as my Current Section'){
+							//perform muna natin dito kukunin yung real section nya
+							//display course depends on student_id
+							$rcourse = "SELECT course FROM student WHERE student_id = '" . $row1student_id . "';";
+							$rcourse = mysqli_query($db,$rcourse);
+							$rcourse = mysqli_fetch_assoc($rcourse);
+							$rcourse = reset($rcourse);
+										
+							//display year depends on student_id
+							$ryear = "SELECT year FROM student WHERE student_id = '" . $row1student_id . "';";
+							$ryear = mysqli_query($db,$ryear);
+							$ryear = mysqli_fetch_assoc($ryear);
+							$ryear = reset($ryear);
+										
+							//display section depends on student_id
+							$rsection = "SELECT section FROM student WHERE student_id = '" . $row1student_id . "';";
+							$rsection = mysqli_query($db,$rsection);
+							$rsection = mysqli_fetch_assoc($rsection);
+							$rsection = reset($rsection);
+
+							// eto na yung real section nya
+							$secselector = $rcourse . $ryear . '-' . $rsection;
+
+							if($secselector == $endSection){
+								//pag pumasok dito means matched yung subject and section pero di sya umattend
+
+								//append na natin sya sa attendance table
+								$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
+													academic_year_start,academic_year_end,date_of_schedule)
+										values ('" . $row1student_id . "','" . $rfirstname. "','" . $rfirstname . "','" . $endsubject . "','" . $endsection . "',
+													'" . $studentTimein . "','" . $rremarks . "','" . $rsem . "','" . $rays . "'
+													,'" . $raye . "','" . $Date . "')";
+								mysqli_query($db, $addAttendance);
+							}
+							else{
+								break;
+							}
+						}
+						else{
+							//perform parin dito yung section selector condition
+							if($secselector == $endSection){
+								//pag pumasok dito means matched yung subject and section pero di sya umattend
+
+								//append na natin sya sa attendance table
+								$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
+													academic_year_start,academic_year_end,date_of_schedule)
+										values ('" . $row1student_id . "','" . $rfirstname. "','" . $rfirstname . "','" . $endsubject . "','" . $endsection . "',
+													'" . $studentTimein . "','" . $rremarks . "','" . $rsem . "','" . $rays . "'
+													,'" . $raye . "','" . $Date . "')";
+								mysqli_query($db, $addAttendance);
+							}
+							else{
+								break;
+							}
+						}
+					}
+				}
+			}
+			else{
+				break;
+			}
+		}
+	}
+	header("location: dean-page.php");
 }
 ?>

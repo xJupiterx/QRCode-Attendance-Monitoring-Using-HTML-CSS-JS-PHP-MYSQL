@@ -161,7 +161,7 @@
             </nav>
 
             <div class="main-content container-fluid">
-                <div class="page-title">
+                <form class="page-title" method='post'>
                     <div class='row'>
                         <div class='col-md-6' style = 'position:relative; padding:6px; left:117px; top:20px'>
                             <h3>My On-Going Class</h3>
@@ -188,10 +188,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
 				<br>
                 <section class="section">
-                    <div class="row mb-4">
+                    <form class="row mb-4" method='post'>
                         <div class="col-md-6">
                             <div class="card" style='height:490px'>
                                 <div class='card-header' style='background-color: gray;'>
@@ -246,6 +246,13 @@
                                             </div>
                                         </div>
                                     <?php endif ?>
+                                    <div class="divider">
+                                        <div class="divider-text" style="color: gray; font-size: 12px">Select Another Student</div>
+                                    </div>
+                                    <div class="clearfix" style='position:relative;padding:5px;'>
+                                        <center><input type="submit" name="SelectAnotherStudent" value="Scan/Select Student" class="btn btn-primary"></center>
+                                        <center><p style='font-size:14px;padding:5px'>Click to Scan/Select Another Student for this Class Schedule</p></center>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -300,7 +307,7 @@
                             </form>
                             <?php } ?>
                         </div>
-                    </div>
+                    </form>
                 </section>
             </div>
         </div>
