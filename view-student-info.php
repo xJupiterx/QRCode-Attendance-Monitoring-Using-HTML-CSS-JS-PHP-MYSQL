@@ -100,7 +100,7 @@
             </nav>
             <div class="main-content container-fluid">
                 <center><div class="page-title">
-                    <h3> Student Dashboard</h3>
+                    <h3>View Student Complete Information</h3>
                 </div></center>
 				<br>
                 <div class="card ">

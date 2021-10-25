@@ -182,7 +182,7 @@
                                 </div>
                                 <div class = 'col-md-4' style='position:relative; top:24px; left:10px'>
                                     <div class="clearfix" style='position:relative; padding:3px; left:17px; bottom: 10px'>
-                                        <input type="submit" name="EndClass" value="End Class" class="button">
+                                        <input type="submit" name="EndClass" value="End Class" class="button" onclick="buttonFunction()">
                                     </div>
                                 </div>
                             </form>
@@ -319,6 +319,7 @@
     <script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
     <script src="assets/js/pages/dashboard.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/sweetAlert.js"></script>
     <script>
 		function myFunction() {
 		  // Declare variables
@@ -342,5 +343,10 @@
 		  }
 		}
 	</script>
+    <script>
+        function buttonFunction(){
+            swal('Class Ended.', 'Attendance has been Recorded!', 'success');
+        }
+    </script>
 </body>
 </html>

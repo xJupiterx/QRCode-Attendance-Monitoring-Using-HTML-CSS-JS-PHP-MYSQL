@@ -132,58 +132,83 @@
                                 </div>
                                 <div class="card-body px-0 pb-0">
                                     <div class="table-responsive">
-                                    <?php
-                                        $sqlSelect = "SELECT * FROM student_attendance";
-                                        $result = mysqli_query($db, $sqlSelect);
-                                                    
-                                        if (mysqli_num_rows($result) > 0) {
-                                    ?>
-                                    <div class="form-group position-relative has-icon-left">
-                                        <div class="position-relative">
-                                            <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Student ID..">
-                                            <div class="form-control-icon">
-                                                <i data-feather="search"></i>
+                                        <?php
+                                            $sqlSelect = "SELECT * FROM student_attendance";
+                                            $result = mysqli_query($db, $sqlSelect);
+                                                        
+                                            if (mysqli_num_rows($result) > 0) {
+                                        ?>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Student ID..">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="search"></i>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <form class="col-md-auto" method='post' style='overflow:scroll; width:100%; height: 400px'>
-                                        <table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th style = "width:8%; font-size: 14px">Student_ID</th>
-                                                    <th style = "width:8%; font-size: 14px">First name</th>
-                                                    <th style = "width:8%; font-size: 14px">Last name</th>
-                                                    <th style = "width:8%; font-size: 14px">Subject</th>
-                                                    <th style = "width:8%; font-size: 14px">Section</th>
-                                                    <th style = "width:8%; font-size: 14px">Remarks</th>
+                                        <form class="col-md-auto" method='post' style='overflow:scroll; width:100%; height: 400px'>
+                                            <table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th style = "width:8%; font-size: 14px">Student_ID</th>
+                                                        <th style = "width:8%; font-size: 14px">First name</th>
+                                                        <th style = "width:8%; font-size: 14px">Last name</th>
+                                                        <th style = "width:8%; font-size: 14px">Subject</th>
+                                                        <th style = "width:8%; font-size: 14px">Section</th>
+                                                        <th style = "width:8%; font-size: 14px">Remarks</th>
 
-                                                </tr>
-                                            </thead>
-                                            <?php
-                                            while ($row = mysqli_fetch_array($result)) {
-                                            ?>
-                                            <tbody>
-                                                <tr>
-                                                    <td><?php  echo $row['student_id']; ?></td>
-                                                    <td><?php  echo $row['firstname']; ?></td>
-                                                    <td><?php  echo $row['lastname']; ?></td>
-                                                    <td><?php  echo $row['subject']; ?></td>
-                                                    <td><?php  echo $row['section']; ?></td>
-                                                    <?php if($row['remarks']=="ON-TIME"): ?>
-                                                        <td style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
-                                                    <?php endif ?>
-                                                    <?php if($row['remarks']=="LATE"): ?>
-                                                        <td style="background-color: #ffc107; color:#fffdf5; border-color: #ecb40a; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
-                                                    <?php endif ?>
-                                                    <?php if($row['remarks']=="ABSENT"): ?>
-                                                        <td style="background-color: #df4759; color: #fef8f8; border-color:#cf4455; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
-                                                    <?php endif ?>
-                                                </tr>
-                                            <?php } ?>
-                                            </tbody>
-                                        </table>
-                                    </form>
-                                    <?php } ?>
+                                                    </tr>
+                                                </thead>
+                                                <?php
+                                                while ($row = mysqli_fetch_array($result)) {
+                                                ?>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><?php  echo $row['student_id']; ?></td>
+                                                        <td><?php  echo $row['firstname']; ?></td>
+                                                        <td><?php  echo $row['lastname']; ?></td>
+                                                        <td><?php  echo $row['subject']; ?></td>
+                                                        <td><?php  echo $row['section']; ?></td>
+                                                        <?php if($row['remarks']=="ON-TIME"): ?>
+                                                            <td style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+                                                        <?php endif ?>
+                                                        <?php if($row['remarks']=="LATE"): ?>
+                                                            <td style="background-color: #ffc107; color:#fffdf5; border-color: #ecb40a; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+                                                        <?php endif ?>
+                                                        <?php if($row['remarks']=="ABSENT"): ?>
+                                                            <td style="background-color: #df4759; color: #fef8f8; border-color:#cf4455; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+                                                        <?php endif ?>
+                                                    </tr>
+                                                <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </form>
+                                        <?php } ?>
+
+                                        <?php if (mysqli_num_rows($result) <= 0) {?>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Student ID..">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="search"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <form class="col-md-auto" method='post' style='overflow:scroll; width:100%; height: 400px'>
+                                            <table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th style = "width:8%; font-size: 14px">Student_ID</th>
+                                                        <th style = "width:8%; font-size: 14px">First name</th>
+                                                        <th style = "width:8%; font-size: 14px">Last name</th>
+                                                        <th style = "width:8%; font-size: 14px">Subject</th>
+                                                        <th style = "width:8%; font-size: 14px">Section</th>
+                                                        <th style = "width:8%; font-size: 14px">Remarks</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </form>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -301,5 +326,4 @@
 		}
 	</script>
 </body>
-
 </html>

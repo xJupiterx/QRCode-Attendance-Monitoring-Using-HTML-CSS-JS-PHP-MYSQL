@@ -173,6 +173,30 @@
 											</table>
 										</form>
 										<?php } ?>
+										<?php if (mysqli_num_rows($result) <= 0) {?>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Student ID..">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="search"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <form class="col-md-auto" method='post' style='overflow:scroll; width:100%; height: 400px'>
+                                            <table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th style = "width:8%; font-size: 14px">Student_ID</th>
+                                                        <th style = "width:8%; font-size: 14px">First name</th>
+                                                        <th style = "width:8%; font-size: 14px">Last name</th>
+                                                        <th style = "width:8%; font-size: 14px">Subject</th>
+                                                        <th style = "width:8%; font-size: 14px">Section</th>
+                                                        <th style = "width:8%; font-size: 14px">Remarks</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </form>
+                                        <?php } ?>
 									</div>
 								</div>
                             </div>

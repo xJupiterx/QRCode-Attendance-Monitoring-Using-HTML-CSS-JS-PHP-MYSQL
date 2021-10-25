@@ -245,7 +245,7 @@
                                         <input type="text" name="student_id" class="form-control" id="student_id" placeholder='Enter Student ID'>
                                     </div>
                                     <div class="clearfix" style='position:relative;'>
-                                        <input type="submit" name="selectStud" value="Select Student" class="btn btn-primary float-end">
+                                        <input type="submit" name="selectStud" value="Select Another Student" class="btn btn-primary float-end">
                                     </div>
                                 </div>
                             </div>

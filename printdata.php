@@ -3,6 +3,6 @@
     <head>
     </head>
     <body>
-        <p> <?php echo $_SESSION['checker'] ?></p>
+        <p>print data: <?php echo $_SESSION['ssval'] ?></p>
     </body>
 </html>

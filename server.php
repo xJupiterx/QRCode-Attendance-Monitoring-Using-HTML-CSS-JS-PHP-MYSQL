@@ -304,10 +304,10 @@ if (isset($_POST["import"])) {
 				$insertCourses = "INSERT into courses_enrolled (student_id, subject1, section1, subject2, section2, subject3, section3, subject4, section4,
 								subject5, section5, subject6, section6, subject7, section7, subject8, section8, subject9, section9, subject10, section10, semester,
 								academic_year_start, academic_year_end)
-						values ('" . $column[3] . "','" . $column[10] . "','" . $column[11] . "','" . $column[13] . "','" . $column[14] . "','" . $column[16] . "','" . $column[17] . "'
-								,'" . $column[19] . "','" . $column[20] . "','" . $column[22] . "','" . $column[23] . "','" . $column[25] . "','" . $column[26] . "'
-								,'" . $column[28] . "','" . $column[29] . "','" . $column[31] . "','" . $column[32] . "','" . $column[34] . "','" . $column[35] . "'
-								,'" . $column[37] . "','" . $column[38] . "','" . $semester . "','" . $startyear . "','" . $endyear . "')";
+						values ('" . $column[3] . "','" . strtoupper($column[10]) . "','" . $column[11] . "','" . strtoupper($column[13]) . "','" . $column[14] . "','" . strtoupper($column[16]) . "','" . $column[17] . "'
+								,'" . strtoupper($column[19]) . "','" . $column[20] . "','" . strtoupper($column[22]) . "','" . $column[23] . "','" . strtoupper($column[25]) . "','" . $column[26] . "'
+								,'" . strtoupper($column[28]) . "','" . $column[29] . "','" . strtoupper($column[31]) . "','" . $column[32] . "','" . strtoupper($column[34]) . "','" . $column[35] . "'
+								,'" . strtoupper($column[37]) . "','" . $column[38] . "','" . $semester . "','" . $startyear . "','" . $endyear . "')";
 				$addStudentAcc = "INSERT INTO user (lastname,firstname,middlename,username,email,password,accesslevel,status)
 					   values ('" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[3] . "','" . $column[1] . "','" . $column[4] . "','" . $accesslevel . "','" . $status . "')";
 				$result = mysqli_query($db, $insertStudent);
@@ -332,7 +332,18 @@ if (isset($_POST['subjects'])) {
 if (isset($_POST['selectStud'])) {
 	$student_id = mysqli_real_escape_string($db,$_POST['student_id']);
 	$scannedqr = mysqli_real_escape_string($db,$_POST['scannedqr']);
-	$student_id = $student_id . $scannedqr;
+	$ssval = mysqli_real_escape_string($db,$_POST['selectStud']);
+	if((!(empty($student_id))) and (!(empty($scannedqr)))){
+		if($ssval == 'Select Student'){
+			echo '<script>alert("Please do not input data in Manual Selector if you want to scan QR Code!");window.location.href="dean-qrscanner.php";</script>';
+		}
+		else{
+			echo '<script>alert("Please do not input data in Manual Selector if you want to scan QR Code!");window.location.href="dean-qrscannerAS.php";</script>';
+		}	
+	}
+	else{
+		$student_id = $student_id . $scannedqr;
+	}
 	$subject=$_POST['subject'];
 	$section=$_POST['section'];
 	$timein=$_POST['time-in'];
@@ -343,15 +354,23 @@ if (isset($_POST['selectStud'])) {
 	$sectionSelector = '';
 	if (mysqli_num_rows($result) > 0) {
 		if (empty($student_id)) {
-			$sserrors = "Please Enter/Scan Student ID!";
-			$sserrorcount = 1;
+			if($ssval == 'Select Student'){
+				echo '<script>alert("Please Enter/Scan Student ID!");window.location.href="dean-qrscanner.php";</script>';
+			}
+			else{
+				echo '<script>alert("Please Enter/Scan Student ID!");window.location.href="dean-qrscannerAS.php";</script>';
+			}	
 		}
 		else{
 			while ($row = mysqli_fetch_array($result)) {
 				if($row['student_id']==$student_id){
 					if (($section == 'Please Select') or ($subject == 'Please Select')) {
-						$sserrors = "Please Select Section/ Subject!";
-						$sserrorcount = 1;
+						if($ssval == 'Select Student'){
+							echo '<script>alert("Please Select Section/ Subject!");window.location.href="dean-qrscanner.php";</script>';
+						}
+						else{
+							echo '<script>alert("Please Select Section/ Subject!");window.location.href="dean-qrscannerAS.php";</script>';
+						}	
 					}
 					else{
 						//display lastname depends on student_id
@@ -414,7 +433,7 @@ if (isset($_POST['selectStud'])) {
 							$subjectSelector = mysqli_fetch_assoc($subjectSelector);
 							$subjectSelector = reset($subjectSelector);
 
-							if((strval($subject) == strval($subjectSelector)) or strtoupper(strval($subject)) == strval($subjectSelector)){
+							if(strval($subject) == strval($subjectSelector)){
 								$soutcome = 'Student ' . $student_id . ' was enrolled in this subject.';
 								$sectioncounter = 'section'.strval($i);
 								$sectionSelector = "SELECT $sectioncounter FROM courses_enrolled WHERE student_id = '$student_id'";
@@ -430,8 +449,12 @@ if (isset($_POST['selectStud'])) {
 						$_SESSION['sectionoutcome'] = $outcome;
 						$_SESSION['subjectoutcome'] = $soutcome;
 						if(($timein == 'Please Select') or ($timeout == 'Please Select')){
-							$sserrors = "Please Select Time-In/ Time-Out!";
-							$sserrorcount = 1;
+							if($ssval == 'Select Student'){
+								echo '<script>alert("Please Select Time-In/ Time-Out!");window.location.href="dean-qrscanner.php";</script>';
+							}
+							else{
+								echo '<script>alert("Please Select Time-In/ Time-Out!");window.location.href="dean-qrscannerAS.php";</script>';
+							}	
 						}
 						else{
 							$StudAttendTime = gmdate("H:i", time() + 3600*(7+date("I"))); //time - in ni student
@@ -481,7 +504,12 @@ if (isset($_POST['selectStud'])) {
 										}
 									}
 									else{
-										echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+										if($ssval == 'Select Student'){
+											echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+										}
+										else{
+											echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+										}	
 									}
 								}
 								else{
@@ -516,7 +544,12 @@ if (isset($_POST['selectStud'])) {
 										}
 									}
 									else{
-										echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+										if($ssval == 'Select Student'){
+											echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+										}
+										else{
+											echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+										}	
 									}
 								}
 							}
@@ -552,7 +585,12 @@ if (isset($_POST['selectStud'])) {
 									}
 								}
 								else{
-									echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+									if($ssval == 'Select Student'){
+										echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+									}
+									else{
+										echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+									}	
 								}
 							}
 						}
@@ -560,16 +598,28 @@ if (isset($_POST['selectStud'])) {
 				}
 			}
 			if (($section == 'Please Select') or ($subject == 'Please Select')) {
-				$sserrors = "Please Select Section/ Subject!";
-				$sserrorcount = 1;
+				if($ssval == 'Select Student'){
+					echo '<script>alert("Please Select Section/ Subject!");window.location.href="dean-qrscanner.php";</script>';
+				}
+				else{
+					echo '<script>alert("Please Select Section/ Subject!");window.location.href="dean-qrscannerAS.php";</script>';
+				}	
 			}
 			elseif(($timein == 'Please Select') or ($timeout == 'Please Select')){
-				$sserrors = "Please Select Time-In/ Time-Out!";
-				$sserrorcount = 1;
+				if($ssval == 'Select Student'){
+					echo '<script>alert("Please select Time-in and Time-Out!");window.location.href="dean-qrscanner.php";</script>';
+				}
+				else{
+					echo '<script>alert("Please select Time-in and Time-Out!");window.location.href="dean-qrscannerAS.php";</script>';
+				}	
 			}
 			else{
-				$sserrors = "Student ID Didn't Match!";
-				$sserrorcount = 1;
+				if($ssval == 'Select Student'){
+					echo '<script>alert("Student id is not existing.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+				}
+				else{
+					echo '<script>alert("Student id is not existing.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+				}	
 			}
 		}
 	}
@@ -780,7 +830,7 @@ if (isset($_POST["EndClass"])){
 								mysqli_query($db, $addAttendance);
 							}
 							else{
-								continue;
+								break;
 							}
 						}
 						else{
@@ -797,9 +847,12 @@ if (isset($_POST["EndClass"])){
 								mysqli_query($db, $addAttendance);
 							}
 							else{
-								continue;
+								break;
 							}
 						}
+					}
+					else{
+						continue;
 					}
 				}
 			}
