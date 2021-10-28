@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php include('server.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +32,7 @@
                             <div class="divider-text" style="color: gray; font-size: 12px">Main Menu</div>
                         </div>
                         <li class="sidebar-item active ">
-                            <a href="dean-page.php" class='sidebar-link' style="background-color: #e3e3e3">
+                            <a href="faculty-page.php" class='sidebar-link' style="background-color: #e3e3e3">
                                 <i data-feather="home" width="20"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -44,27 +44,12 @@
                             </a>
                             <ul class="submenu " style="background-color: #e3e3e3">
                                 <li>
-                                    <a href="dean-student-info.php">View Student's Information</a>
+                                    <a href="faculty-student-info.php">View Student's Information</a>
                                 </li>
                                 <li>
-                                    <a href="dean-student-attendance.php">View Student's Attendance</a>
+                                    <a href="faculty-student-attendance.php">View Student's Attendance</a>
                                 </li>
                             </ul>
-                        </li>
-						<div class="divider">
-                            <div class="divider-text" style="color: gray; font-size: 12px">More Options</div>
-                        </div>
-						<li class="sidebar-item active ">
-                            <a href="dean-createacc.php" class='sidebar-link' style="background-color: #e3e3e3">
-                                <i data-feather="plus" width="20"></i>
-                                <span>Create Faculty Account</span>
-                            </a>
-                        </li>
-						<li class="sidebar-item active ">
-                            <a href="dean-update-database.php" class='sidebar-link' style="background-color: #e3e3e3">
-                                <i data-feather="database" width="20"></i>
-                                <span>Update Student Database</span>
-                            </a>
                         </li>
                     </ul>
                 </div>
@@ -109,13 +94,14 @@
                     </div>
                     <div class="card-body">
 						<br>
-						<center><p class="col-md-12 col-12"><b>Student ID: </b><?php echo $_SESSION['sstudent_id']; ?></p></center>
-						<p class="col-md-4 col-12"><b>Course/Year/Section: </b><?php echo $_SESSION['scourse']; ?> <?php echo $_SESSION['syear']; ?>-<?php echo $_SESSION['ssection']; ?></p>
+						<center><p class="col-md-12 col-12" style='font-size:18px'><b>Student ID: </b><?php echo $_SESSION['sstudent_id']; ?></p></center>
+						<p class="col-md-4 col-12" style='font-size:18px'><b>Course/Year/Section: </b><?php echo $_SESSION['scourse']; ?> <?php echo $_SESSION['syear']; ?>-<?php echo $_SESSION['ssection']; ?></p>
 						<div class="row">
-							<p class="col-md-4 col-12"><b>Last name: </b><u><?php echo $_SESSION['slastname']; ?></u></p>
-							<p class="col-md-4 col-12"><b>First name: </b><u><?php echo $_SESSION['sfirstname']; ?></u></p>
-							<p class="col-md-4 col-12"><b>Middle name: </b><u><?php echo $_SESSION['smiddlename']; ?></u></p>
+							<p class="col-md-4 col-12" style='font-size:18px'><b>Last name: </b><u><?php echo $_SESSION['slastname']; ?></u></p>
+							<p class="col-md-4 col-12" style='font-size:18px'><b>First name: </b><u><?php echo $_SESSION['sfirstname']; ?></u></p>
+							<p class="col-md-4 col-12" style='font-size:18px'><b>Middle name: </b><u><?php echo $_SESSION['smiddlename']; ?></u></p>
 						</div>
+                        <br>
                     </div>
                 </div>
                 <div class="card ">
@@ -128,39 +114,39 @@
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted;'>
                                 <center><p style='position:relative; top:7px'><strong>SUBJECT</strong></p></center>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-right:none'>
                                 <center><p style='position:relative; top:7px'><strong>SECTION</strong></p></center>
                             </div>
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted'>
                                 <center><p style='position:relative; top:7px'><strong>SUBJECT</strong></p></center>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-right:none'>
                                 <center><p style='position:relative; top:7px'><strong>SECTION</strong></p></center>
                             </div>
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted'>
                                 <center><p style='position:relative; top:7px'><strong>SUBJECT</strong></p></center>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-right:none'>
                                 <center><p style='position:relative; top:7px'><strong>SECTION</strong></p></center>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted;'>
+                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject1'] ?></strong></p></center>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-right:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section1'] ?></strong></p></center>
                             </div>
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject2'] ?></strong></p></center>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-right:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section2'] ?></strong></p></center>
                             </div>
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject3'] ?></strong></p></center>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-right:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section3'] ?></strong></p></center>
                             </div>
                         </div>  
@@ -168,19 +154,19 @@
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject4'] ?></strong></p></center>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section4'] ?></strong></p></center>
                             </div>
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject5'] ?></strong></p></center>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section5'] ?></strong></p></center>
                             </div>
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject6'] ?></strong></p></center>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section6'] ?></strong></p></center>
                             </div>
                         </div>
@@ -188,19 +174,19 @@
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject7'] ?></strong></p></center>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section7'] ?></strong></p></center>
                             </div>
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject8'] ?></strong></p></center>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section8'] ?></strong></p></center>
                             </div>
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject9'] ?></strong></p></center>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section9'] ?></strong></p></center>
                             </div>
                         </div>
@@ -208,17 +194,17 @@
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; height:45px; border-top:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject10'] ?></strong></p></center>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
                                 <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section10'] ?></strong></p></center>
                             </div>
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
                             <p></p>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
                             </div>
                             <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none'>
+                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
                             </div>
                         </div>
                     </div>

@@ -139,111 +139,111 @@ if (isset($_POST['Login'])) {
 						$section = reset($section);
 
 						//display subject1 and section1 depends on username
-						$subject1 = "SELECT subject1 FROM student WHERE username = '$username'";
+						$subject1 = "SELECT subject1 FROM courses_enrolled WHERE student_id = '$username'";
 						$subject1 = mysqli_query($db,$subject1);
 						$subject1 = mysqli_fetch_assoc($subject1);
 						$subject1 = reset($subject1);
 
-						$section1 = "SELECT section1 FROM student WHERE username = '$username'";
+						$section1 = "SELECT section1 FROM courses_enrolled WHERE student_id = '$username'";
 						$section1 = mysqli_query($db,$section1);
 						$section1 = mysqli_fetch_assoc($section1);
 						$section1 = reset($section1);
 
 						//display subject2 and section2 depends on username
-						$subject2 = "SELECT subject2 FROM student WHERE username = '$username'";
+						$subject2 = "SELECT subject2 FROM courses_enrolled WHERE student_id = '$username'";
 						$subject2 = mysqli_query($db,$subject2);
 						$subject2 = mysqli_fetch_assoc($subject2);
 						$subject2 = reset($subject2);
 
-						$section2 = "SELECT section2 FROM student WHERE username = '$username'";
+						$section2 = "SELECT section2 FROM courses_enrolled WHERE student_id = '$username'";
 						$section2 = mysqli_query($db,$section2);
 						$section2 = mysqli_fetch_assoc($section2);
 						$section2 = reset($section2);
 
 						//display subject3 and section3 depends on username
-						$subject3 = "SELECT subject3 FROM student WHERE username = '$username'";
+						$subject3 = "SELECT subject3 FROM courses_enrolled WHERE student_id = '$username'";
 						$subject3 = mysqli_query($db,$subject3);
 						$subject3 = mysqli_fetch_assoc($subject3);
 						$subject3 = reset($subject3);
 
-						$section3 = "SELECT section3 FROM student WHERE username = '$username'";
+						$section3 = "SELECT section3 FROM courses_enrolled WHERE student_id = '$username'";
 						$section3 = mysqli_query($db,$section3);
 						$section3 = mysqli_fetch_assoc($section3);
 						$section3 = reset($section3);
 
 						//display subject4 and section4 depends on username
-						$subject4 = "SELECT subject4 FROM student WHERE username = '$username'";
+						$subject4 = "SELECT subject4 FROM courses_enrolled WHERE student_id = '$username'";
 						$subject4 = mysqli_query($db,$subject4);
 						$subject4 = mysqli_fetch_assoc($subject4);
 						$subject4 = reset($subject4);
 
-						$section4 = "SELECT section4 FROM student WHERE username = '$username'";
+						$section4 = "SELECT section4 FROM courses_enrolled WHERE student_id = '$username'";
 						$section4 = mysqli_query($db,$section4);
 						$section4 = mysqli_fetch_assoc($section4);
 						$section4= reset($section4);
 
 						//display subject5 and section5 depends on username
-						$subject5 = "SELECT subject5 FROM student WHERE username = '$username'";
+						$subject5 = "SELECT subject5 FROM courses_enrolled WHERE student_id = '$username'";
 						$subject5 = mysqli_query($db,$subject5);
 						$subject5 = mysqli_fetch_assoc($subject5);
 						$subject5 = reset($subject5);
 
-						$section5 = "SELECT section5 FROM student WHERE username = '$username'";
+						$section5 = "SELECT section5 FROM courses_enrolled WHERE student_id = '$username'";
 						$section5 = mysqli_query($db,$section5);
 						$section5 = mysqli_fetch_assoc($section5);
 						$section5 = reset($section5);
 
 						//display subject6 and section6 depends on username
-						$subject6 = "SELECT subject6 FROM student WHERE username = '$username'";
+						$subject6 = "SELECT subject6 FROM courses_enrolled WHERE student_id = '$username'";
 						$subject6 = mysqli_query($db,$subject6);
 						$subject6 = mysqli_fetch_assoc($subject6);
 						$subject6 = reset($subject6);
 
-						$section6 = "SELECT section6 FROM student WHERE username = '$username'";
+						$section6 = "SELECT section6 FROM courses_enrolled WHERE student_id = '$username'";
 						$section6 = mysqli_query($db,$section6);
 						$section6 = mysqli_fetch_assoc($section6);
 						$section6 = reset($section6);
 
 						//display subject7 and section7 depends on username
-						$subject7 = "SELECT subject7 FROM student WHERE username = '$username'";
+						$subject7 = "SELECT subject7 FROM courses_enrolled WHERE student_id = '$username'";
 						$subject7 = mysqli_query($db,$subject7);
 						$subject7 = mysqli_fetch_assoc($subject7);
 						$subject7 = reset($subject7);
 
-						$section7 = "SELECT section7 FROM student WHERE username = '$username'";
+						$section7 = "SELECT section7 FROM courses_enrolled WHERE student_id = '$username'";
 						$section7 = mysqli_query($db,$section7);
 						$section7 = mysqli_fetch_assoc($section7);
 						$section7 = reset($section7);
 
 						//display subject8 and section8 depends on username
-						$subject8 = "SELECT subject8 FROM student WHERE username = '$username'";
+						$subject8 = "SELECT subject8 FROM courses_enrolled WHERE student_id = '$username'";
 						$subject8 = mysqli_query($db,$subject8);
 						$subject8 = mysqli_fetch_assoc($subject8);
 						$subject8 = reset($subject8);
 
-						$section8 = "SELECT section8 FROM student WHERE username = '$username'";
+						$section8 = "SELECT section8 FROM courses_enrolled WHERE student_id = '$username'";
 						$section8 = mysqli_query($db,$section8);
 						$section8 = mysqli_fetch_assoc($section8);
 						$section8 = reset($section8);
 
 						//display subject9 and section9 depends on username
-						$subject9 = "SELECT subject9 FROM student WHERE username = '$username'";
+						$subject9 = "SELECT subject9 FROM courses_enrolled WHERE student_id = '$username'";
 						$subject9 = mysqli_query($db,$subject9);
 						$subject9 = mysqli_fetch_assoc($subject9);
 						$subject9 = reset($subject9);
 
-						$section9 = "SELECT section9 FROM student WHERE username = '$username'";
+						$section9 = "SELECT section9 FROM courses_enrolled WHERE student_id = '$username'";
 						$section9 = mysqli_query($db,$section9);
 						$section9 = mysqli_fetch_assoc($section9);
 						$section9 = reset($section9);
 
 						//display subject10 and section10 depends on username
-						$subject10 = "SELECT subject10 FROM student WHERE username = '$username'";
+						$subject10 = "SELECT subject10 FROM courses_enrolled WHERE student_id = '$username'";
 						$subject10 = mysqli_query($db,$subject10);
 						$subject10 = mysqli_fetch_assoc($subject10);
 						$subject10 = reset($subject10);
 
-						$section10 = "SELECT section10 FROM student WHERE username = '$username'";
+						$section10 = "SELECT section10 FROM courses_enrolled WHERE student_id = '$username'";
 						$section10 = mysqli_query($db,$section10);
 						$section10 = mysqli_fetch_assoc($section10);
 						$section10 = reset($section10);
@@ -346,7 +346,16 @@ if (isset($_POST['selectStud'])) {
 	}
 	$subject=$_POST['subject'];
 	$section=$_POST['section'];
+
+	//time restriction
+	$trtime = gmdate("H:i", time() + 3600*(7+date("I"))); //current time na nagselect class si prof
+	$TTHour = substr($trtime, -5,2); // return yung hour *00*:00 ng time na nagselect class si prof
+	$TTMins = substr($trtime, -2,2); // return yung minutes 00:*00* ng time na nagselect class si prof
+	$TTHourMins = $TTHour . $TTMins; // pagsamahin yung hour at mins
+	$TTHM_int = intval($TTHourMins); // convert sa int
 	$timein=$_POST['time-in'];
+
+
 	$timeout=$_POST['time-out'];
 	$sqlSelect = "SELECT * FROM student";
     $result = mysqli_query($db, $sqlSelect);
@@ -493,13 +502,19 @@ if (isset($_POST['selectStud'])) {
 											$aye = mysqli_fetch_assoc($aye);
 											$aye = reset($aye);
 											$DateofAttendance = gmdate("Y/m/j");
+											$_SESSION['Date'] = $DateofAttendance;
 											$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
 															academic_year_start,academic_year_end,date_of_schedule)
 												values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
 															'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
 															,'" . $aye . "','" . $DateofAttendance . "')";
 											mysqli_query($db, $addAttendance);
-											header("location: dean-scannedqr.php");
+											if( $_SESSION['accesslevel'] == 'DEAN'){
+												header("location: dean-scannedqr.php");
+											}
+											else{
+												header("location: faculty-scannedqr.php");
+											}
 											exit();
 										}
 									}
@@ -533,13 +548,19 @@ if (isset($_POST['selectStud'])) {
 											$aye = mysqli_fetch_assoc($aye);
 											$aye = reset($aye);
 											$DateofAttendance = gmdate("Y/m/j");
+											$_SESSION['Date'] = $DateofAttendance;
 											$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
 															academic_year_start,academic_year_end,date_of_schedule)
 												values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
 															'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
 															,'" . $aye . "','" . $DateofAttendance . "')";
 											mysqli_query($db, $addAttendance);
-											header("location: dean-scannedqr.php");
+											if( $_SESSION['accesslevel'] == 'DEAN'){
+												header("location: dean-scannedqr.php");
+											}
+											else{
+												header("location: faculty-scannedqr.php");
+											}
 											exit();
 										}
 									}
@@ -574,13 +595,19 @@ if (isset($_POST['selectStud'])) {
 										$aye = mysqli_fetch_assoc($aye);
 										$aye = reset($aye);
 										$DateofAttendance = gmdate("Y/m/j");
+										$_SESSION['Date'] = $DateofAttendance;
 										$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
 															academic_year_start,academic_year_end,date_of_schedule)
 												values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
 															'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
 															,'" . $aye . "','" . $DateofAttendance . "')";
 										mysqli_query($db, $addAttendance);
-										header("location: dean-scannedqr.php");
+										if( $_SESSION['accesslevel'] == 'DEAN'){
+											header("location: dean-scannedqr.php");
+										}
+										else{
+											header("location: faculty-scannedqr.php");
+										}
 										exit();
 									}
 								}
@@ -741,8 +768,12 @@ if (isset($_POST["StudentViewer"])){
     $_SESSION['scourse'] = $course ;
 	$_SESSION['syear'] = $year ;
 	$_SESSION['ssection'] = $ssection ;
-	
-	header("location: view-student-info.php");
+	if( $_SESSION['accesslevel'] == 'DEAN'){
+		header("location: dean-view-student.php");
+	}
+	else{
+		header("location: faculty-view-student.php");
+	}
 }
 
 if (isset($_POST["EndClass"])){
@@ -750,6 +781,16 @@ if (isset($_POST["EndClass"])){
 	$endSection = $_SESSION['selectedsection'];
     $endTimein = $_SESSION['classTimeIn'];
     $endTimeout = $_SESSION['classTimeOut'];
+	if($endSubject == 'Select Subject'){
+		if( $_SESSION['accesslevel'] == 'DEAN'){
+			header("location: dean-page.php");
+			exit();
+		}
+		else{
+			header("location: faculty-page.php");
+			exit();
+		}
+	}
 	$Date = gmdate("Y/m/j");
 	$studentTimein = 'null';
 	$rremarks = 'ABSENT';
@@ -857,7 +898,62 @@ if (isset($_POST["EndClass"])){
 				}
 			}
 		}
-		header("location: dean-page.php");
+		if( $_SESSION['accesslevel'] == 'DEAN'){
+			$_SESSION['selectedsubject'] = 'Select Subject';
+			$_SESSION['selectedsection'] = 'Select Section';
+			$_SESSION['classTimeIn'] = 'Select Time-in';
+			$_SESSION['classTimeOut'] = 'Select Time-out';
+			$_SESSION['sstudent_id'] = 'Select Student';
+			$_SESSION['slastname'] = 'Select Student';
+			$_SESSION['sfirstname'] = 'Select Student';
+			$_SESSION['smiddlename'] = 'Select Student';
+			$_SESSION['sectionSelector'] = 'Select Student';
+			$_SESSION['timeRemarks'] = '';
+			header("location: dean-page.php");
+		}
+		else{
+			$_SESSION['selectedsubject'] = 'Select Subject';
+			$_SESSION['selectedsection'] = 'Select Section';
+			$_SESSION['classTimeIn'] = 'Select Time-in';
+			$_SESSION['classTimeOut'] = 'Select Time-out';
+			$_SESSION['sstudent_id'] = 'Select Student';
+			$_SESSION['slastname'] = 'Select Student';
+			$_SESSION['sfirstname'] = 'Select Student';
+			$_SESSION['smiddlename'] = 'Select Student';
+			$_SESSION['sectionSelector'] = 'Select Student';
+			$_SESSION['timeRemarks'] = '';
+			header("location: faculty-page.php");
+		}
 	}
+}
+
+if (isset($_POST["UpdateStudInfo"])){
+	$editstudent_id = mysqli_real_escape_string($db,$_POST['estudent_id']);
+	$editcourse = mysqli_real_escape_string($db,$_POST['ecourse']);
+	$edityear = mysqli_real_escape_string($db,$_POST['eyear']);
+	$editsection = mysqli_real_escape_string($db,$_POST['esection']);
+	$editfirstname = mysqli_real_escape_string($db,$_POST['efirstname']);
+	$editmiddlename = mysqli_real_escape_string($db,$_POST['emiddlename']);
+	$editlastname = mysqli_real_escape_string($db,$_POST['elastname']);
+	$modifyStudInfo="UPDATE student
+					SET 
+						lastname = '" . $editlastname . "',
+						firstname = '" . $editfirstname . "',
+						middlename = '" . $editmiddlename . "',
+						course = '" . $editcourse . "',
+						year = '" . $edityear . "',
+						section = '" . $editsection . "'
+					WHERE
+						student_id = '" . $editstudent_id . "';";
+	mysqli_query($db, $modifyStudInfo);
+	$modifyUserTable="UPDATE student
+					SET 
+						lastname = '" . $editlastname . "',
+						firstname = '" . $editfirstname . "',
+						middlename = '" . $editmiddlename . "'
+					WHERE
+						username = '" . $editstudent_id . "';";
+	mysqli_query($db, $modifyUserTable);
+	header("location: dean-page.php");
 }
 ?>

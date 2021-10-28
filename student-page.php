@@ -95,7 +95,7 @@
                                     <div class='row'>
                                         <img src="assets/images/scs.png", 
                                             style='position: absolute; width: 66px; height:46px; left:47.3%; top:36.3%;'>
-									    <center><canvas id="qr-code"></canvas></center>
+									    <canvas id="qr-code" style='position:relative; height:50; width:50'></canvas>
                                     <div>
 									<br>
 									<center><p class="col-md-12 col-12"><b>Student ID: </b><?php echo $_SESSION['student_id']; ?></p></center>

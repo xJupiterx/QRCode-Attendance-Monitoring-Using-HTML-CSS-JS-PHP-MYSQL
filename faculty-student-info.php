@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Database</title>
+    <title>Student Information</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/vendors/chartjs/Chart.min.css">
 	<link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
@@ -29,7 +29,9 @@
 				</center>
                 <div class="sidebar-menu">
                     <ul class="menu">
-                        <li class='sidebar-title' style="color: gray">Main Menu</li>
+                        <div class="divider">
+                            <div class="divider-text" style="color: gray; font-size: 12px">Main Menu</div>
+                        </div>
                         <li class="sidebar-item active ">
                             <a href="faculty-page.php" class='sidebar-link' style="background-color: #e3e3e3">
                                 <i data-feather="home" width="20"></i>
@@ -105,7 +107,7 @@
                                 </div>
                             </div>
                         </div>
-						<div class="col-md-12">
+						<form class="table-responsive" method='post'>
 							<table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
 								<thead>
 									<tr>
@@ -122,7 +124,11 @@
 								?>
 								<tbody>
 									<tr>
-										<td><?php  echo $row['student_id']; ?></td>
+										<td style="color:blue">
+											<div>
+												<input type="submit" name="StudentViewer" value=<?php  echo $row['student_id']; ?> style="background-color:white; border:none; color: blue">
+											</div>
+										</td>
 										<td><?php  echo $row['lastname']; ?></td>
 										<td><?php  echo $row['firstname']; ?></td>
 										<td><?php  echo $row['middlename']; ?></td>
@@ -134,7 +140,7 @@
 								?>
 								</tbody>
 							</table>
-						</div>
+						</form>
 					</div>
 				</section>
             </div>
@@ -247,6 +253,16 @@
 			  }
 			}
 		  }
+		}
+	</script>
+	<script>
+		$("#table tr").click(function(){
+		$(this).addClass('selected').siblings().removeClass('selected');    
+		var value=$(this).find('td:first').html();
+		});
+		function fnselect(){
+
+		alert($("tr.selected td:first" ).html());
 		}
 	</script>
 </body>

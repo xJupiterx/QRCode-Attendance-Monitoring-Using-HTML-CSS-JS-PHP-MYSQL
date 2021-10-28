@@ -73,9 +73,6 @@
 								<div class="clearfix">
 									<input type="submit" name="Login" value="LOGIN" class="btn btn-primary float-end">
 								</div>
-                                <div class="clearfix">
-									<input type="submit" name="subjects" value="Print Array" class="btn btn-primary float-end">
-								</div>
                             </form>
 							<br><br>
                         </div>

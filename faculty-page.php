@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php include('server.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +29,9 @@
 				</center>
                 <div class="sidebar-menu">
                     <ul class="menu">
-                        <li class='sidebar-title' style="color: gray">Main Menu</li>
+                        <div class="divider">
+                            <div class="divider-text" style="color: gray; font-size: 12px">Main Menu</div>
+                        </div>
                         <li class="sidebar-item active ">
                             <a href="faculty-page.php" class='sidebar-link' style="background-color: #e3e3e3">
                                 <i data-feather="home" width="20"></i>
@@ -115,70 +117,83 @@
                                 </div>
                                 <div class="card-body px-0 pb-0">
                                     <div class="table-responsive">
-                                        <table class='table mb-0' id="table1">
-                                            <thead>
-                                                <tr>
-                                                    <th>Student Id</th>
-                                                    <th>Last name</th>
-                                                    <th>First name</th>
-                                                    <th>Course-Year-Section</th>
-                                                    <th>Subject Code</th>
-													<th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1801499</td>
-                                                    <td>Jamiladan</td>
-                                                    <td>Jhon Peter</td>
-                                                    <td>BSIT 4-3</td>
-													<td>ITEC69</td>
-                                                    <td style="background-color: rgb(220, 53, 69)">
-                                                        <span class="badge bg-danger" style="color:black">Absent</span>
-                                                    </td>
-                                                </tr>
-												<tr>
-                                                    <td>1801498</td>
-                                                    <td>Villaflor</td>
-                                                    <td>Aldrine</td>
-                                                    <td>BSIT 4-3</td>
-													<td>ITEC69</td>
-                                                    <td style="background-color: rgb(255, 193, 7)">
-                                                        <span class="badge bg-warning" style="color:black">Late</span>
-                                                    </td>
-                                                </tr>
-												<tr>
-                                                    <td>1801497</td>
-                                                    <td>Mayuga</td>
-                                                    <td>Wenwen</td>
-                                                    <td>BSIT 4-3</td>
-													<td>ITEC69</td>
-                                                    <td style="background-color: rgb(25, 135, 84)">
-                                                        <span class="badge bg-success" style="color:black">On-time</span>
-                                                    </td>
-                                                </tr>
-												<tr>
-                                                    <td>1801496</td>
-                                                    <td>Olazo</td>
-                                                    <td>Archie</td>
-                                                    <td>BSIT 4-3</td>
-													<td>ITEC69</td>
-                                                    <td style="background-color: rgb(25, 135, 84)">
-                                                        <span class="badge bg-success" style="color:black">On-time</span>
-                                                    </td>
-                                                </tr>
-												<tr>
-                                                    <td>1801495</td>
-                                                    <td>Vergara</td>
-                                                    <td>Jasmin</td>
-                                                    <td>BSIT 4-3</td>
-													<td>ITEC69</td>
-                                                    <td style="background-color: rgb(25, 135, 84)">
-                                                        <span class="badge bg-success" style="color:black">On-time</span>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <?php
+                                            $sqlSelect = "SELECT * FROM student_attendance";
+                                            $result = mysqli_query($db, $sqlSelect);
+                                                        
+                                            if (mysqli_num_rows($result) > 0) {
+                                        ?>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Student ID..">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="search"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <form class="col-md-auto" method='post' style='overflow:scroll; width:100%; height: 400px'>
+                                            <table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th style = "width:8%; font-size: 14px">Student_ID</th>
+                                                        <th style = "width:8%; font-size: 14px">First name</th>
+                                                        <th style = "width:8%; font-size: 14px">Last name</th>
+                                                        <th style = "width:8%; font-size: 14px">Subject</th>
+                                                        <th style = "width:8%; font-size: 14px">Section</th>
+                                                        <th style = "width:8%; font-size: 14px">Remarks</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <?php
+                                                while ($row = mysqli_fetch_array($result)) {
+                                                ?>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><?php  echo $row['student_id']; ?></td>
+                                                        <td><?php  echo $row['firstname']; ?></td>
+                                                        <td><?php  echo $row['lastname']; ?></td>
+                                                        <td><?php  echo $row['subject']; ?></td>
+                                                        <td><?php  echo $row['section']; ?></td>
+                                                        <?php if($row['remarks']=="ON-TIME"): ?>
+                                                            <td style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+                                                        <?php endif ?>
+                                                        <?php if($row['remarks']=="LATE"): ?>
+                                                            <td style="background-color: #ffc107; color:#fffdf5; border-color: #ecb40a; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+                                                        <?php endif ?>
+                                                        <?php if($row['remarks']=="ABSENT"): ?>
+                                                            <td style="background-color: #df4759; color: #fef8f8; border-color:#cf4455; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+                                                        <?php endif ?>
+                                                    </tr>
+                                                <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </form>
+                                        <?php } ?>
+
+                                        <?php if (mysqli_num_rows($result) <= 0) {?>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Student ID..">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="search"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <form class="col-md-auto" method='post' style='overflow:scroll; width:100%; height: 400px'>
+                                            <table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th style = "width:8%; font-size: 14px">Student_ID</th>
+                                                        <th style = "width:8%; font-size: 14px">First name</th>
+                                                        <th style = "width:8%; font-size: 14px">Last name</th>
+                                                        <th style = "width:8%; font-size: 14px">Subject</th>
+                                                        <th style = "width:8%; font-size: 14px">Section</th>
+                                                        <th style = "width:8%; font-size: 14px">Remarks</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </form>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -268,12 +283,32 @@
     <script src="assets/js/feather-icons/feather.min.js"></script>
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/app.js"></script>
-
     <script src="assets/vendors/chartjs/Chart.min.js"></script>
     <script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
     <script src="assets/js/pages/dashboard.js"></script>
-
     <script src="assets/js/main.js"></script>
-</body>
+    <script>
+		function myFunction() {
+		  // Declare variables
+		  var input, filter, table, tr, td, i, txtValue;
+		  input = document.getElementById("myInput");
+		  filter = input.value.toUpperCase();
+		  table = document.getElementById("myTable");
+		  tr = table.getElementsByTagName("tr");
 
+		  // Loop through all table rows, and hide those who don't match the search query
+		  for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[0];
+			if (td) {
+			  txtValue = td.textContent || td.innerText;
+			  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			  } else {
+				tr[i].style.display = "none";
+			  }
+			}
+		  }
+		}
+	</script>
+</body>
 </html>

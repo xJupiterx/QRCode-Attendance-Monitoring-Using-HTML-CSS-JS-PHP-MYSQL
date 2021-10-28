@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dean Dashboard</title>
+    <title>Schedule Selector</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/vendors/chartjs/Chart.min.css">
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
@@ -146,7 +146,7 @@
 
             <div class="main-content container-fluid">
                 <div class="page-title">
-                    <h3>Attendance Recording</h3>
+                    <h3>Select Student</h3>
                 </div>
 				<br>
                 <section class="section">

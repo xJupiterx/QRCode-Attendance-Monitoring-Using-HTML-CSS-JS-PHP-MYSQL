@@ -76,7 +76,7 @@
                             <div class="divider-text" style="color: gray; font-size: 12px">Main Menu</div>
                         </div>
                         <li class="sidebar-item active ">
-                            <a href="dean-page.php" class='sidebar-link' style="background-color: #e3e3e3">
+                            <a href="faculty-page.php" class='sidebar-link' style="background-color: #e3e3e3">
                                 <i data-feather="home" width="20"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -88,27 +88,12 @@
                             </a>
                             <ul class="submenu " style="background-color: #e3e3e3">
                                 <li>
-                                    <a href="dean-student-info.php">View Student's Information</a>
+                                    <a href="faculty-student-info.php">View Student's Information</a>
                                 </li>
                                 <li>
-                                    <a href="dean-student-attendance.php">View Student's Attendance</a>
+                                    <a href="faculty-student-attendance.php">View Student's Attendance</a>
                                 </li>
                             </ul>
-                        </li>
-						<div class="divider">
-                            <div class="divider-text" style="color: gray; font-size: 12px">More Options</div>
-                        </div>
-						<li class="sidebar-item active ">
-                            <a href="dean-createacc.php" class='sidebar-link' style="background-color: #e3e3e3">
-                                <i data-feather="plus" width="20"></i>
-                                <span>Create Faculty Account</span>
-                            </a>
-                        </li>
-						<li class="sidebar-item active ">
-                            <a href="dean-update-database.php" class='sidebar-link' style="background-color: #e3e3e3">
-                                <i data-feather="database" width="20"></i>
-                                <span>Update Student Database</span>
-                            </a>
                         </li>
                     </ul>
                 </div>
