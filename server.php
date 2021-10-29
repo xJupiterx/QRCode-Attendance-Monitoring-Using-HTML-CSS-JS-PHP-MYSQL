@@ -325,9 +325,6 @@ if (isset($_POST["import"])) {
 		}
 	}
 }
-if (isset($_POST['subjects'])) {
-	header("location: printdata.html");
-}
 
 if (isset($_POST['selectStud'])) {
 	$student_id = mysqli_real_escape_string($db,$_POST['student_id']);
@@ -346,16 +343,7 @@ if (isset($_POST['selectStud'])) {
 	}
 	$subject=$_POST['subject'];
 	$section=$_POST['section'];
-
-	//time restriction
-	$trtime = gmdate("H:i", time() + 3600*(7+date("I"))); //current time na nagselect class si prof
-	$TTHour = substr($trtime, -5,2); // return yung hour *00*:00 ng time na nagselect class si prof
-	$TTMins = substr($trtime, -2,2); // return yung minutes 00:*00* ng time na nagselect class si prof
-	$TTHourMins = $TTHour . $TTMins; // pagsamahin yung hour at mins
-	$TTHM_int = intval($TTHourMins); // convert sa int
 	$timein=$_POST['time-in'];
-
-
 	$timeout=$_POST['time-out'];
 	$sqlSelect = "SELECT * FROM student";
     $result = mysqli_query($db, $sqlSelect);
@@ -480,144 +468,154 @@ if (isset($_POST['selectStud'])) {
 
 							$_SESSION['classTimeIn'] = $FACtimein;
 							$_SESSION['classTimeOut'] = $timeout;
-							if($SATHM_int > ($FACHM_int + 15)){
-								if($SATHM_int <($FACHM_int + 30)){
-									$timeRemarks = 'LATE';
-									$_SESSION['timeRemarks'] = $timeRemarks;
-									if($section == $sectionSelector){
-										if($_SESSION['subjectoutcome'] == 'Student '.$_SESSION['sstudent_id'].' was enrolled in this subject.'){
-											// GET SEMESTER
-											$sem = "SELECT semester FROM courses_enrolled WHERE student_id = '$student_id'";
-											$sem = mysqli_query($db,$sem);
-											$sem = mysqli_fetch_assoc($sem);
-											$sem = reset($sem);
-											// GET academic year start
-											$ays = "SELECT academic_year_start FROM courses_enrolled WHERE student_id = '$student_id'";
-											$ays = mysqli_query($db,$ays);
-											$ays = mysqli_fetch_assoc($ays);
-											$ays = reset($ays);
-											// GET academic year end
-											$aye = "SELECT academic_year_end FROM courses_enrolled WHERE student_id = '$student_id'";
-											$aye = mysqli_query($db,$aye);
-											$aye = mysqli_fetch_assoc($aye);
-											$aye = reset($aye);
-											$DateofAttendance = gmdate("Y/m/j");
-											$_SESSION['Date'] = $DateofAttendance;
-											$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
-															academic_year_start,academic_year_end,date_of_schedule)
-												values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
-															'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
-															,'" . $aye . "','" . $DateofAttendance . "')";
-											mysqli_query($db, $addAttendance);
-											if( $_SESSION['accesslevel'] == 'DEAN'){
-												header("location: dean-scannedqr.php");
-											}
-											else{
-												header("location: faculty-scannedqr.php");
-											}
-											exit();
-										}
-									}
-									else{
-										if($ssval == 'Select Student'){
-											echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
-										}
-										else{
-											echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
-										}	
-									}
+							if($SATHM_int < ($FACHM_int)){
+								if($ssval == 'Select Student'){
+									echo '<script>alert("The schedule has not yet been started!");window.location.href="dean-qrscanner.php";</script>';
 								}
 								else{
-									$timeRemarks = 'ABSENT';
-									$_SESSION['timeRemarks'] = $timeRemarks;
-									if($section == $sectionSelector){
-										if($_SESSION['subjectoutcome'] == 'Student '.$_SESSION['sstudent_id'].' was enrolled in this subject.'){
-											// GET SEMESTER
-											$sem = "SELECT semester FROM courses_enrolled WHERE student_id = '$student_id'";
-											$sem = mysqli_query($db,$sem);
-											$sem = mysqli_fetch_assoc($sem);
-											$sem = reset($sem);
-											// GET academic year start
-											$ays = "SELECT academic_year_start FROM courses_enrolled WHERE student_id = '$student_id'";
-											$ays = mysqli_query($db,$ays);
-											$ays = mysqli_fetch_assoc($ays);
-											$ays = reset($ays);
-											// GET academic year end
-											$aye = "SELECT academic_year_end FROM courses_enrolled WHERE student_id = '$student_id'";
-											$aye = mysqli_query($db,$aye);
-											$aye = mysqli_fetch_assoc($aye);
-											$aye = reset($aye);
-											$DateofAttendance = gmdate("Y/m/j");
-											$_SESSION['Date'] = $DateofAttendance;
-											$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
-															academic_year_start,academic_year_end,date_of_schedule)
-												values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
-															'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
-															,'" . $aye . "','" . $DateofAttendance . "')";
-											mysqli_query($db, $addAttendance);
-											if( $_SESSION['accesslevel'] == 'DEAN'){
-												header("location: dean-scannedqr.php");
-											}
-											else{
-												header("location: faculty-scannedqr.php");
-											}
-											exit();
-										}
-									}
-									else{
-										if($ssval == 'Select Student'){
-											echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
-										}
-										else{
-											echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
-										}	
-									}
+									echo '<script>alert("The schedule has not yet been started!");window.location.href="dean-qrscannerAS.php";</script>';
 								}
 							}
 							else{
-								$timeRemarks = 'ON-TIME';
-								$_SESSION['timeRemarks'] = $timeRemarks;
-								if($section == $sectionSelector){
-									if($_SESSION['subjectoutcome'] == 'Student '.$_SESSION['sstudent_id'].' was enrolled in this subject.'){
-										// GET SEMESTER
-										$sem = "SELECT semester FROM courses_enrolled WHERE student_id = '$student_id'";
-										$sem = mysqli_query($db,$sem);
-										$sem = mysqli_fetch_assoc($sem);
-										$sem = reset($sem);
-										// GET academic year start
-										$ays = "SELECT academic_year_start FROM courses_enrolled WHERE student_id = '$student_id'";
-										$ays = mysqli_query($db,$ays);
-										$ays = mysqli_fetch_assoc($ays);
-										$ays = reset($ays);
-										// GET academic year end
-										$aye = "SELECT academic_year_end FROM courses_enrolled WHERE student_id = '$student_id'";
-										$aye = mysqli_query($db,$aye);
-										$aye = mysqli_fetch_assoc($aye);
-										$aye = reset($aye);
-										$DateofAttendance = gmdate("Y/m/j");
-										$_SESSION['Date'] = $DateofAttendance;
-										$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
-															academic_year_start,academic_year_end,date_of_schedule)
-												values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
-															'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
-															,'" . $aye . "','" . $DateofAttendance . "')";
-										mysqli_query($db, $addAttendance);
-										if( $_SESSION['accesslevel'] == 'DEAN'){
-											header("location: dean-scannedqr.php");
+								if($SATHM_int > ($FACHM_int + 15)){
+									if($SATHM_int <($FACHM_int + 30)){
+										$timeRemarks = 'LATE';
+										$_SESSION['timeRemarks'] = $timeRemarks;
+										if($section == $sectionSelector){
+											if($_SESSION['subjectoutcome'] == 'Student '.$_SESSION['sstudent_id'].' was enrolled in this subject.'){
+												// GET SEMESTER
+												$sem = "SELECT semester FROM courses_enrolled WHERE student_id = '$student_id'";
+												$sem = mysqli_query($db,$sem);
+												$sem = mysqli_fetch_assoc($sem);
+												$sem = reset($sem);
+												// GET academic year start
+												$ays = "SELECT academic_year_start FROM courses_enrolled WHERE student_id = '$student_id'";
+												$ays = mysqli_query($db,$ays);
+												$ays = mysqli_fetch_assoc($ays);
+												$ays = reset($ays);
+												// GET academic year end
+												$aye = "SELECT academic_year_end FROM courses_enrolled WHERE student_id = '$student_id'";
+												$aye = mysqli_query($db,$aye);
+												$aye = mysqli_fetch_assoc($aye);
+												$aye = reset($aye);
+												$DateofAttendance = gmdate("Y/m/j");
+												$_SESSION['Date'] = $DateofAttendance;
+												$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
+																academic_year_start,academic_year_end,date_of_schedule)
+													values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
+																'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
+																,'" . $aye . "','" . $DateofAttendance . "')";
+												mysqli_query($db, $addAttendance);
+												if( $_SESSION['accesslevel'] == 'DEAN'){
+													header("location: dean-scannedqr.php");
+												}
+												else{
+													header("location: faculty-scannedqr.php");
+												}
+												exit();
+											}
 										}
 										else{
-											header("location: faculty-scannedqr.php");
+											if($ssval == 'Select Student'){
+												echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+											}
+											else{
+												echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+											}	
 										}
-										exit();
+									}
+									else{
+										$timeRemarks = 'ABSENT';
+										$_SESSION['timeRemarks'] = $timeRemarks;
+										if($section == $sectionSelector){
+											if($_SESSION['subjectoutcome'] == 'Student '.$_SESSION['sstudent_id'].' was enrolled in this subject.'){
+												// GET SEMESTER
+												$sem = "SELECT semester FROM courses_enrolled WHERE student_id = '$student_id'";
+												$sem = mysqli_query($db,$sem);
+												$sem = mysqli_fetch_assoc($sem);
+												$sem = reset($sem);
+												// GET academic year start
+												$ays = "SELECT academic_year_start FROM courses_enrolled WHERE student_id = '$student_id'";
+												$ays = mysqli_query($db,$ays);
+												$ays = mysqli_fetch_assoc($ays);
+												$ays = reset($ays);
+												// GET academic year end
+												$aye = "SELECT academic_year_end FROM courses_enrolled WHERE student_id = '$student_id'";
+												$aye = mysqli_query($db,$aye);
+												$aye = mysqli_fetch_assoc($aye);
+												$aye = reset($aye);
+												$DateofAttendance = gmdate("Y/m/j");
+												$_SESSION['Date'] = $DateofAttendance;
+												$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
+																academic_year_start,academic_year_end,date_of_schedule)
+													values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
+																'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
+																,'" . $aye . "','" . $DateofAttendance . "')";
+												mysqli_query($db, $addAttendance);
+												if( $_SESSION['accesslevel'] == 'DEAN'){
+													header("location: dean-scannedqr.php");
+												}
+												else{
+													header("location: faculty-scannedqr.php");
+												}
+												exit();
+											}
+										}
+										else{
+											if($ssval == 'Select Student'){
+												echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+											}
+											else{
+												echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+											}	
+										}
 									}
 								}
 								else{
-									if($ssval == 'Select Student'){
-										echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+									$timeRemarks = 'ON-TIME';
+									$_SESSION['timeRemarks'] = $timeRemarks;
+									if($section == $sectionSelector){
+										if($_SESSION['subjectoutcome'] == 'Student '.$_SESSION['sstudent_id'].' was enrolled in this subject.'){
+											// GET SEMESTER
+											$sem = "SELECT semester FROM courses_enrolled WHERE student_id = '$student_id'";
+											$sem = mysqli_query($db,$sem);
+											$sem = mysqli_fetch_assoc($sem);
+											$sem = reset($sem);
+											// GET academic year start
+											$ays = "SELECT academic_year_start FROM courses_enrolled WHERE student_id = '$student_id'";
+											$ays = mysqli_query($db,$ays);
+											$ays = mysqli_fetch_assoc($ays);
+											$ays = reset($ays);
+											// GET academic year end
+											$aye = "SELECT academic_year_end FROM courses_enrolled WHERE student_id = '$student_id'";
+											$aye = mysqli_query($db,$aye);
+											$aye = mysqli_fetch_assoc($aye);
+											$aye = reset($aye);
+											$DateofAttendance = gmdate("Y/m/j");
+											$_SESSION['Date'] = $DateofAttendance;
+											$addAttendance = "INSERT INTO student_attendance (student_id,firstname,lastname,subject,section,stud_time_in,remarks,semester,
+																academic_year_start,academic_year_end,date_of_schedule)
+													values ('" . $student_id . "','" . $firstname. "','" . $lastname . "','" . $subject . "','" . $section . "',
+																'" . $StudAttendTime . "','" . $timeRemarks . "','" . $sem . "','" . $ays . "'
+																,'" . $aye . "','" . $DateofAttendance . "')";
+											mysqli_query($db, $addAttendance);
+											if( $_SESSION['accesslevel'] == 'DEAN'){
+												header("location: dean-scannedqr.php");
+											}
+											else{
+												header("location: faculty-scannedqr.php");
+											}
+											exit();
+										}
 									}
 									else{
-										echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
-									}	
+										if($ssval == 'Select Student'){
+											echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+										}
+										else{
+											echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+										}	
+									}
 								}
 							}
 						}
