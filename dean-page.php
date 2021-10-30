@@ -106,7 +106,7 @@
                 </div>
             </nav>
 
-            <div class="main-content container-fluid">
+            <form class="main-content container-fluid" method = 'post' action = 'dean-page.php'>
                 <div class="page-title">
                     <h3>Dean Dashboard</h3>
                 </div>
@@ -247,7 +247,7 @@
                         </div>
                     </div>
                 </section>
-            </div>
+            </form>
         </div>
     </div>
     <script src="assets/js/feather-icons/feather.min.js"></script>

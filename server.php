@@ -488,6 +488,18 @@ if (isset($_POST['selectStud'])) {
 								}
 							}
 							else{
+								// perform checker in recent_schedule
+								$DateChecker = gmdate("Y/m/j");
+								$rschecker = "SELECT * FROM recent_schedule 
+												WHERE subject = '" . $subject . "' and section = '" . $section . "' 
+												and date_of_schedule = '" . $DateChecker . "';";
+								$rsResult = mysqli_query($db, $rschecker);
+								if (!(mysqli_num_rows($rsResult) > 0)) {
+									$rsAdder = "INSERT INTO recent_schedule (subject,section,timein,timeout,date_of_schedule,sched_status)
+												values ('" . $subject . "','" . $section. "','" . $FACtimein . "','" . $timeout . "','" . $DateChecker. "',
+													'ON-GOING');";
+									mysqli_query($db, $rsAdder);
+								}
 								if($SATHM_int > ($FACHM_int + 15)){
 									if($SATHM_int <($FACHM_int + 30)){
 										$timeRemarks = 'LATE';
@@ -801,6 +813,12 @@ if (isset($_POST["EndClass"])){
 		}
 	}
 	$Date = gmdate("Y/m/j");
+	$schedEnder = "UPDATE recent_schedule
+	SET 
+		sched_status = 'END'
+	WHERE
+		subject = '$endSubject' and section = '$endSection' and date_of_schedule = '$Date';";
+	mysqli_query($db, $schedEnder);
 	$studentTimein = 'null';
 	$rremarks = 'ABSENT';
 	$studselect = "SELECT * FROM courses_enrolled";
@@ -970,17 +988,49 @@ if (isset($_POST["returnClass"])){
 	$rsubject = mysqli_real_escape_string($db,$_POST['rsubject']);
 	$rsection = mysqli_real_escape_string($db,$_POST['rsection']);
 	$rdate = gmdate("Y/m/j");
-	$rsubject = "SELECT sched_status FROM recent_schedule 
-				WHERE subject = '" . $rsubject . "' and section = '" . $rsection . "' and date_of_schedule = '" . $rdate . "';";
-	$rsubject = mysqli_query($db,$rsubject);
-	$rsubject = mysqli_fetch_assoc($rsubject);
-	$rsubject = reset($rsubject);
+	$rToSched = "SELECT sched_status FROM recent_schedule WHERE subject = '" . $rsubject . "' and section = '" . $rsection . "' and date_of_schedule = '" . $rdate . "';";
+	$rToSched = mysqli_query($db,$rToSched);
+	$rToSched = mysqli_fetch_assoc($rToSched);
+	$rToSched = reset($rToSched);
 	
-	if($rsubject == 'END'){
-		echo '<script>alert("Schedule is already ended!");window.location.href="dean-qrscannerAS.php";</script>';
+	if($rToSched == 'END'){
+		echo '<script>alert("Schedule is already ended!");window.location.href="dean-page.php";</script>';
+	}
+	elseif($rToSched == 'ON-GOING'){
+		//display all subjects and section
+		$allChecker = "SELECT * FROM recent_schedule WHERE subject = '" . $rsubject . "' and section = '" . $rsection . "' and date_of_schedule = '" . $rdate . "';";
+		$allChecker = mysqli_query($db,$allChecker);
+		$allChecker = mysqli_fetch_assoc($allChecker);
+		$_SESSION['selectedsubject'] = $rsubject;
+		$_SESSION['selectedsection'] = $rsection;
+		$_SESSION['sectionSelector'] = $rsection;
+		$_SESSION['classTimeIn'] = $allChecker['timein'];
+		$_SESSION['classTimeOut'] = $allChecker['timeout'];
+
+		$recentAttendance = "SELECT * FROM student_attendance
+								WHERE subject = '" . $rsubject . "' and section = '" . $rsection . "' and date_of_schedule = '" . $rdate . "'
+								ORDER BY attendance_id DESC
+								LIMIT 1;";
+		$recentAttendance = mysqli_query($db,$recentAttendance);
+		$recentAttendance = mysqli_fetch_assoc($recentAttendance);
+
+		//display middlename depends on username
+		$middlenameGetter = $recentAttendance['student_id'];
+		$middle = "SELECT middlename FROM student WHERE student_id = '" . $middlenameGetter . "';";
+		$middle = mysqli_query($db,$middle);
+		$middle = mysqli_fetch_assoc($middle);
+		$middle = reset($middle);
+
+		$_SESSION['sstudent_id'] = $recentAttendance['student_id'];
+		$_SESSION['slastname'] = $recentAttendance['firstname'];
+		$_SESSION['sfirstname'] = $recentAttendance['lastname'];
+		$_SESSION['smiddlename'] = $middle;
+		$_SESSION['timeRemarks'] = $recentAttendance['remarks'];
+		$_SESSION['Date'] = $rdate;
+		header("location: dean-scannedqr.php");
 	}
 	else{
-		echo '<script>alert("if statement didnt read!");window.location.href="dean-qrscannerAS.php";</script>';
+		echo '<script>alert("Schedule is not Existing!");window.location.href="dean-page.php";</script>';
 	}
 }
 ?>
