@@ -1,5 +1,5 @@
 <?php
-    include('server.php');
+    // include('server.php');
         $sections = [];
         $sqlSelect = "SELECT * FROM courses_enrolled";
         $result = mysqli_query($db, $sqlSelect);

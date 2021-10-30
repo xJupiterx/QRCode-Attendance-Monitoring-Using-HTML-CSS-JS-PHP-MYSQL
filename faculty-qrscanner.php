@@ -168,18 +168,12 @@
                                                         <p style= "font-size:14px;"><strong>Selected Subject:</strong></p>
                                                     </center>
                                                     <div class="dropdown">
-                                                        <Select class="body_text" name="subject" onchange="getSubject()" id='SelectedSubject'>
+                                                        <Select class="body_text" name="subject" id='SelectedSubject'>
                                                             <option value="Please Select"> Please Select </option>
                                                             <?php include("PHPRequestDatas/subjects.php"); ?> 
                                                         </select>
                                                         <br><br>
-                                                        <div id="subject" style="color:Green; font-size: 13px; font-weight:bold; position:relative"> </div>
                                                     </div>
-                                                    <script language="JavaScript">
-                                                        function getSubject() {
-                                                            document.getElementById("subject").innerHTML = document.getElementById("SelectedSubject").value
-                                                        }
-                                                    </script>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -188,18 +182,12 @@
                                                         <p style= "font-size:14px;"><strong>Select Section:</strong></p>
                                                     </center>
                                                     <div class="dropdown">
-                                                        <Select class="body_text" name="section" onchange="getSection()" id='SelectedSection'>
+                                                        <Select class="body_text" name="section" id='SelectedSection'>
                                                             <option value="Please Select"> Please Select </option>
                                                             <?php include("PHPRequestDatas/sections.php"); ?>
                                                         </select>
                                                         <br><br>
-                                                        <div id="section" style="color:Green; font-size: 13px; font-weight:bold; position:relative"> </div>
                                                     </div>
-                                                    <script language="JavaScript">
-                                                        function getSection() {
-                                                            document.getElementById("section").innerHTML = document.getElementById("SelectedSection").value
-                                                        }
-                                                    </script>
                                                 </div>
                                             </div>
                                         </div>
@@ -302,11 +290,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <?php if($sserrorcount > 0):?>
-                                                <div style='position:relative; bottom:50px'>
-                                                    <center><p style="color:red;"><?php echo $sserrors?></p></center>
-                                                </div>
-                                            <?php endif ?>
                                         </div>
                                     </div>
                                 </div>

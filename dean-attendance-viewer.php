@@ -14,6 +14,20 @@
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/scs.png" type="image/x-icon">
+    <style>
+        #myInput {
+            box-sizing: border-box;
+            background-image: url('searchicon.png');
+            background-position: 14px 12px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+        #myInput:focus {outline: 3px solid #ddd;}
+    </style>
+
 </head>
 
 <body>
@@ -54,7 +68,7 @@
                                     <a href="dean-student-attendance.php">Start A Class</a>
                                 </li>
                                 <li>
-                                    <a href="dean-attendance-viewer.php">View Student's Attendance</a>
+                                    <a href="#">View Student's Attendance</a>
                                 </li>
                             </ul>
                         </li>
@@ -114,69 +128,130 @@
                 <section class="section">
                     <div class="row mb-4">
                         <div class="col-md-8">
-                            <div class="card ">
-                                <div class="card-header" style="background-color: #3acf61">
-                                    <h4 style="color: white"><strong>User Details</strong></h4>
-                                </div>
-                                <div class="card-body">
-									<br>
-									<center><p class="col-md-12 col-12"><b>Access Level: </b><u><?php echo $_SESSION['accesslevel']; ?></u></p></center>
-									<div class="row">
-										<p class="col-md-4 col-12"><b>Last name: </b><u><?php echo $_SESSION['lastname']; ?></u></p>
-										<p class="col-md-4 col-12"><b>First name: </b><u><?php echo $_SESSION['firstname']; ?></u></p>
-										<p class="col-md-4 col-12"><b>Middle name: </b><u><?php echo $_SESSION['middlename']; ?></u></p>
-									</div>
-									<p class="col-md-12 col-12"><b>Email: </b><u><?php echo $_SESSION['email']; ?></u></p>
-                                </div>
-                            </div>
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #3acf61">
-                                    <h4 class="card-title" style="color: white"><strong>Return to My Class</strong></h4>
-                                </div>
-                                <div class="card-body">
-                                    <br><br>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <center><div>
-                                                    <p style= "font-size:14px;"><strong>Select Subject:</strong></p>
-                                                <div class="dropdown">
-                                                    <Select class="body_text" name="rsubject" id='SelectedSubject'>
-                                                        <option value="Please Select"> Please Select </option>
-                                                        <?php include("PHPRequestDatas/subjects.php"); ?> 
-                                                    </select>
-                                                    <br><br>
-                                                </div>
-                                            </div></center>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <center><div>
-                                                    <p style= "font-size:14px;"><strong>Select Section:</strong></p>
-                                                <div class="dropdown">
-                                                    <Select class="body_text" name="rsection" id='SelectedSection'>
-                                                        <option value="Please Select"> Please Select </option>
-                                                        <?php include("PHPRequestDatas/sections.php"); ?>
-                                                    </select>
-                                                    <br><br>
-                                                </div>
-                                            </div></center>
-                                        </div>
+                                    <h4 class="card-title" style="color: white"><strong>Recent Attendance</strong></h4>
+                                    <div class="d-flex ">
+                                        <i data-feather="download"  style="color: white"></i>
                                     </div>
-                                    <br>
-                                    <center><div class="clearfix" style='position:relative;'>
-                                        <input type="submit" name="returnClass" value="Return Class" class="btn btn-primary">
-                                    </div></center>
+                                </div>
+                                <div class="card-body px-0 pb-0">
+                                    <div class="table-responsive">
+                                        <?php
+                                            $sqlSelect = "SELECT * FROM student_attendance ORDER BY attendance_id DESC;";
+                                            $result = mysqli_query($db, $sqlSelect);
+                                                        
+                                            if (mysqli_num_rows($result) > 0) {
+                                        ?>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Student ID..">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="search"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <form class="col-md-auto" method='post' style='overflow:scroll; width:100%; height: 400px'>
+                                            <table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th style = "width:8%; font-size: 14px">Student_ID</th>
+                                                        <th style = "width:8%; font-size: 14px">First name</th>
+                                                        <th style = "width:8%; font-size: 14px">Last name</th>
+                                                        <th style = "width:8%; font-size: 14px">Subject</th>
+                                                        <th style = "width:8%; font-size: 14px">Section</th>
+                                                        <th style = "width:8%; font-size: 14px">Remarks</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <?php
+                                                while ($row = mysqli_fetch_array($result)) {
+                                                ?>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><?php  echo $row['student_id']; ?></td>
+                                                        <td><?php  echo $row['firstname']; ?></td>
+                                                        <td><?php  echo $row['lastname']; ?></td>
+                                                        <td><?php  echo $row['subject']; ?></td>
+                                                        <td><?php  echo $row['section']; ?></td>
+                                                        <?php if($row['remarks']=="ON-TIME"): ?>
+                                                            <td style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+                                                        <?php endif ?>
+                                                        <?php if($row['remarks']=="LATE"): ?>
+                                                            <td style="background-color: #ffc107; color:#fffdf5; border-color: #ecb40a; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+                                                        <?php endif ?>
+                                                        <?php if($row['remarks']=="ABSENT"): ?>
+                                                            <td style="background-color: #df4759; color: #fef8f8; border-color:#cf4455; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+                                                        <?php endif ?>
+                                                    </tr>
+                                                <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </form>
+                                        <?php } ?>
+
+                                        <?php if (mysqli_num_rows($result) <= 0) {?>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Student ID..">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="search"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <form class="col-md-auto" method='post' style='overflow:scroll; width:100%; height: 400px'>
+                                            <table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th style = "width:8%; font-size: 14px">Student_ID</th>
+                                                        <th style = "width:8%; font-size: 14px">First name</th>
+                                                        <th style = "width:8%; font-size: 14px">Last name</th>
+                                                        <th style = "width:8%; font-size: 14px">Subject</th>
+                                                        <th style = "width:8%; font-size: 14px">Section</th>
+                                                        <th style = "width:8%; font-size: 14px">Remarks</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </form>
+                                        <?php } ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class='card-heading p-1 pl-3'>Attendance Graph</h3>
+                                    <h3 class='card-heading p-1 pl-3'>Sorting Function</h3>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-0 col-0">
-                                            <canvas id="bar"></canvas>
+                                    <div class = 'row'>
+                                        <div class='col-md-6'>
+                                            <center>
+                                                <p style= "font-size:14px;"><strong>Select Subject:</strong></p>
+                                            </center>
+                                            <div class="dropdown">
+                                                <Select class="body_text" name="subject" onchange="getSubject()" id='SelectedSubject'>
+                                                    <option value="Please Select"> Please Select </option>
+                                                    <?php include("PHPRequestDatas/subjects.php"); ?> 
+                                                </select>
+                                                <br><br>
+                                                <div id="subject" style="color:Green; font-size: 13px; font-weight:bold; position:relative"> </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div>
+                                                <center>
+                                                    <p style= "font-size:14px;"><strong>Select Section:</strong></p>
+                                                </center>
+                                                <div class="dropdown">
+                                                    <Select class="body_text" name="section" onchange="getSection()" id='SelectedSection'>
+                                                        <option value="Please Select"> Please Select </option>
+                                                        <?php include("PHPRequestDatas/sections.php"); ?>
+                                                    </select>
+                                                    <br><br>
+                                                    <div id="section" style="color:Green; font-size: 13px; font-weight:bold; position:relative"> </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

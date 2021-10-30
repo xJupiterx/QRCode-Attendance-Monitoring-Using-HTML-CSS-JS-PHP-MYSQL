@@ -343,6 +343,17 @@ if (isset($_POST['selectStud'])) {
 	}
 	$subject=$_POST['subject'];
 	$section=$_POST['section'];
+	
+	// schedule cancellator * if schedule already done in this day *
+	$dateCancellator = gmdate("Y/m/j");
+	// get * in student_attendance where subject = $subject and section = $section and date_of_schedule = $dateCancellator
+	$SchedCancellator = "SELECT * from student_attendance WHERE subject = '" . $subject . "' and section = '" . $section . "' and date_of_schedule = '" . $dateCancellator . "';";
+	$SCResult = mysqli_query($db, $SchedCancellator);
+	if (mysqli_num_rows($SCResult) > 0) {
+		// return to select schedule if schedule already exist
+		echo '<script>alert("Class Already Started!");window.location.href="dean-qrscanner.php";</script>';
+	}
+
 	$timein=$_POST['time-in'];
 	$timeout=$_POST['time-out'];
 	$sqlSelect = "SELECT * FROM student";
@@ -953,5 +964,23 @@ if (isset($_POST["UpdateStudInfo"])){
 						username = '" . $editstudent_id . "';";
 	mysqli_query($db, $modifyUserTable);
 	header("location: dean-page.php");
+}
+
+if (isset($_POST["returnClass"])){
+	$rsubject = mysqli_real_escape_string($db,$_POST['rsubject']);
+	$rsection = mysqli_real_escape_string($db,$_POST['rsection']);
+	$rdate = gmdate("Y/m/j");
+	$rsubject = "SELECT sched_status FROM recent_schedule 
+				WHERE subject = '" . $rsubject . "' and section = '" . $rsection . "' and date_of_schedule = '" . $rdate . "';";
+	$rsubject = mysqli_query($db,$rsubject);
+	$rsubject = mysqli_fetch_assoc($rsubject);
+	$rsubject = reset($rsubject);
+	
+	if($rsubject == 'END'){
+		echo '<script>alert("Schedule is already ended!");window.location.href="dean-qrscannerAS.php";</script>';
+	}
+	else{
+		echo '<script>alert("if statement didnt read!");window.location.href="dean-qrscannerAS.php";</script>';
+	}
 }
 ?>

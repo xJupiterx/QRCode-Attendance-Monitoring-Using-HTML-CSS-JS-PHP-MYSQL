@@ -1,5 +1,4 @@
 <?php
-    include('server.php');
     $subjects = [];
     $sqlSelect = "SELECT * FROM courses_enrolled";
     $result = mysqli_query($db, $sqlSelect);
