@@ -109,131 +109,148 @@
                     <h3>View Student Complete Information</h3>
                 </div></center>
 				<br>
-                <div class="card ">
-                    <div class="card-header" style="background-color: #3acf61">
-                        <h4 style="color: white"><center><strong>Student Details</strong></center></h4>
-                    </div>
-                    <div class="card-body">
-						<br>
-						<center><p class="col-md-12 col-12" style='font-size:18px'><b>Student ID: </b><?php echo $_SESSION['sstudent_id']; ?></p></center>
-						<p class="col-md-4 col-12" style='font-size:18px'><b>Course/Year/Section: </b><?php echo $_SESSION['scourse']; ?> <?php echo $_SESSION['syear']; ?>-<?php echo $_SESSION['ssection']; ?></p>
-						<div class="row">
-							<p class="col-md-4 col-12" style='font-size:18px'><b>Last name: </b><u><?php echo $_SESSION['slastname']; ?></u></p>
-							<p class="col-md-4 col-12" style='font-size:18px'><b>First name: </b><u><?php echo $_SESSION['sfirstname']; ?></u></p>
-							<p class="col-md-4 col-12" style='font-size:18px'><b>Middle name: </b><u><?php echo $_SESSION['smiddlename']; ?></u></p>
-						</div>
-                        <br>
-                    </div>
-                    <div class="card-footer" style="background-color: gray; position:relative; height:30px">
-                        <a style="color: white; font-size:14px; position:relative; bottom:3px" href='dean-edit-student-info.php'><center>Click <u>here</u> to edit Student Information.</center></a>
-                    </div>
-                </div>
-                <div class="card ">
-                    <div class="card-header" style="background-color: #3acf61">
-                        <h4 style="color: white"><center><strong>Student Subjects and Section</strong></center></h4>
-                    </div>
-                    <div class="card-body">
-                        <br>
-                        <div class = 'row'>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted;'>
-                                <center><p style='position:relative; top:7px'><strong>SUBJECT</strong></p></center>
+                <div class = 'row'>
+                    <div class = 'col-md-8'>
+                        <div class="card">
+                            <div class="card-header" style="background-color: #3acf61">
+                                <h4 style="color: white"><center><strong>Student Details</strong></center></h4>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-right:none'>
-                                <center><p style='position:relative; top:7px'><strong>SECTION</strong></p></center>
+                            <div class="card-body">
+                                <br>
+                                <center><p class="col-md-12 col-12" style='font-size:18px'><b>Student ID: </b><?php echo $_SESSION['sstudent_id']; ?></p></center>
+                                <p class="col-12" style='font-size:18px'><b>Course/Year/Section: </b><?php echo $_SESSION['scourse']; ?> <?php echo $_SESSION['syear']; ?>-<?php echo $_SESSION['ssection']; ?></p>
+                                <div class="row">
+                                    <p class="col-md-4 col-12" style='font-size:18px'><b>Last name: </b><u><?php echo $_SESSION['slastname']; ?></u></p>
+                                    <p class="col-md-4 col-12" style='font-size:18px'><b>First name: </b><u><?php echo $_SESSION['sfirstname']; ?></u></p>
+                                    <p class="col-md-4 col-12" style='font-size:18px'><b>Middle name: </b><u><?php echo $_SESSION['smiddlename']; ?></u></p>
+                                </div>
+                                <br>
                             </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted'>
-                                <center><p style='position:relative; top:7px'><strong>SUBJECT</strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-right:none'>
-                                <center><p style='position:relative; top:7px'><strong>SECTION</strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted'>
-                                <center><p style='position:relative; top:7px'><strong>SUBJECT</strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-right:none'>
-                                <center><p style='position:relative; top:7px'><strong>SECTION</strong></p></center>
-                            </div>
-                        </div>
-                        <div class = 'row'>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject1'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-right:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section1'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject2'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-right:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section2'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject3'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-right:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section3'] ?></strong></p></center>
-                            </div>
-                        </div>  
-                        <div class='row'>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject4'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section4'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject5'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section5'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject6'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section6'] ?></strong></p></center>
-                            </div>
-                        </div>
-                        <div class = 'row'>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject7'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section7'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject8'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section8'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject9'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section9'] ?></strong></p></center>
-                            </div>
-                        </div>
-                        <div class = 'row'>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; height:45px; border-top:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['subject10'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
-                                <center><p style='position:relative; top:7px'><strong><?php echo $_SESSION['section10'] ?></strong></p></center>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
-                            <p></p>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-right-style:dotted; border-top:none'>
-                            </div>
-                            <div class = 'col-md-2' style='border-style:solid; border-left-style:none; border-top:none; border-right:none'>
+                            <div class="card-footer" style="background-color: gray; position:relative; height:30px">
+                                <a style="color: white; font-size:14px; position:relative; bottom:3px" href='dean-edit-student-info.php'><center>Click <u>here</u> to edit Student Information.</center></a>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer" style="background-color: gray; position:relative; height:30px">
-                        <a style="color: white; font-size:14px; position:relative; bottom:3px" href='#'><center>Click <u>here</u> to edit Student Subject/Section.</center></a>
+                    <div class = 'col-md-4'>
+                        <div class="card ">
+                            <div class="card-header" style="background-color: #3acf61">
+                                <h4 style="color: white"><center><strong>Student Subjects and Section</strong></center></h4>
+                            </div>
+                            <div class="card-body">
+                                <br>
+                                <div class = 'row'>
+                                    <div class = 'col-md-6' style='border-style:solid; border-right-style:dotted;'>
+                                        <center><p style='position:relative; top:7px'><strong>SUBJECT</strong></p></center>
+                                    </div>
+                                    <div class = 'col-md-6' style='border-style:solid; border-left-style:none;'>
+                                        <center><p style='position:relative; top:7px'><strong>SECTION</strong></p></center>
+                                    </div>
+                                </div>
+                                <?php if($_SESSION['subject1'] != ''): ?>
+                                    <div class = 'row'>
+                                        <div class = 'col-md-6' style='border-style:solid; border-right-style:dotted'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['subject1'] ?></p></center>
+                                        </div>
+                                        <div class = 'col-md-6' style='border-style:solid; border-left-style:none;'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['section1'] ?></p></center>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                                <?php if($_SESSION['subject2'] != ''): ?>
+                                    <div class = 'row'>
+                                        <div class = 'col-md-6' style='border-style:solid; border-right-style:dotted; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['subject2'] ?></p></center>
+                                        </div>
+                                        <div class = 'col-md-6' style='border-style:solid; border-left-style:none; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['section2'] ?></p></center>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                                <?php if($_SESSION['subject3'] != ''): ?>
+                                    <div class = 'row'>
+                                        <div class = 'col-md-6' style='border-style:solid; border-right-style:dotted; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['subject3'] ?></p></center>
+                                        </div>
+                                        <div class = 'col-md-6' style='border-style:solid; border-left-style:none; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['section3'] ?></p></center>
+                                        </div>
+                                    </div>  
+                                <?php endif ?>
+                                <?php if($_SESSION['subject4'] != ''): ?>
+                                    <div class='row'>
+                                        <div class = 'col-md-6' style='border-style:solid; border-right-style:dotted; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['subject4'] ?></p></center>
+                                        </div>
+                                        <div class = 'col-md-6' style='border-style:solid; border-left-style:none; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['section4'] ?></p></center>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                                <?php if($_SESSION['subject5'] != ''): ?>
+                                    <div class = 'row'>
+                                        <div class = 'col-md-6' style='border-style:solid; border-right-style:dotted; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['subject5'] ?></p></center>
+                                        </div>
+                                        <div class = 'col-md-6' style='border-style:solid; border-left-style:none; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['section5'] ?></p></center>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                                <?php if($_SESSION['subject6'] != ''): ?>
+                                    <div class = 'row'>
+                                        <div class = 'col-md-6' style='border-style:solid; border-right-style:dotted; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['subject6'] ?></p></center>
+                                        </div>
+                                        <div class = 'col-md-6' style='border-style:solid; border-left-style:none; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['section6'] ?></p></center>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                                <?php if($_SESSION['subject7'] != ''): ?>
+                                    <div class = 'row'>
+                                        <div class = 'col-md-6' style='border-style:solid; border-right-style:dotted; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['subject7'] ?></p></center>
+                                        </div>
+                                        <div class = 'col-md-6' style='border-style:solid; border-left-style:none; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['section7'] ?></p></center>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                                <?php if($_SESSION['subject8'] != ''): ?>
+                                    <div class = 'row'>
+                                        <div class = 'col-md-6' style='border-style:solid; border-right-style:dotted; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['subject8'] ?></p></center>
+                                        </div>
+                                        <div class = 'col-md-6' style='border-style:solid; border-left-style:none; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['section8'] ?></p></center>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                                <?php if($_SESSION['subject9'] != ''): ?>
+                                    <div class = 'row'>
+                                        <div class = 'col-md-6' style='border-style:solid; border-right-style:dotted; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['subject9'] ?></p></center>
+                                        </div>
+                                        <div class = 'col-md-6' style='border-style:solid; border-left-style:none; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['section9'] ?></p></center>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                                <?php if($_SESSION['subject10'] != ''): ?>
+                                    <div class = 'row'>
+                                        <div class = 'col-md-6' style='border-style:solid; border-right-style:dotted; height:45px; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['subject10'] ?></p></center>
+                                        </div>
+                                        <div class = 'col-md-6' style='border-style:solid; border-left-style:none; border-top:none'>
+                                            <center><p style='position:relative; top:7px'><?php echo $_SESSION['section10'] ?></p></center>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                            </div>
+                            <div class="card-footer" style="background-color: gray; position:relative; height:30px">
+                                <a style="color: white; font-size:14px; position:relative; bottom:3px" href='#'><center>Click <u>here</u> to edit Student Subject/Section.</center></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

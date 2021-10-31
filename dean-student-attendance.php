@@ -120,7 +120,7 @@
 						<div class="col-md-6">
 							<div class="card h-100">
                                 <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #3acf61">
-                                    <h4 class="card-title" style="color: white"><strong>Recent Attendance</strong></h4>
+                                    <h4 class="card-title" style="color: white"><strong>Recent Class</strong></h4>
                                     <div class="d-flex ">
                                         <i data-feather="download"  style="color: white"></i>
                                     </div>
@@ -128,7 +128,7 @@
                                 <div class="card-body px-0 pb-0">
 									<div class="table-responsive">
 										<?php
-											$sqlSelect = "SELECT * FROM student_attendance";
+											$sqlSelect = "SELECT * FROM recent_schedule ORDER BY schedule_id DESC";
 											$result = mysqli_query($db, $sqlSelect);
 														
 											if (mysqli_num_rows($result) > 0) {
@@ -145,12 +145,12 @@
 											<table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
 												<thead>
 													<tr>
-														<th style = "width:8%; font-size: 14px">Student_ID</th>
-														<th style = "width:8%; font-size: 14px">First name</th>
-														<th style = "width:8%; font-size: 14px">Last name</th>
 														<th style = "width:8%; font-size: 14px">Subject</th>
 														<th style = "width:8%; font-size: 14px">Section</th>
-														<th style = "width:8%; font-size: 14px">Remarks</th>
+														<th style = "width:8%; font-size: 14px">Time-In</th>
+														<th style = "width:8%; font-size: 14px">Time-Out</th>
+														<th style = "width:8%; font-size: 14px">Date of Schedule</th>
+														<th style = "width:8%; font-size: 14px">Status</th>
 
 													</tr>
 												</thead>
@@ -159,20 +159,12 @@
 												?>
 												<tbody>
 													<tr>
-														<td><?php  echo $row['student_id']; ?></td>
-														<td><?php  echo $row['firstname']; ?></td>
-														<td><?php  echo $row['lastname']; ?></td>
 														<td><?php  echo $row['subject']; ?></td>
 														<td><?php  echo $row['section']; ?></td>
-														<?php if($row['remarks']=="ON-TIME"): ?>
-															<td style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
-														<?php endif ?>
-														<?php if($row['remarks']=="LATE"): ?>
-															<td style="background-color: #ffc107; color:#fffdf5; border-color: #ecb40a; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
-														<?php endif ?>
-														<?php if($row['remarks']=="ABSENT"): ?>
-															<td style="background-color: #df4759; color: #fef8f8; border-color:#cf4455; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
-														<?php endif ?>
+														<td><?php  echo $row['timein']; ?></td>
+														<td><?php  echo $row['timeout']; ?></td>
+														<td><?php  echo $row['date_of_schedule']; ?></td>
+														<td><?php  echo $row['sched_status']; ?></td>
 													</tr>
 												<?php } ?>
 												</tbody>
