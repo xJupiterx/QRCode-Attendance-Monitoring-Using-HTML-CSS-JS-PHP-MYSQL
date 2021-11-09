@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2021 at 02:15 AM
+-- Generation Time: Nov 09, 2021 at 01:10 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -117,7 +117,9 @@ INSERT INTO `recent_schedule` (`schedule_id`, `subject`, `section`, `timein`, `t
 (4, 'PROG1', 'BSCS1-1', '15:00', '18:00', '2021/10/30', 'END'),
 (5, 'COSC18', 'BSCS1-1', '15:30', '18:30', '2021/10/30', 'END'),
 (9, 'COSC18', 'BSCS1-1', '09:30', '11:30', '2021/11/3', 'END'),
-(10, 'FILI3', 'BSCS2-2', '10:00', '12:00', '2021/11/3', 'END');
+(10, 'FILI3', 'BSCS2-2', '10:00', '12:00', '2021/11/3', 'END'),
+(11, 'COSC18', 'BSCS1-1', '13:30', '14:00', '2021/11/9', 'END'),
+(12, 'PROG1', 'BSCS1-1', '19:00', '21:00', '2021/11/9', 'END');
 
 -- --------------------------------------------------------
 
@@ -290,7 +292,35 @@ INSERT INTO `student_attendance` (`student_id`, `firstname`, `lastname`, `subjec
 ('2020020162', 'Frank Cedric', 'Redicio', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 108),
 ('2020020118', 'Jun-Jun', 'Magan', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 109),
 ('2021010116', 'Arist', 'Asia', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 110),
-('2021011373', 'Jon Marvin', 'Vidallo', 'FILI3', 'BSCS2-2', '10:01', 'ON-TIME', '1st Semester', '2021', '2022', '2021/11/3', 111);
+('2021010379', 'Christine Joy', 'Conejos', 'COSC18', 'BSCS1-1', '13:59', 'LATE', '1st Semester', '2021', '2022', '2021/11/9', 121),
+('2021010080', 'Aeron', 'Amon', 'COSC18', 'BSCS1-1', '14:11', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 122),
+('2021011373', 'Jon Marvin', 'Vidallo', 'COSC18', 'BSCS1-1', '14:17', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 123),
+('2021010406', 'Andrei Mari ', 'Cuadra ', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 124),
+('2021011383', 'Caila Joy', 'Villamin', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 125),
+('2021010668', 'Jerold', 'Gomez', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 126),
+('2020020195', 'Paul Edward', 'Triño', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 127),
+('2021010792', 'Bea', 'Lucero', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 128),
+('2021010527', 'Jessica', 'Doctor', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 129),
+('2021010523', 'Cherwin Grace', 'Diomampo', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 130),
+('2021010517', 'Angelika', 'Dimaranan', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 131),
+('2021010927', 'Antoinette', 'Nadala ', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 132),
+('2021011439', 'Job Lenard', 'Villanueva', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 133),
+('2020020162', 'Frank Cedric', 'Redicio', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 134),
+('2020020118', 'Jun-Jun', 'Magan', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 135),
+('2021010116', 'Arist', 'Asia', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 136),
+('2021010379', 'Christine Joy', 'Conejos', 'PROG1', 'BSCS1-1', '19:21', 'LATE', '1st Semester', '2021', '2022', '2021/11/9', 137),
+('2021010527', 'Jessica', 'Doctor', 'PROG1', 'BSCS1-1', '19:22', 'LATE', '1st Semester', '2021', '2022', '2021/11/9', 138),
+('2021010080', 'Aeron', 'Amon', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 139),
+('2021011373', 'Jon Marvin', 'Vidallo', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 140),
+('2021010406', 'Andrei Mari ', 'Cuadra ', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 141),
+('2021011383', 'Caila Joy', 'Villamin', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 142),
+('2021010668', 'Jerold', 'Gomez', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 143),
+('2021010792', 'Bea', 'Lucero', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 144),
+('2021010523', 'Cherwin Grace', 'Diomampo', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 145),
+('2021010834', 'John Patrick', 'Manalo', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 146),
+('2021010517', 'Angelika', 'Dimaranan', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 147),
+('2020020162', 'Frank Cedric', 'Redicio', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 148),
+('2021010116', 'Arist', 'Asia', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/9', 149);
 
 -- --------------------------------------------------------
 
@@ -374,13 +404,13 @@ ALTER TABLE `student_attendance`
 -- AUTO_INCREMENT for table `recent_schedule`
 --
 ALTER TABLE `recent_schedule`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `student_attendance`
 --
 ALTER TABLE `student_attendance`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
