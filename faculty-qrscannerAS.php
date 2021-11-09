@@ -81,6 +81,12 @@
                                 <span>Dashboard</span>
                             </a>
                         </li>
+                        <li class="sidebar-item active ">
+                            <a href="faculty-student-info.php" class='sidebar-link' style="background-color: #e3e3e3">
+                                <i data-feather="users" width="20"></i>
+                                <span>View Student's Information</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link' style="background-color: #e3e3e3">
                                 <i data-feather="book" width="20"></i>
@@ -88,10 +94,10 @@
                             </a>
                             <ul class="submenu " style="background-color: #e3e3e3">
                                 <li>
-                                    <a href="faculty-student-info.php">View Student's Information</a>
+                                    <a href="faculty-student-attendance.php">Start A Class</a>
                                 </li>
                                 <li>
-                                    <a href="faculty-student-attendance.php">View Student's Attendance</a>
+                                    <a href="faculty-attendance-viewer.php">View Student's Attendance</a>
                                 </li>
                             </ul>
                         </li>

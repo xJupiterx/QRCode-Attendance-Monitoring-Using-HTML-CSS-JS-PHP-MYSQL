@@ -28,7 +28,7 @@
 					</div>	
 				</center>
                 <div class="sidebar-menu">
-                    <ul class="menu">
+					<ul class="menu">
                         <div class="divider">
                             <div class="divider-text" style="color: gray; font-size: 12px">Main Menu</div>
                         </div>
@@ -38,6 +38,12 @@
                                 <span>Dashboard</span>
                             </a>
                         </li>
+                        <li class="sidebar-item active ">
+                            <a href="faculty-student-info.php" class='sidebar-link' style="background-color: #e3e3e3">
+                                <i data-feather="users" width="20"></i>
+                                <span>View Student's Information</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link' style="background-color: #e3e3e3">
                                 <i data-feather="book" width="20"></i>
@@ -45,10 +51,10 @@
                             </a>
                             <ul class="submenu " style="background-color: #e3e3e3">
                                 <li>
-                                    <a href="faculty-student-info.php">View Student's Information</a>
+                                    <a href="faculty-student-attendance.php">Start A Class</a>
                                 </li>
                                 <li>
-                                    <a href="faculty-student-attendance.php">View Student's Attendance</a>
+                                    <a href="faculty-attendance-viewer.php">View Student's Attendance</a>
                                 </li>
                             </ul>
                         </li>
@@ -99,7 +105,7 @@
 						<div class="col-md-6">
 							<div class="card h-100">
                                 <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #3acf61">
-                                    <h4 class="card-title" style="color: white"><strong>Recent Attendance</strong></h4>
+                                    <h4 class="card-title" style="color: white"><strong>Recent Class</strong></h4>
                                     <div class="d-flex ">
                                         <i data-feather="download"  style="color: white"></i>
                                     </div>
@@ -107,29 +113,21 @@
                                 <div class="card-body px-0 pb-0">
 									<div class="table-responsive">
 										<?php
-											$sqlSelect = "SELECT * FROM student_attendance";
+											$sqlSelect = "SELECT * FROM recent_schedule ORDER BY schedule_id DESC";
 											$result = mysqli_query($db, $sqlSelect);
 														
 											if (mysqli_num_rows($result) > 0) {
 										?>
-										<div class="form-group position-relative has-icon-left">
-											<div class="position-relative">
-												<input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Student ID..">
-												<div class="form-control-icon">
-													<i data-feather="search"></i>
-												</div>
-											</div>
-										</div>
 										<form method='post' style='overflow:scroll; width:100%; height:530px'>
 											<table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
 												<thead>
 													<tr>
-														<th style = "width:8%; font-size: 14px">Student_ID</th>
-														<th style = "width:8%; font-size: 14px">First name</th>
-														<th style = "width:8%; font-size: 14px">Last name</th>
 														<th style = "width:8%; font-size: 14px">Subject</th>
 														<th style = "width:8%; font-size: 14px">Section</th>
-														<th style = "width:8%; font-size: 14px">Remarks</th>
+														<th style = "width:8%; font-size: 14px">Time-In</th>
+														<th style = "width:8%; font-size: 14px">Time-Out</th>
+														<th style = "width:8%; font-size: 14px">Date of Schedule</th>
+														<th style = "width:8%; font-size: 14px">Status</th>
 
 													</tr>
 												</thead>
@@ -138,19 +136,16 @@
 												?>
 												<tbody>
 													<tr>
-														<td><?php  echo $row['student_id']; ?></td>
-														<td><?php  echo $row['firstname']; ?></td>
-														<td><?php  echo $row['lastname']; ?></td>
 														<td><?php  echo $row['subject']; ?></td>
 														<td><?php  echo $row['section']; ?></td>
-														<?php if($row['remarks']=="ON-TIME"): ?>
-															<td style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+														<td><?php  echo $row['timein']; ?></td>
+														<td><?php  echo $row['timeout']; ?></td>
+														<td><?php  echo $row['date_of_schedule']; ?></td>
+														<?php if($row['sched_status'] == 'END'): ?>
+															<td style = 'color:white; background-color:#df4759'><?php  echo $row['sched_status']; ?></td>
 														<?php endif ?>
-														<?php if($row['remarks']=="LATE"): ?>
-															<td style="background-color: #ffc107; color:#fffdf5; border-color: #ecb40a; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
-														<?php endif ?>
-														<?php if($row['remarks']=="ABSENT"): ?>
-															<td style="background-color: #df4759; color: #fef8f8; border-color:#cf4455; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
+														<?php if($row['sched_status'] == 'ON-GOING'): ?>
+															<td style = 'color: #f7fcfb; background-color: #42ba96'><?php  echo $row['sched_status']; ?></td>
 														<?php endif ?>
 													</tr>
 												<?php } ?>

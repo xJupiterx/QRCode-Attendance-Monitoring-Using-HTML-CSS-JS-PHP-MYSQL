@@ -44,7 +44,7 @@
                         </li>
                         <li class="sidebar-item active ">
                             <a href="dean-student-info.php" class='sidebar-link' style="background-color: #e3e3e3">
-                                <i data-feather="home" width="20"></i>
+                                <i data-feather="users" width="20"></i>
                                 <span>View Student's Information</span>
                             </a>
                         </li>
@@ -58,7 +58,7 @@
                                     <a href="dean-student-attendance.php">Start A Class</a>
                                 </li>
                                 <li>
-                                    <a href="#">View Student's Attendance</a>
+                                    <a href="dean-attendance-viewer.php">View Student's Attendance</a>
                                 </li>
                             </ul>
                         </li>

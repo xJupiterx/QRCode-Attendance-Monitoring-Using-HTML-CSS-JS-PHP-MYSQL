@@ -88,7 +88,7 @@
 					</div>	
 				</center>
                 <div class="sidebar-menu">
-                    <ul class="menu">
+                <ul class="menu">
                         <div class="divider">
                             <div class="divider-text" style="color: gray; font-size: 12px">Main Menu</div>
                         </div>
@@ -100,7 +100,7 @@
                         </li>
                         <li class="sidebar-item active ">
                             <a href="dean-student-info.php" class='sidebar-link' style="background-color: #e3e3e3">
-                                <i data-feather="home" width="20"></i>
+                                <i data-feather="users" width="20"></i>
                                 <span>View Student's Information</span>
                             </a>
                         </li>
@@ -114,7 +114,7 @@
                                     <a href="dean-student-attendance.php">Start A Class</a>
                                 </li>
                                 <li>
-                                    <a href="#">View Student's Attendance</a>
+                                    <a href="dean-attendance-viewer.php">View Student's Attendance</a>
                                 </li>
                             </ul>
                         </li>
@@ -285,6 +285,7 @@
                                             <th style = "width:8%; font-size: 14px">Student_ID</th>
                                             <th style = "width:8%; font-size: 14px">First name</th>
                                             <th style = "width:8%; font-size: 14px">Last name</th>
+                                            <th style = "width:8%; font-size: 14px">Time-in</th>
                                             <th style = "width:8%; font-size: 14px">Remarks</th>
 
                                         </tr>
@@ -297,6 +298,7 @@
                                             <td><?php  echo $row['student_id']; ?></td>
                                             <td><?php  echo $row['firstname']; ?></td>
                                             <td><?php  echo $row['lastname']; ?></td>
+                                            <td><?php  echo $row['stud_time_in']; ?></td>
                                             <?php if($row['remarks']=="ON-TIME"): ?>
                                                 <td style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
                                             <?php endif ?>
@@ -326,28 +328,6 @@
     <script src="assets/js/pages/dashboard.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/sweetAlert.js"></script>
-    <script>
-		function myFunction() {
-		  // Declare variables
-		  var input, filter, table, tr, td, i, txtValue;
-		  input = document.getElementById("myInput");
-		  filter = input.value.toUpperCase();
-		  table = document.getElementById("myTable");
-		  tr = table.getElementsByTagName("tr");
-
-		  // Loop through all table rows, and hide those who don't match the search query
-		  for (i = 0; i < tr.length; i++) {
-			td = tr[i].getElementsByTagName("td")[0];
-			if (td) {
-			  txtValue = td.textContent || td.innerText;
-			  if (txtValue.toUpperCase().indexOf(filter) > -1) {
-				tr[i].style.display = "";
-			  } else {
-				tr[i].style.display = "none";
-			  }
-			}
-		  }
-		}
 	</script>
     <script>
         function buttonFunction(){

@@ -42,18 +42,18 @@
 					</div>	
 				</center>
                 <div class="sidebar-menu">
-                <ul class="menu">
+                    <ul class="menu">
                         <div class="divider">
                             <div class="divider-text" style="color: gray; font-size: 12px">Main Menu</div>
                         </div>
                         <li class="sidebar-item active ">
-                            <a href="dean-page.php" class='sidebar-link' style="background-color: #e3e3e3">
+                            <a href="faculty-page.php" class='sidebar-link' style="background-color: #e3e3e3">
                                 <i data-feather="home" width="20"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item active ">
-                            <a href="dean-student-info.php" class='sidebar-link' style="background-color: #e3e3e3">
+                            <a href="faculty-student-info.php" class='sidebar-link' style="background-color: #e3e3e3">
                                 <i data-feather="users" width="20"></i>
                                 <span>View Student's Information</span>
                             </a>
@@ -65,27 +65,12 @@
                             </a>
                             <ul class="submenu " style="background-color: #e3e3e3">
                                 <li>
-                                    <a href="dean-student-attendance.php">Start A Class</a>
+                                    <a href="faculty-student-attendance.php">Start A Class</a>
                                 </li>
                                 <li>
-                                    <a href="dean-attendance-viewer.php">View Student's Attendance</a>
+                                    <a href="faculty-attendance-viewer.php">View Student's Attendance</a>
                                 </li>
                             </ul>
-                        </li>
-						<div class="divider">
-                            <div class="divider-text" style="color: gray; font-size: 12px">More Options</div>
-                        </div>
-						<li class="sidebar-item active ">
-                            <a href="dean-createacc.php" class='sidebar-link' style="background-color: #e3e3e3">
-                                <i data-feather="plus" width="20"></i>
-                                <span>Create Faculty Account</span>
-                            </a>
-                        </li>
-						<li class="sidebar-item active ">
-                            <a href="dean-update-database.php" class='sidebar-link' style="background-color: #e3e3e3">
-                                <i data-feather="database" width="20"></i>
-                                <span>Update Student Database</span>
-                            </a>
                         </li>
                     </ul>
                 </div>
@@ -122,7 +107,7 @@
 
             <div class="main-content container-fluid">
                 <div class="page-title">
-                    <h3>Recent Student Attendance</h3>
+                    <h3>Sorted Student Attendance</h3>
                 </div>
 				<br>
                 <section class="section">
@@ -138,7 +123,7 @@
                                 <div class="card-body px-0 pb-0">
                                     <div class="table-responsive">
                                         <?php
-                                            $sqlSelect = "SELECT * FROM student_attendance ORDER BY attendance_id DESC;";
+                                            $sqlSelect = "SELECT * FROM student_attendance WHERE subject = '" . $_SESSION['SortSubject'] . "' and section = '" . $_SESSION['SortSection'] . "' ORDER BY attendance_id DESC;";
                                             $result = mysqli_query($db, $sqlSelect);
                                                         
                                             if (mysqli_num_rows($result) > 0) {
@@ -156,11 +141,13 @@
                                                 <thead>
                                                     <tr>
                                                         <th style = "width:8%; font-size: 14px">Subject</th>
-                                                        <th style = "width:8%; font-size: 14px">Section</th>
+                                                        <th style = "width:10%; font-size: 14px">Section</th>
                                                         <th style = "width:8%; font-size: 14px">Student_ID</th>
                                                         <th style = "width:8%; font-size: 14px">First name</th>
                                                         <th style = "width:8%; font-size: 14px">Last name</th>
+                                                        <th style = "width:8%; font-size: 14px">Time-In</th>
                                                         <th style = "width:8%; font-size: 14px">Remarks</th>
+                                                        <th style = "width:8%; font-size: 14px">Date</th>
 
                                                     </tr>
                                                 </thead>
@@ -174,6 +161,7 @@
                                                         <td><?php  echo $row['student_id']; ?></td>
                                                         <td><?php  echo $row['firstname']; ?></td>
                                                         <td><?php  echo $row['lastname']; ?></td>
+                                                        <td><?php  echo $row['stud_time_in']; ?></td>
                                                         <?php if($row['remarks']=="ON-TIME"): ?>
                                                             <td style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
                                                         <?php endif ?>
@@ -183,6 +171,7 @@
                                                         <?php if($row['remarks']=="ABSENT"): ?>
                                                             <td style="background-color: #df4759; color: #fef8f8; border-color:#cf4455; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
                                                         <?php endif ?>
+                                                        <td><?php  echo $row['date_of_schedule']; ?></td>
                                                     </tr>
                                                 <?php } ?>
                                                 </tbody>
@@ -260,7 +249,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <a style = "font-size:12px; color:black" href = "dean-sortby-stud_id.php">Click <u>HERE</u> to display attendance of selected student</a>
+                                    <a style = "font-size:12px; color:black" href = "faculty-sortby-stud_id.php">Click <u>HERE</u> to display attendance of selected student</a>
                                 </div>
                             </form>
                         </div>

@@ -42,18 +42,18 @@
 					</div>	
 				</center>
                 <div class="sidebar-menu">
-                <ul class="menu">
+                    <ul class="menu">
                         <div class="divider">
                             <div class="divider-text" style="color: gray; font-size: 12px">Main Menu</div>
                         </div>
                         <li class="sidebar-item active ">
-                            <a href="dean-page.php" class='sidebar-link' style="background-color: #e3e3e3">
+                            <a href="faculty-page.php" class='sidebar-link' style="background-color: #e3e3e3">
                                 <i data-feather="home" width="20"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item active ">
-                            <a href="dean-student-info.php" class='sidebar-link' style="background-color: #e3e3e3">
+                            <a href="faculty-student-info.php" class='sidebar-link' style="background-color: #e3e3e3">
                                 <i data-feather="users" width="20"></i>
                                 <span>View Student's Information</span>
                             </a>
@@ -65,27 +65,12 @@
                             </a>
                             <ul class="submenu " style="background-color: #e3e3e3">
                                 <li>
-                                    <a href="dean-student-attendance.php">Start A Class</a>
+                                    <a href="faculty-student-attendance.php">Start A Class</a>
                                 </li>
                                 <li>
-                                    <a href="dean-attendance-viewer.php">View Student's Attendance</a>
+                                    <a href="faculty-attendance-viewer.php">View Student's Attendance</a>
                                 </li>
                             </ul>
-                        </li>
-						<div class="divider">
-                            <div class="divider-text" style="color: gray; font-size: 12px">More Options</div>
-                        </div>
-						<li class="sidebar-item active ">
-                            <a href="dean-createacc.php" class='sidebar-link' style="background-color: #e3e3e3">
-                                <i data-feather="plus" width="20"></i>
-                                <span>Create Faculty Account</span>
-                            </a>
-                        </li>
-						<li class="sidebar-item active ">
-                            <a href="dean-update-database.php" class='sidebar-link' style="background-color: #e3e3e3">
-                                <i data-feather="database" width="20"></i>
-                                <span>Update Student Database</span>
-                            </a>
                         </li>
                     </ul>
                 </div>
@@ -260,7 +245,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <a style = "font-size:12px; color:black" href = "dean-sortby-stud_id.php">Click <u>HERE</u> to display attendance of selected student</a>
+                                    <a style = "font-size:12px; color:black" href = "faculty-sortby-stud_id.php">Click <u>HERE</u> to display attendance of selected student</a>
                                 </div>
                             </form>
                         </div>

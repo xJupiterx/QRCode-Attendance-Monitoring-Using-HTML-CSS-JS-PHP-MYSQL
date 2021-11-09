@@ -38,6 +38,12 @@
                                 <span>Dashboard</span>
                             </a>
                         </li>
+                        <li class="sidebar-item active ">
+                            <a href="faculty-student-info.php" class='sidebar-link' style="background-color: #e3e3e3">
+                                <i data-feather="users" width="20"></i>
+                                <span>View Student's Information</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link' style="background-color: #e3e3e3">
                                 <i data-feather="book" width="20"></i>
@@ -45,10 +51,10 @@
                             </a>
                             <ul class="submenu " style="background-color: #e3e3e3">
                                 <li>
-                                    <a href="faculty-student-info.php">View Student's Information</a>
+                                    <a href="faculty-student-attendance.php">Start A Class</a>
                                 </li>
                                 <li>
-                                    <a href="faculty-student-attendance.php">View Student's Attendance</a>
+                                    <a href="faculty-attendance-viewer.php">View Student's Attendance</a>
                                 </li>
                             </ul>
                         </li>
@@ -85,14 +91,14 @@
                 </div>
             </nav>
 
-            <div class="main-content container-fluid">
+            <form class="main-content container-fluid" method = 'post' action = 'dean-page.php'>
                 <div class="page-title">
                     <h3>Faculty Dashboard</h3>
                 </div>
 				<br>
                 <section class="section">
                     <div class="row mb-4">
-                        <div class="col-md-8">
+                        <div class = "col-md-12">
                             <div class="card ">
                                 <div class="card-header" style="background-color: #3acf61">
                                     <h4 style="color: white"><strong>User Details</strong></h4>
@@ -108,176 +114,50 @@
 									<p class="col-md-12 col-12"><b>Email: </b><u><?php echo $_SESSION['email']; ?></u></p>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #3acf61">
-                                    <h4 class="card-title" style="color: white"><strong>Recent Attendance</strong></h4>
-                                    <div class="d-flex ">
-                                        <i data-feather="download"  style="color: white"></i>
-                                    </div>
-                                </div>
-                                <div class="card-body px-0 pb-0">
-                                    <div class="table-responsive">
-                                        <?php
-                                            $sqlSelect = "SELECT * FROM student_attendance";
-                                            $result = mysqli_query($db, $sqlSelect);
-                                                        
-                                            if (mysqli_num_rows($result) > 0) {
-                                        ?>
-                                        <div class="form-group position-relative has-icon-left">
-                                            <div class="position-relative">
-                                                <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Student ID..">
-                                                <div class="form-control-icon">
-                                                    <i data-feather="search"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <form class="col-md-auto" method='post' style='overflow:scroll; width:100%; height: 400px'>
-                                            <table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th style = "width:8%; font-size: 14px">Student_ID</th>
-                                                        <th style = "width:8%; font-size: 14px">First name</th>
-                                                        <th style = "width:8%; font-size: 14px">Last name</th>
-                                                        <th style = "width:8%; font-size: 14px">Subject</th>
-                                                        <th style = "width:8%; font-size: 14px">Section</th>
-                                                        <th style = "width:8%; font-size: 14px">Remarks</th>
-
-                                                    </tr>
-                                                </thead>
-                                                <?php
-                                                while ($row = mysqli_fetch_array($result)) {
-                                                ?>
-                                                <tbody>
-                                                    <tr>
-                                                        <td><?php  echo $row['student_id']; ?></td>
-                                                        <td><?php  echo $row['firstname']; ?></td>
-                                                        <td><?php  echo $row['lastname']; ?></td>
-                                                        <td><?php  echo $row['subject']; ?></td>
-                                                        <td><?php  echo $row['section']; ?></td>
-                                                        <?php if($row['remarks']=="ON-TIME"): ?>
-                                                            <td style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
-                                                        <?php endif ?>
-                                                        <?php if($row['remarks']=="LATE"): ?>
-                                                            <td style="background-color: #ffc107; color:#fffdf5; border-color: #ecb40a; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
-                                                        <?php endif ?>
-                                                        <?php if($row['remarks']=="ABSENT"): ?>
-                                                            <td style="background-color: #df4759; color: #fef8f8; border-color:#cf4455; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
-                                                        <?php endif ?>
-                                                    </tr>
-                                                <?php } ?>
-                                                </tbody>
-                                            </table>
-                                        </form>
-                                        <?php } ?>
-
-                                        <?php if (mysqli_num_rows($result) <= 0) {?>
-                                        <div class="form-group position-relative has-icon-left">
-                                            <div class="position-relative">
-                                                <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Student ID..">
-                                                <div class="form-control-icon">
-                                                    <i data-feather="search"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <form class="col-md-auto" method='post' style='overflow:scroll; width:100%; height: 400px'>
-                                            <table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th style = "width:8%; font-size: 14px">Student_ID</th>
-                                                        <th style = "width:8%; font-size: 14px">First name</th>
-                                                        <th style = "width:8%; font-size: 14px">Last name</th>
-                                                        <th style = "width:8%; font-size: 14px">Subject</th>
-                                                        <th style = "width:8%; font-size: 14px">Section</th>
-                                                        <th style = "width:8%; font-size: 14px">Remarks</th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                        </form>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class='card-heading p-1 pl-3'>Attendance Graph</h3>
+                                    <h4 class="card-title" style="color: white"><strong>Return to My Class</strong></h4>
                                 </div>
                                 <div class="card-body">
+                                    <br><br>
                                     <div class="row">
-                                        <div class="col-md-0 col-0">
-                                            <canvas id="bar"></canvas>
+                                        <div class="col-md-6">
+                                            <center><div>
+                                                    <p style= "font-size:14px;"><strong>Select Subject:</strong></p>
+                                                <div class="dropdown">
+                                                    <Select class="body_text" name="rsubject" id='SelectedSubject'>
+                                                        <option value="Please Select"> Please Select </option>
+                                                        <?php include("PHPRequestDatas/subjects.php"); ?> 
+                                                    </select>
+                                                    <br><br>
+                                                </div>
+                                            </div></center>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <center><div>
+                                                    <p style= "font-size:14px;"><strong>Select Section:</strong></p>
+                                                <div class="dropdown">
+                                                    <Select class="body_text" name="rsection" id='SelectedSection'>
+                                                        <option value="Please Select"> Please Select </option>
+                                                        <?php include("PHPRequestDatas/sections.php"); ?>
+                                                    </select>
+                                                    <br><br>
+                                                </div>
+                                            </div></center>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="card widget-todo">
-                                <div
-                                    class="card-header border-bottom d-flex justify-content-between align-items-center">
-                                    <h4 class="card-title d-flex">
-                                        <i class='bx bx-check font-medium-5 pl-25 pr-75'></i>Progress
-                                    </h4>
-
-                                </div>
-                                <div class="card-body px-0 py-1">
-                                    <table class='table table-borderless'>
-                                        <tr>
-                                            <td class='col-3'>UI Design</td>
-                                            <td class='col-6'>
-                                                <div class="progress progress-info">
-                                                    <div class="progress-bar" role="progressbar" style="width: 60%"
-                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                            <td class='col-3 text-center'>60%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class='col-3'>VueJS</td>
-                                            <td class='col-6'>
-                                                <div class="progress progress-success">
-                                                    <div class="progress-bar" role="progressbar" style="width: 35%"
-                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                            <td class='col-3 text-center'>30%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class='col-3'>Laravel</td>
-                                            <td class='col-6'>
-                                                <div class="progress progress-danger">
-                                                    <div class="progress-bar" role="progressbar" style="width: 50%"
-                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                            <td class='col-3 text-center'>50%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class='col-3'>ReactJS</td>
-                                            <td class='col-6'>
-                                                <div class="progress progress-primary">
-                                                    <div class="progress-bar" role="progressbar" style="width: 80%"
-                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                            <td class='col-3 text-center'>80%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class='col-3'>Go</td>
-                                            <td class='col-6'>
-                                                <div class="progress progress-secondary">
-                                                    <div class="progress-bar" role="progressbar" style="width: 65%"
-                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                            <td class='col-3 text-center'>65%</td>
-                                        </tr>
-                                    </table>
+                                    <br>
+                                    <center><div class="clearfix" style='position:relative;'>
+                                        <input type="submit" name="returnClass" value="Return Class" class="btn btn-primary">
+                                    </div></center>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-            </div>
+            </form>
         </div>
     </div>
     <script src="assets/js/feather-icons/feather.min.js"></script>
@@ -287,28 +167,5 @@
     <script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
     <script src="assets/js/pages/dashboard.js"></script>
     <script src="assets/js/main.js"></script>
-    <script>
-		function myFunction() {
-		  // Declare variables
-		  var input, filter, table, tr, td, i, txtValue;
-		  input = document.getElementById("myInput");
-		  filter = input.value.toUpperCase();
-		  table = document.getElementById("myTable");
-		  tr = table.getElementsByTagName("tr");
-
-		  // Loop through all table rows, and hide those who don't match the search query
-		  for (i = 0; i < tr.length; i++) {
-			td = tr[i].getElementsByTagName("td")[0];
-			if (td) {
-			  txtValue = td.textContent || td.innerText;
-			  if (txtValue.toUpperCase().indexOf(filter) > -1) {
-				tr[i].style.display = "";
-			  } else {
-				tr[i].style.display = "none";
-			  }
-			}
-		  }
-		}
-	</script>
 </body>
 </html>

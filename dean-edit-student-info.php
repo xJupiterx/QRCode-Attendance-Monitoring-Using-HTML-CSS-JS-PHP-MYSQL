@@ -27,7 +27,7 @@
 					</div>	
 				</center>
                 <div class="sidebar-menu">
-                    <ul class="menu">
+                <ul class="menu">
                         <div class="divider">
                             <div class="divider-text" style="color: gray; font-size: 12px">Main Menu</div>
                         </div>
@@ -39,7 +39,7 @@
                         </li>
                         <li class="sidebar-item active ">
                             <a href="dean-student-info.php" class='sidebar-link' style="background-color: #e3e3e3">
-                                <i data-feather="home" width="20"></i>
+                                <i data-feather="users" width="20"></i>
                                 <span>View Student's Information</span>
                             </a>
                         </li>
@@ -53,7 +53,7 @@
                                     <a href="dean-student-attendance.php">Start A Class</a>
                                 </li>
                                 <li>
-                                    <a href="#">View Student's Attendance</a>
+                                    <a href="dean-attendance-viewer.php">View Student's Attendance</a>
                                 </li>
                             </ul>
                         </li>
@@ -133,11 +133,11 @@
                             </div>
                         </div>
                         <div class = 'row'>
-                            <p class='col-md-2' style='font-size:18px;position:relative;'><b>First Name:</b></p>
+                            <p class='col-md-2' style='font-size:18px;position:relative;'><b>Last Name:</b></p>
                             <div class = 'col-md-2'>
                                 <input type='input' name = 'elastname' value="<?php echo $_SESSION['slastname']; ?>" style='position:relative; right:63px; width:155px'>
                             </div>
-                            <p class='col-md-2' style='font-size:18px;position:relative; right:15px'><b>Last Name:</b></p>
+                            <p class='col-md-2' style='font-size:18px;position:relative; right:15px'><b>First Name:</b></p>
                             <div class = 'col-md-2'>
                                 <input type='input' name = 'efirstname' value="<?php echo $_SESSION['sfirstname']; ?>" style='position:relative; right:80px; width:188px'>
                             </div>
@@ -149,7 +149,7 @@
                         <br><br>
                         <div class='clearfix'>
                             <center>
-                            <input type="submit" name="UpdateStudInfo" value="Update Data" class="btn btn-primary">
+                            <input type="submit" name="UpdateStudInfo" value="Update Data" class="btn btn-primary" onclick="return  confirm('Do you really want to Change Student Information?')">
                             </center>
                         </div>
                     </div>

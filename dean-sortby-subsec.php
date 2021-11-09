@@ -122,7 +122,7 @@
 
             <div class="main-content container-fluid">
                 <div class="page-title">
-                    <h3>Recent Student Attendance</h3>
+                    <h3>Sorted Student Attendance</h3>
                 </div>
 				<br>
                 <section class="section">
@@ -138,7 +138,7 @@
                                 <div class="card-body px-0 pb-0">
                                     <div class="table-responsive">
                                         <?php
-                                            $sqlSelect = "SELECT * FROM student_attendance ORDER BY attendance_id DESC;";
+                                            $sqlSelect = "SELECT * FROM student_attendance WHERE subject = '" . $_SESSION['SortSubject'] . "' and section = '" . $_SESSION['SortSection'] . "' ORDER BY attendance_id DESC;";
                                             $result = mysqli_query($db, $sqlSelect);
                                                         
                                             if (mysqli_num_rows($result) > 0) {
@@ -156,11 +156,13 @@
                                                 <thead>
                                                     <tr>
                                                         <th style = "width:8%; font-size: 14px">Subject</th>
-                                                        <th style = "width:8%; font-size: 14px">Section</th>
+                                                        <th style = "width:10%; font-size: 14px">Section</th>
                                                         <th style = "width:8%; font-size: 14px">Student_ID</th>
                                                         <th style = "width:8%; font-size: 14px">First name</th>
                                                         <th style = "width:8%; font-size: 14px">Last name</th>
+                                                        <th style = "width:8%; font-size: 14px">Time-In</th>
                                                         <th style = "width:8%; font-size: 14px">Remarks</th>
+                                                        <th style = "width:8%; font-size: 14px">Date</th>
 
                                                     </tr>
                                                 </thead>
@@ -174,6 +176,7 @@
                                                         <td><?php  echo $row['student_id']; ?></td>
                                                         <td><?php  echo $row['firstname']; ?></td>
                                                         <td><?php  echo $row['lastname']; ?></td>
+                                                        <td><?php  echo $row['stud_time_in']; ?></td>
                                                         <?php if($row['remarks']=="ON-TIME"): ?>
                                                             <td style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
                                                         <?php endif ?>
@@ -183,6 +186,7 @@
                                                         <?php if($row['remarks']=="ABSENT"): ?>
                                                             <td style="background-color: #df4759; color: #fef8f8; border-color:#cf4455; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
                                                         <?php endif ?>
+                                                        <td><?php  echo $row['date_of_schedule']; ?></td>
                                                     </tr>
                                                 <?php } ?>
                                                 </tbody>

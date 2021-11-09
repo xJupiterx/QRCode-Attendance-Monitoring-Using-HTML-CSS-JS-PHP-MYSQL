@@ -28,7 +28,7 @@
 					</div>	
 				</center>
                 <div class="sidebar-menu">
-					<ul class="menu">
+				<ul class="menu">
                         <div class="divider">
                             <div class="divider-text" style="color: gray; font-size: 12px">Main Menu</div>
                         </div>
@@ -40,7 +40,7 @@
                         </li>
                         <li class="sidebar-item active ">
                             <a href="dean-student-info.php" class='sidebar-link' style="background-color: #e3e3e3">
-                                <i data-feather="home" width="20"></i>
+                                <i data-feather="users" width="20"></i>
                                 <span>View Student's Information</span>
                             </a>
                         </li>
@@ -54,7 +54,7 @@
                                     <a href="dean-student-attendance.php">Start A Class</a>
                                 </li>
                                 <li>
-                                    <a href="#">View Student's Attendance</a>
+                                    <a href="dean-attendance-viewer.php">View Student's Attendance</a>
                                 </li>
                             </ul>
                         </li>
@@ -133,14 +133,6 @@
 														
 											if (mysqli_num_rows($result) > 0) {
 										?>
-										<div class="form-group position-relative has-icon-left">
-											<div class="position-relative">
-												<input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Student ID..">
-												<div class="form-control-icon">
-													<i data-feather="search"></i>
-												</div>
-											</div>
-										</div>
 										<form method='post' style='overflow:scroll; width:100%; height:530px'>
 											<table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
 												<thead>
@@ -164,7 +156,12 @@
 														<td><?php  echo $row['timein']; ?></td>
 														<td><?php  echo $row['timeout']; ?></td>
 														<td><?php  echo $row['date_of_schedule']; ?></td>
-														<td><?php  echo $row['sched_status']; ?></td>
+														<?php if($row['sched_status'] == 'END'): ?>
+															<td style = 'color:white; background-color:#df4759'><?php  echo $row['sched_status']; ?></td>
+														<?php endif ?>
+														<?php if($row['sched_status'] == 'ON-GOING'): ?>
+															<td style = 'color: #f7fcfb; background-color: #42ba96'><?php  echo $row['sched_status']; ?></td>
+														<?php endif ?>
 													</tr>
 												<?php } ?>
 												</tbody>

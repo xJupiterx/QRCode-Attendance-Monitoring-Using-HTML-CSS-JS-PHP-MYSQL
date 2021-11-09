@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2021 at 05:41 PM
+-- Generation Time: Nov 05, 2021 at 02:15 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -59,36 +59,65 @@ CREATE TABLE `courses_enrolled` (
 --
 
 INSERT INTO `courses_enrolled` (`student_id`, `subject1`, `section1`, `subject2`, `section2`, `subject3`, `section3`, `subject4`, `section4`, `subject5`, `section5`, `subject6`, `section6`, `subject7`, `section7`, `subject8`, `section8`, `subject9`, `section9`, `subject10`, `section10`, `semester`, `academic_year_start`, `academic_year_end`) VALUES
-('2021010379', 'COSC18', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'FILI3', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010080', 'COSC18', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'FILI3', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021011373', 'COSC18', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'FILI3', 'BSCS2-2', 'HUMA1a', 'BSCS2-2', '', '', '', '', '', '', '2nd Semester', '2021', '2022'),
-('2021010406', 'COSC18', 'Same as my Current Section', 'COSC15 ', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021011383', 'PROG1', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'CSCP60', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010668', 'COSC18', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2020020195', 'COSC15', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'SCSBC1', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010792', 'COSC15', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010527', 'Cosc18 ', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'PHed1', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'Cosc15', 'Same as my Current Section', 'Prog1', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010523', 'COSC15', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010834', 'COSC15', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010517', 'PROG1', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010927', 'COSC15', 'Same as my Current Section', 'ENG1a', 'Same as my Current Section', 'SOCS1a ', 'Same as my Current Section', 'CSPC60 ', 'Same as my Current Section', 'NSTP1 ', 'Same as my Current Section', 'COSC18 ', 'Same as my Current Section', ' MATH1a', 'Same as my Current Section', ' PROG1', 'Same as my Current Section', 'PHED1 ', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021011439', 'COSC15', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'SCSBC1', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2020020162', 'COSC18', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2020020118', 'COSC15', 'Same as my Current Section', 'COSC18 ', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'ENGL1a ', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', ' PHED1', 'Same as my Current Section', 'SCSBC1', 'Same as my Current Section', ' SOCS1a', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010116', 'COSC18', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'SOCS1a ', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010364', 'ITEC18', 'Same as my Current Section', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENG1', 'Same as my Current Section', 'MIMW', 'Same as my Current Section', 'NSTP', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', '', '', '', '', '2nd Semester', '2021', '2022'),
-('2020020025', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021011197', 'ITEC15', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'MATH1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '', '', '', '', '2nd Semester', '2021', '2022'),
-('2021010784', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021011130', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '', '', '2nd Semester', '2021', '2022'),
-('2021010407', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010563', 'ITEC16', 'Same as my Current Section', 'ITEC71', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', 'PROG2', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'ITEC19', 'Same as my Current Section', 'PHED2', 'Same as my Current Section', 'NSTP2', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010306', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '', '', '', '', '2nd Semester', '2021', '2022'),
-('2021011343', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010453', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1a', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'SOCS1a', 'Same as my Current Section', '', '', '2nd Semester', '2021', '2022'),
-('2021010849', 'ITEC70', 'Same as my Current Section', 'ITEC15', 'Same as my Current Section', 'ENGl1a', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '', '', '2nd Semester', '2021', '2022'),
-('2021010289', 'ITEC71', 'Same as my Current Section', 'ITEC15', 'Same as my Current Section', 'ENGl1a', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1a', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '', '', '2nd Semester', '2021', '2022'),
-('1801561', 'STAT1', 'Same as my Current Section', 'SOCS3', 'Same as my Current Section', 'ITEC69', 'Same as my Current Section', 'ITEC100b', 'Same as my Current Section', '', '', '', '', '', '', '', '', '', '', '', '', '2nd Semester', '2021', '2022');
+('2021010379', 'FILI3', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010080', 'COSC18', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'FILI3', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021011373', 'COSC18', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'FILI3', 'BSCS2-2', 'HUMA1A', 'BSCS2-2', '', '', '', '', '', '', '1st Semester', '2021', '2022'),
+('2021010406', 'COSC18', 'Same as my Current Section', 'COSC15 ', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021011383', 'PROG1', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'CSCP60', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010668', 'COSC18', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2020020195', 'COSC15', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'SCSBC1', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010792', 'COSC15', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010527', 'COSC18', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010523', 'COSC15', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010834', 'COSC15', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010517', 'PROG1', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010927', 'COSC18', 'Same as my Current Section', 'ENG1A', 'Same as my Current Section', 'SOCS1A ', 'Same as my Current Section', 'CSPC60 ', 'Same as my Current Section', 'NSTP1 ', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', ' MATH1A', 'Same as my Current Section', ' PROG1', 'Same as my Current Section', 'PHED1 ', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021011439', 'COSC15', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'SCSBC1', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2020020162', 'COSC18', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2020020118', 'COSC15', 'Same as my Current Section', 'COSC18', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'ENGL1A ', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', ' PHED1', 'Same as my Current Section', 'SCSBC1', 'Same as my Current Section', ' SOCS1A', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010116', 'COSC18', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'SOCS1A ', 'Same as my Current Section', 'CSPC60', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'COSC15', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010364', 'ITEC18', 'Same as my Current Section', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENG1', 'Same as my Current Section', 'MIMW', 'Same as my Current Section', 'NSTP', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', '', '', '', '', '1st Semester', '2021', '2022'),
+('2020020025', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021011197', 'ITEC15', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'MATH1', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '', '', '', '', '1st Semester', '2021', '2022'),
+('2021010784', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021011130', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '', '', '1st Semester', '2021', '2022'),
+('2021010407', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010563', 'ITEC16', 'Same as my Current Section', 'ITEC71', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', 'PROG2', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'ITEC19', 'Same as my Current Section', 'PHED2', 'Same as my Current Section', 'NSTP2', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010306', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '', '', '', '', '1st Semester', '2021', '2022'),
+('2021011343', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010453', 'ITEC15', 'Same as my Current Section', 'ITEC70', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', 'SOCS1A', 'Same as my Current Section', '', '', '1st Semester', '2021', '2022'),
+('2021010849', 'ITEC70', 'Same as my Current Section', 'ITEC15', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '', '', '1st Semester', '2021', '2022'),
+('2021010289', 'ITEC71', 'Same as my Current Section', 'ITEC15', 'Same as my Current Section', 'ENGL1A', 'Same as my Current Section', 'PROG1', 'Same as my Current Section', 'MATH1A', 'Same as my Current Section', 'ITEC18', 'Same as my Current Section', 'PHED1', 'Same as my Current Section', 'NSTP1', 'Same as my Current Section', '', '', '', '', '1st Semester', '2021', '2022'),
+('1801561', 'STAT1', 'Same as my Current Section', 'SOCS3', 'Same as my Current Section', 'ITEC69', 'Same as my Current Section', 'ITEC100B', 'Same as my Current Section', '', '', '', '', '', '', '', '', '', '', '', '', '1st Semester', '2021', '2022');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recent_schedule`
+--
+
+CREATE TABLE `recent_schedule` (
+  `schedule_id` int(11) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `section` varchar(255) DEFAULT NULL,
+  `timein` varchar(255) DEFAULT NULL,
+  `timeout` varchar(255) DEFAULT NULL,
+  `date_of_schedule` varchar(255) DEFAULT NULL,
+  `sched_status` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `recent_schedule`
+--
+
+INSERT INTO `recent_schedule` (`schedule_id`, `subject`, `section`, `timein`, `timeout`, `date_of_schedule`, `sched_status`) VALUES
+(1, 'COSC18', 'BSCS1-1', '14:00', '16:00', '2021/10/29', 'END'),
+(2, 'SOCS1A', 'BSCS1-1', '14:00', '16:00', '2021/10/29', 'END'),
+(3, 'CSPC60', 'BSCS1-1', '14:30', '18:30', '2021/10/30', 'END'),
+(4, 'PROG1', 'BSCS1-1', '15:00', '18:00', '2021/10/30', 'END'),
+(5, 'COSC18', 'BSCS1-1', '15:30', '18:30', '2021/10/30', 'END'),
+(9, 'COSC18', 'BSCS1-1', '09:30', '11:30', '2021/11/3', 'END'),
+(10, 'FILI3', 'BSCS2-2', '10:00', '12:00', '2021/11/3', 'END');
 
 -- --------------------------------------------------------
 
@@ -162,40 +191,106 @@ CREATE TABLE `student_attendance` (
   `semester` varchar(255) DEFAULT NULL,
   `academic_year_start` varchar(255) DEFAULT NULL,
   `academic_year_end` varchar(255) DEFAULT NULL,
-  `date_of_schedule` varchar(255) DEFAULT NULL
+  `date_of_schedule` varchar(255) DEFAULT NULL,
+  `attendance_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `student_attendance`
 --
 
-INSERT INTO `student_attendance` (`student_id`, `firstname`, `lastname`, `subject`, `section`, `stud_time_in`, `remarks`, `semester`, `academic_year_start`, `academic_year_end`, `date_of_schedule`) VALUES
-('2021010379', 'Christine Joy', 'Conejos', 'COSC18', 'BSCS1-1', '17:30', 'ON-TIME', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010080', 'Aeron', 'Amon', 'COSC18', 'BSCS1-1', '17:30', 'ON-TIME', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021011373', 'Jon Marvin', 'Vidallo', 'COSC18', 'BSCS1-1', '17:30', 'ON-TIME', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010406', 'Andrei Mari ', 'Cuadra ', 'COSC18', 'BSCS1-1', '17:30', 'ON-TIME', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021011383', 'Caila Joy', 'Villamin', 'COSC18', 'BSCS1-1', '17:31', 'ON-TIME', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010668', 'Jerold', 'Gomez', 'COSC18', 'BSCS1-1', '17:31', 'ON-TIME', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2020020195', 'Paul Edward', 'Triño', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010792', 'Bea', 'Lucero', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010523', 'Cherwin Grace', 'Diomampo', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010517', 'Angelika', 'Dimaranan', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021011439', 'Job Lenard', 'Villanueva', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2020020162', 'Frank Cedric', 'Redicio', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010116', 'Arist', 'Asia', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010379', 'Christine Joy', 'Conejos', 'SOCS1a', 'BSCS1-1', '22:13', 'ON-TIME', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010080', 'Aeron', 'Amon', 'SOCS1a', 'BSCS1-1', '22:13', 'ON-TIME', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010406', 'Andrei Mari ', 'Cuadra ', 'SOCS1a', 'BSCS1-1', '22:20', 'LATE', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021011373', 'Jon Marvin', 'Vidallo', 'SOCS1a', 'BSCS1-1', '22:20', 'LATE', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021011383', 'Caila Joy', 'Villamin', 'SOCS1a', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2020020195', 'Paul Edward', 'Triño', 'SOCS1a', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010792', 'Bea', 'Lucero', 'SOCS1a', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010527', 'Jessica', 'Doctor', 'SOCS1a', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010523', 'Cherwin Grace', 'Diomampo', 'SOCS1a', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010834', 'John Patrick', 'Manalo', 'SOCS1a', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021010517', 'Angelika', 'Dimaranan', 'SOCS1a', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2021011439', 'Job Lenard', 'Villanueva', 'SOCS1a', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24'),
-('2020020162', 'Frank Cedric', 'Redicio', 'SOCS1a', 'BSCS1-1', 'null', 'ABSENT', '2nd Semester', '2021', '2022', '2021/10/24');
+INSERT INTO `student_attendance` (`student_id`, `firstname`, `lastname`, `subject`, `section`, `stud_time_in`, `remarks`, `semester`, `academic_year_start`, `academic_year_end`, `date_of_schedule`, `attendance_id`) VALUES
+('2021010379', 'Christine Joy', 'Conejos', 'COSC18', 'BSCS1-1', '14:00', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 1),
+('2021010080', 'Aeron', 'Amon', 'COSC18', 'BSCS1-1', '14:00', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 2),
+('2021011373', 'Jon Marvin', 'Vidallo', 'COSC18', 'BSCS1-1', '14:00', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 3),
+('2021010406', 'Andrei Mari ', 'Cuadra ', 'COSC18', 'BSCS1-1', '14:00', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 4),
+('2021011383', 'Caila Joy', 'Villamin', 'COSC18', 'BSCS1-1', '14:01', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 5),
+('2021010668', 'Jerold', 'Gomez', 'COSC18', 'BSCS1-1', '14:01', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 6),
+('2020020195', 'Paul Edward', 'Triño', 'COSC18', 'BSCS1-1', '14:01', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 7),
+('2021010792', 'Bea', 'Lucero', 'COSC18', 'BSCS1-1', '14:01', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 8),
+('2021010527', 'Jessica', 'Doctor', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 9),
+('2021010523', 'Cherwin Grace', 'Diomampo', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 10),
+('2021010517', 'Angelika', 'Dimaranan', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 11),
+('2021010927', 'Antoinette', 'Nadala ', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 12),
+('2021011439', 'Job Lenard', 'Villanueva', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 13),
+('2020020162', 'Frank Cedric', 'Redicio', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 14),
+('2020020118', 'Jun-Jun', 'Magan', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 15),
+('2021010116', 'Arist', 'Asia', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 16),
+('2021010379', 'Christine Joy', 'Conejos', 'SOCS1A', 'BSCS1-1', '14:12', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 17),
+('2021010080', 'Aeron', 'Amon', 'SOCS1A', 'BSCS1-1', '14:13', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 18),
+('2021011373', 'Jon Marvin', 'Vidallo', 'SOCS1A', 'BSCS1-1', '14:13', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 19),
+('2021010406', 'Andrei Mari ', 'Cuadra ', 'SOCS1A', 'BSCS1-1', '14:13', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 20),
+('2021011383', 'Caila Joy', 'Villamin', 'SOCS1A', 'BSCS1-1', '14:13', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 21),
+('2021010668', 'Jerold', 'Gomez', 'SOCS1A', 'BSCS1-1', '14:13', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 22),
+('2020020195', 'Paul Edward', 'Triño', 'SOCS1A', 'BSCS1-1', '14:15', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/29', 23),
+('2021010792', 'Bea', 'Lucero', 'SOCS1A', 'BSCS1-1', '14:17', 'LATE', '1st Semester', '2021', '2022', '2021/10/29', 24),
+('2021010527', 'Jessica', 'Doctor', 'SOCS1A', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 25),
+('2021010523', 'Cherwin Grace', 'Diomampo', 'SOCS1A', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 26),
+('2021010834', 'John Patrick', 'Manalo', 'SOCS1A', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 27),
+('2021010517', 'Angelika', 'Dimaranan', 'SOCS1A', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 28),
+('2021011439', 'Job Lenard', 'Villanueva', 'SOCS1A', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 29),
+('2020020162', 'Frank Cedric', 'Redicio', 'SOCS1A', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/29', 30),
+('2021010379', 'Christine Joy', 'Conejos', 'CSPC60', 'BSCS1-1', '14:35', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/30', 33),
+('2021010080', 'Aeron', 'Amon', 'CSPC60', 'BSCS1-1', '14:35', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/30', 34),
+('2021011373', 'Jon Marvin', 'Vidallo', 'CSPC60', 'BSCS1-1', '14:36', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/30', 35),
+('2021010406', 'Andrei Mari ', 'Cuadra ', 'CSPC60', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 36),
+('2021010668', 'Jerold', 'Gomez', 'CSPC60', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 37),
+('2020020195', 'Paul Edward', 'Triño', 'CSPC60', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 38),
+('2021010792', 'Bea', 'Lucero', 'CSPC60', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 39),
+('2021010527', 'Jessica', 'Doctor', 'CSPC60', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 40),
+('2021010523', 'Cherwin Grace', 'Diomampo', 'CSPC60', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 41),
+('2021010834', 'John Patrick', 'Manalo', 'CSPC60', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 42),
+('2021010517', 'Angelika', 'Dimaranan', 'CSPC60', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 43),
+('2021011439', 'Job Lenard', 'Villanueva', 'CSPC60', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 44),
+('2020020162', 'Frank Cedric', 'Redicio', 'CSPC60', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 45),
+('2020020118', 'Jun-Jun', 'Magan', 'CSPC60', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 46),
+('2021010116', 'Arist', 'Asia', 'CSPC60', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 47),
+('2021010379', 'Christine Joy', 'Conejos', 'PROG1', 'BSCS1-1', '15:19', 'LATE', '1st Semester', '2021', '2022', '2021/10/30', 48),
+('2021010080', 'Aeron', 'Amon', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 49),
+('2021011373', 'Jon Marvin', 'Vidallo', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 50),
+('2021010406', 'Andrei Mari ', 'Cuadra ', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 51),
+('2021011383', 'Caila Joy', 'Villamin', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 52),
+('2021010668', 'Jerold', 'Gomez', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 53),
+('2021010792', 'Bea', 'Lucero', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 54),
+('2021010527', 'Jessica', 'Doctor', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 55),
+('2021010523', 'Cherwin Grace', 'Diomampo', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 56),
+('2021010834', 'John Patrick', 'Manalo', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 57),
+('2021010517', 'Angelika', 'Dimaranan', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 58),
+('2020020162', 'Frank Cedric', 'Redicio', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 59),
+('2021010116', 'Arist', 'Asia', 'PROG1', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 60),
+('2021010379', 'Christine Joy', 'Conejos', 'COSC18', 'BSCS1-1', '15:31', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/30', 61),
+('2021010080', 'Aeron', 'Amon', 'COSC18', 'BSCS1-1', '15:31', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/30', 62),
+('2021011373', 'Jon Marvin', 'Vidallo', 'COSC18', 'BSCS1-1', '15:31', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/30', 63),
+('2021010406', 'Andrei Mari ', 'Cuadra ', 'COSC18', 'BSCS1-1', '15:31', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/30', 64),
+('2020020195', 'Paul Edward', 'Triño', 'COSC18', 'BSCS1-1', '15:31', 'ON-TIME', '1st Semester', '2021', '2022', '2021/10/30', 65),
+('2021011383', 'Caila Joy', 'Villamin', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 66),
+('2021010668', 'Jerold', 'Gomez', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 67),
+('2021010792', 'Bea', 'Lucero', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 68),
+('2021010527', 'Jessica', 'Doctor', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 69),
+('2021010523', 'Cherwin Grace', 'Diomampo', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 70),
+('2021010517', 'Angelika', 'Dimaranan', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 71),
+('2021010927', 'Antoinette', 'Nadala ', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 72),
+('2021011439', 'Job Lenard', 'Villanueva', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 73),
+('2020020162', 'Frank Cedric', 'Redicio', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 74),
+('2020020118', 'Jun-Jun', 'Magan', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 75),
+('2021010116', 'Arist', 'Asia', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/10/30', 76),
+('2021010379', 'Christine Joy', 'Conejos', 'COSC18', 'BSCS1-1', '09:43', 'ON-TIME', '1st Semester', '2021', '2022', '2021/11/3', 95),
+('2021010080', 'Aeron', 'Amon', 'COSC18', 'BSCS1-1', '09:54', 'LATE', '1st Semester', '2021', '2022', '2021/11/3', 96),
+('2021011373', 'Jon Marvin', 'Vidallo', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 97),
+('2021010406', 'Andrei Mari ', 'Cuadra ', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 98),
+('2021011383', 'Caila Joy', 'Villamin', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 99),
+('2021010668', 'Jerold', 'Gomez', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 100),
+('2020020195', 'Paul Edward', 'Triño', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 101),
+('2021010792', 'Bea', 'Lucero', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 102),
+('2021010527', 'Jessica', 'Doctor', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 103),
+('2021010523', 'Cherwin Grace', 'Diomampo', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 104),
+('2021010517', 'Angelika', 'Dimaranan', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 105),
+('2021010927', 'Antoinette', 'Nadala ', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 106),
+('2021011439', 'Job Lenard', 'Villanueva', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 107),
+('2020020162', 'Frank Cedric', 'Redicio', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 108),
+('2020020118', 'Jun-Jun', 'Magan', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 109),
+('2021010116', 'Arist', 'Asia', 'COSC18', 'BSCS1-1', 'null', 'ABSENT', '1st Semester', '2021', '2022', '2021/11/3', 110),
+('2021011373', 'Jon Marvin', 'Vidallo', 'FILI3', 'BSCS2-2', '10:01', 'ON-TIME', '1st Semester', '2021', '2022', '2021/11/3', 111);
 
 -- --------------------------------------------------------
 
@@ -254,6 +349,38 @@ INSERT INTO `user` (`lastname`, `firstname`, `middlename`, `username`, `email`, 
 ('Marges', 'Jayvee', 'Salvador', '2021010849', 'jayvee.marges@citycollegeoftagaytay.edu.ph', 'Marges', 'STUDENT', 'ACTIVE'),
 ('Cadacio ', 'Daniel', 'Tipora', '2021010289', 'daniel.cadacio@citycollegeoftagaytay.edu.ph', 'Cadacio ', 'STUDENT', 'ACTIVE'),
 ('Delim', 'Joseph', 'Lagunsin', '1801561', 'joseph.delim@citycollegeoftagaytay.edu.ph', 'Delim', 'STUDENT', 'ACTIVE');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `recent_schedule`
+--
+ALTER TABLE `recent_schedule`
+  ADD PRIMARY KEY (`schedule_id`);
+
+--
+-- Indexes for table `student_attendance`
+--
+ALTER TABLE `student_attendance`
+  ADD PRIMARY KEY (`attendance_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `recent_schedule`
+--
+ALTER TABLE `recent_schedule`
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `student_attendance`
+--
+ALTER TABLE `student_attendance`
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

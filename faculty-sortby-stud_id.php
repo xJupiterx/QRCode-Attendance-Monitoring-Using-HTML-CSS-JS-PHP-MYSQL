@@ -93,7 +93,7 @@
 
             <div class="main-content container-fluid">
                 <div class="page-title">
-                    <h3>View Student Information</h3>
+                    <h3>Please Select Student</h3>
                 </div>
 				<br>
 				<section class="col-md-12">
@@ -132,7 +132,7 @@
 									<tr>
 										<td style = "color:white"><?php  echo $row['student_id']; ?>
 											<div>
-												<input type="submit" name="StudentViewer" value=<?php  echo $row['student_id']; ?> style="background-color:white; border:none; color: blue; position:relative; bottom:14px">
+												<input type="submit" name="SortStudent" value=<?php  echo $row['student_id']; ?> style="background-color:white; border:none; color: blue; position:relative; bottom:14px">
 											</div>
 										</td>
 										<td><?php  echo $row['lastname']; ?></td>

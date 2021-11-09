@@ -28,7 +28,7 @@
 					</div>	
 				</center>
                 <div class="sidebar-menu">
-					<ul class="menu">
+				<ul class="menu">
                         <div class="divider">
                             <div class="divider-text" style="color: gray; font-size: 12px">Main Menu</div>
                         </div>
@@ -40,7 +40,7 @@
                         </li>
                         <li class="sidebar-item active ">
                             <a href="dean-student-info.php" class='sidebar-link' style="background-color: #e3e3e3">
-                                <i data-feather="home" width="20"></i>
+                                <i data-feather="users" width="20"></i>
                                 <span>View Student's Information</span>
                             </a>
                         </li>
@@ -54,7 +54,7 @@
                                     <a href="dean-student-attendance.php">Start A Class</a>
                                 </li>
                                 <li>
-                                    <a href="#">View Student's Attendance</a>
+                                    <a href="dean-attendance-viewer.php">View Student's Attendance</a>
                                 </li>
                             </ul>
                         </li>
@@ -145,9 +145,9 @@
 								?>
 								<tbody>
 									<tr>
-										<td style="color:blue">
+										<td style = "color:white"><?php  echo $row['student_id']; ?>
 											<div>
-												<input type="submit" name="StudentViewer" value=<?php  echo $row['student_id']; ?> style="background-color:white; border:none; color: blue">
+												<input type="submit" name="StudentViewer" value=<?php  echo $row['student_id']; ?> style="background-color:white; border:none; color: blue; position:relative; bottom:14px">
 											</div>
 										</td>
 										<td><?php  echo $row['lastname']; ?></td>
@@ -177,27 +177,7 @@
 
     <script src="assets/js/main.js"></script>
 	<?php } ?>
-	<script type="text/javascript">
-		$(document).ready(
-		function() {
-			$("#frmCSVImport").on(
-			"submit",
-			function() {
-				$("#response").attr("class", "");
-				$("#response").html("");
-				var fileType = ".csv";
-				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+("+ fileType + ")$");
-				if (!regex.test($("#file").val().toLowerCase())) {
-					$("#response").addClass("error");
-					$("#response").addClass("display-block");
-					$("#response").html("Invalid File. Upload : <b>" + fileType + "</b> Files.");
-					return false;
-				}
-				return true;
-			});
-		});
-	</script>
-		<script>
+	<script>
 		function sort(n) {
 		  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 		  table = document.getElementById("myTable");
@@ -252,8 +232,6 @@
 			}
 		  }
 		}
-	</script>
-	<script>
 		function myFunction() {
 		  // Declare variables
 		  var input, filter, table, tr, td, i, txtValue;
@@ -274,16 +252,6 @@
 			  }
 			}
 		  }
-		}
-	</script>
-	<script>
-		$("#table tr").click(function(){
-		$(this).addClass('selected').siblings().removeClass('selected');    
-		var value=$(this).find('td:first').html();
-		});
-		function fnselect(){
-
-		alert($("tr.selected td:first" ).html());
 		}
 	</script>
 </body>

@@ -332,10 +332,24 @@ if (isset($_POST['selectStud'])) {
 	$ssval = mysqli_real_escape_string($db,$_POST['selectStud']);
 	if((!(empty($student_id))) and (!(empty($scannedqr)))){
 		if($ssval == 'Select Student'){
-			echo '<script>alert("Please do not input data in Manual Selector if you want to scan QR Code!");window.location.href="dean-qrscanner.php";</script>';
+			if($_SESSION['accesslevel'] == "DEAN"){
+				echo '<script>alert("Please do not input data in Manual Selector if you want to scan QR Code!");window.location.href="dean-qrscanner.php";</script>';
+				exit();
+			}
+			else{
+				echo '<script>alert("Please do not input data in Manual Selector if you want to scan QR Code!");window.location.href="faculty-qrscanner.php";</script>';
+				exit();
+			}
 		}
 		else{
-			echo '<script>alert("Please do not input data in Manual Selector if you want to scan QR Code!");window.location.href="dean-qrscannerAS.php";</script>';
+			if($_SESSION['accesslevel'] == "DEAN"){
+				echo '<script>alert("Please do not input data in Manual Selector if you want to scan QR Code!");window.location.href="dean-qrscannerAS.php";</script>';
+				exit();
+			}
+			else{
+				echo '<script>alert("Please do not input data in Manual Selector if you want to scan QR Code!");window.location.href="faculty-qrscannerAS.php";</script>';
+				exit();
+			}
 		}	
 	}
 	else{
@@ -347,11 +361,19 @@ if (isset($_POST['selectStud'])) {
 	// schedule cancellator * if schedule already done in this day *
 	$dateCancellator = gmdate("Y/m/j");
 	// get * in student_attendance where subject = $subject and section = $section and date_of_schedule = $dateCancellator
-	$SchedCancellator = "SELECT * from student_attendance WHERE subject = '" . $subject . "' and section = '" . $section . "' and date_of_schedule = '" . $dateCancellator . "';";
-	$SCResult = mysqli_query($db, $SchedCancellator);
-	if (mysqli_num_rows($SCResult) > 0) {
+	$all = "SELECT * from recent_schedule WHERE subject = '" . $subject . "' and section = '" . $section . "' and date_of_schedule = '" . $dateCancellator . "';";
+	$all = mysqli_query($db,$all);
+	$all = mysqli_fetch_assoc($all);
+	if ($all['sched_status'] == 'END') {
 		// return to select schedule if schedule already exist
-		echo '<script>alert("Class Already Started!");window.location.href="dean-qrscanner.php";</script>';
+		if($_SESSION['accesslevel'] == "DEAN"){
+			echo '<script>alert("Class Already Ended!");window.location.href="dean-qrscanner.php";</script>';
+			exit();
+		}
+		else{
+			echo '<script>alert("Class Already Ended!");window.location.href="faculty-qrscanner.php";</script>';
+			exit();
+		}
 	}
 
 	$timein=$_POST['time-in'];
@@ -363,21 +385,49 @@ if (isset($_POST['selectStud'])) {
 	if (mysqli_num_rows($result) > 0) {
 		if (empty($student_id)) {
 			if($ssval == 'Select Student'){
-				echo '<script>alert("Please Enter/Scan Student ID!");window.location.href="dean-qrscanner.php";</script>';
+				if($_SESSION['accesslevel'] == "DEAN"){
+					echo '<script>alert("Please Enter/Scan Student ID!");window.location.href="dean-qrscanner.php";</script>';
+					exit();
+				}
+				else{
+					echo '<script>alert("Please Enter/Scan Student ID!");window.location.href="faculty-qrscanner.php";</script>';
+					exit();
+				}
 			}
 			else{
-				echo '<script>alert("Please Enter/Scan Student ID!");window.location.href="dean-qrscannerAS.php";</script>';
-			}	
+				if($_SESSION['accesslevel'] == "DEAN"){
+					echo '<script>alert("Please Enter/Scan Student ID!");window.location.href="dean-qrscannerAS.php";</script>';
+					exit();
+				}
+				else{
+					echo '<script>alert("Please Enter/Scan Student ID!");window.location.href="faculty-qrscannerAS.php";</script>';
+					exit();
+				}	
+			}
 		}
 		else{
 			while ($row = mysqli_fetch_array($result)) {
 				if($row['student_id']==$student_id){
 					if (($section == 'Please Select') or ($subject == 'Please Select')) {
 						if($ssval == 'Select Student'){
-							echo '<script>alert("Please Select Section/ Subject!");window.location.href="dean-qrscanner.php";</script>';
+							if($_SESSION['accesslevel'] == "DEAN"){
+								echo '<script>alert("Please Select Section/ Subject!");window.location.href="dean-qrscanner.php";</script>';
+								exit();
+							}
+							else{
+								echo '<script>alert("Please Select Section/ Subject!");window.location.href="faculty-qrscanner.php";</script>';
+								exit();
+							}
 						}
 						else{
-							echo '<script>alert("Please Select Section/ Subject!");window.location.href="dean-qrscannerAS.php";</script>';
+							if($_SESSION['accesslevel'] == "DEAN"){
+								echo '<script>alert("Please Select Section/ Subject!");window.location.href="dean-qrscannerAS.php";</script>';
+								exit();
+							}
+							else{
+								echo '<script>alert("Please Select Section/ Subject!");window.location.href="faculty-qrscannerAS.php";</script>';
+								exit();
+							}
 						}	
 					}
 					else{
@@ -458,14 +508,28 @@ if (isset($_POST['selectStud'])) {
 						$_SESSION['subjectoutcome'] = $soutcome;
 						if(($timein == 'Please Select') or ($timeout == 'Please Select')){
 							if($ssval == 'Select Student'){
-								echo '<script>alert("Please Select Time-In/ Time-Out!");window.location.href="dean-qrscanner.php";</script>';
+								if($_SESSION['accesslevel'] == "DEAN"){
+									echo '<script>alert("Please Select Time-In/ Time-Out!");window.location.href="dean-qrscanner.php";</script>';
+									exit();
+								}
+								else{
+									echo '<script>alert("Please Select Time-In/ Time-Out!");window.location.href="faculty-qrscanner.php";</script>';
+									exit();
+								}
 							}
 							else{
-								echo '<script>alert("Please Select Time-In/ Time-Out!");window.location.href="dean-qrscannerAS.php";</script>';
+								if($_SESSION['accesslevel'] == "DEAN"){
+									echo '<script>alert("Please Select Time-In/ Time-Out!");window.location.href="dean-qrscannerAS.php";</script>';
+									exit();
+								}
+								else{
+									echo '<script>alert("Please Select Time-In/ Time-Out!");window.location.href="faculty-qrscannerAS.php";</script>';
+									exit();
+								}
 							}	
 						}
 						else{
-							$StudAttendTime = gmdate("H:i", time() + 3600*(7+date("I"))); //time - in ni student
+							$StudAttendTime = gmdate("H:i", time() + 3600*(8+date("I"))); //time - in ni student
 							$SATHour = substr($StudAttendTime, -5,2); // return yung hour *00*:00 ng time-in ni student
 							$SATMins = substr($StudAttendTime, -2,2); // return yung minutes 00:*00* ng time-in ni student
 							$SATHourMins = $SATHour . $SATMins; // pagsamahin yung hour at mins
@@ -476,15 +540,29 @@ if (isset($_POST['selectStud'])) {
 							$FACMins = substr($FACtimein, -2,2); // return yung minutes 00:*00* ng time-in na sinelect ni faculty
 							$FACHourMins = $FACHour . $FACMins; // pagsamahin yung hour at mins
 							$FACHM_int = intval($FACHourMins); // convert into string yung hour at mins para sa condition
-
+							
 							$_SESSION['classTimeIn'] = $FACtimein;
 							$_SESSION['classTimeOut'] = $timeout;
 							if($SATHM_int < ($FACHM_int)){
 								if($ssval == 'Select Student'){
-									echo '<script>alert("The schedule has not yet been started!");window.location.href="dean-qrscanner.php";</script>';
+									if($_SESSION['accesslevel'] == "DEAN"){
+										echo '<script>alert("The schedule has not yet been started!");window.location.href="dean-qrscanner.php";</script>';
+										exit();
+									}
+									else{
+										echo '<script>alert("The schedule has not yet been started!");window.location.href="faculty-qrscanner.php";</script>';
+										exit();
+									}
 								}
 								else{
-									echo '<script>alert("The schedule has not yet been started!");window.location.href="dean-qrscannerAS.php";</script>';
+									if($_SESSION['accesslevel'] == "DEAN"){
+										echo '<script>alert("The schedule has not yet been started!");window.location.href="dean-qrscannerAS.php";</script>';
+										exit();
+									}
+									else{
+										echo '<script>alert("The schedule has not yet been started!");window.location.href="faculty-qrscannerAS.php";</script>';
+										exit();
+									}
 								}
 							}
 							else{
@@ -540,10 +618,24 @@ if (isset($_POST['selectStud'])) {
 										}
 										else{
 											if($ssval == 'Select Student'){
-												echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+												if($_SESSION['accesslevel'] == "DEAN"){
+													echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+													exit();
+												}
+												else{
+													echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="faculty-qrscanner.php";</script>';
+													exit();
+												}
 											}
 											else{
-												echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+												if($_SESSION['accesslevel'] == "DEAN"){
+													echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+													exit();
+												}
+												else{
+													echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="faculty-qrscannerAS.php";</script>';
+													exit();
+												}
 											}	
 										}
 									}
@@ -586,10 +678,24 @@ if (isset($_POST['selectStud'])) {
 										}
 										else{
 											if($ssval == 'Select Student'){
-												echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+												if($_SESSION['accesslevel'] == "DEAN"){
+													echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+													exit();
+												}
+												else{
+													echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="faculty-qrscanner.php";</script>';
+													exit();
+												}
 											}
 											else{
-												echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+												if($_SESSION['accesslevel'] == "DEAN"){
+													echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+													exit();
+												}
+												else{
+													echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="faculty-qrscannerAS.php";</script>';
+													exit();
+												}
 											}	
 										}
 									}
@@ -633,10 +739,24 @@ if (isset($_POST['selectStud'])) {
 									}
 									else{
 										if($ssval == 'Select Student'){
-											echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+											if($_SESSION['accesslevel'] == "DEAN"){
+												echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+												exit();
+											}
+											else{
+												echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="faculty-qrscanner.php";</script>';
+												exit();
+											}
 										}
 										else{
-											echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+											if($_SESSION['accesslevel'] == "DEAN"){
+												echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+												exit();
+											}
+											else{
+												echo '<script>alert("Student did not matched with selected section/subject.\nPlease Select/Scan another student.");window.location.href="faculty-qrscannerAS.php";</script>';
+												exit();
+											}
 										}	
 									}
 								}
@@ -647,26 +767,68 @@ if (isset($_POST['selectStud'])) {
 			}
 			if (($section == 'Please Select') or ($subject == 'Please Select')) {
 				if($ssval == 'Select Student'){
-					echo '<script>alert("Please Select Section/ Subject!");window.location.href="dean-qrscanner.php";</script>';
+					if($_SESSION['accesslevel'] == "DEAN"){
+						echo '<script>alert("Please Select Section/ Subject!");window.location.href="dean-qrscanner.php";</script>';
+						exit();
+					}
+					else{
+						echo '<script>alert("Please Select Section/ Subject!");window.location.href="faculty-qrscanner.php";</script>';
+						exit();
+					}
 				}
 				else{
-					echo '<script>alert("Please Select Section/ Subject!");window.location.href="dean-qrscannerAS.php";</script>';
+					if($_SESSION['accesslevel'] == "DEAN"){
+						echo '<script>alert("Please Select Section/ Subject!");window.location.href="dean-qrscannerAS.php";</script>';
+						exit();
+					}
+					else{
+						echo '<script>alert("Please Select Section/ Subject!");window.location.href="faculty-qrscannerAS.php";</script>';
+						exit();
+					}
 				}	
 			}
 			elseif(($timein == 'Please Select') or ($timeout == 'Please Select')){
 				if($ssval == 'Select Student'){
-					echo '<script>alert("Please select Time-in and Time-Out!");window.location.href="dean-qrscanner.php";</script>';
+					if($_SESSION['accesslevel'] == "DEAN"){
+						echo '<script>alert("Please select Time-in and Time-Out!");window.location.href="dean-qrscanner.php";</script>';
+						exit();
+					}
+					else{
+						echo '<script>alert("Please select Time-in and Time-Out!");window.location.href="faculty-qrscanner.php";</script>';
+						exit();
+					}
 				}
 				else{
-					echo '<script>alert("Please select Time-in and Time-Out!");window.location.href="dean-qrscannerAS.php";</script>';
+					if($_SESSION['accesslevel'] == "DEAN"){
+						echo '<script>alert("Please select Time-in and Time-Out!");window.location.href="dean-qrscannerAS.php";</script>';
+						exit();
+					}
+					else{
+						echo '<script>alert("Please select Time-in and Time-Out!");window.location.href="faculty-qrscannerAS.php";</script>';
+						exit();
+					}
 				}	
 			}
 			else{
 				if($ssval == 'Select Student'){
-					echo '<script>alert("Student id is not existing.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+					if($_SESSION['accesslevel'] == "DEAN"){
+						echo '<script>alert("Student id is not existing.\nPlease Select/Scan another student.");window.location.href="dean-qrscanner.php";</script>';
+						exit();
+					}
+					else{
+						echo '<script>alert("Student id is not existing.\nPlease Select/Scan another student.");window.location.href="faculty-qrscanner.php";</script>';
+						exit();
+					}
 				}
 				else{
-					echo '<script>alert("Student id is not existing.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+					if($_SESSION['accesslevel'] == "DEAN"){
+						echo '<script>alert("Student id is not existing.\nPlease Select/Scan another student.");window.location.href="dean-qrscannerAS.php";</script>';
+						exit();
+					}
+					else{
+						echo '<script>alert("Student id is not existing.\nPlease Select/Scan another student.");window.location.href="faculty-qrscannerAS.php";</script>';
+						exit();
+					}
 				}	
 			}
 		}
@@ -685,7 +847,12 @@ if (isset($_POST["SelectAnotherStudent"])){
 
     $currentTimeout = $_SESSION['classTimeOut'];
 	$_SESSION['currentTimeout'] = $currentTimeout; // passed variable for selected time out
-	header("location: dean-qrscannerAS.php");
+	if($_SESSION['accesslevel'] == "DEAN"){
+		header("location: dean-qrscannerAS.php");
+	}
+	else{
+		header("location: faculty-qrscannerAS.php");
+	}
 }
 
 if (isset($_POST["StudentViewer"])){
@@ -789,7 +956,7 @@ if (isset($_POST["StudentViewer"])){
     $_SESSION['scourse'] = $course ;
 	$_SESSION['syear'] = $year ;
 	$_SESSION['ssection'] = $ssection ;
-	if( $_SESSION['accesslevel'] == 'DEAN'){
+	if($_SESSION['accesslevel'] == 'DEAN'){
 		header("location: dean-view-student.php");
 	}
 	else{
@@ -991,10 +1158,16 @@ if (isset($_POST["returnClass"])){
 	$rToSched = "SELECT sched_status FROM recent_schedule WHERE subject = '" . $rsubject . "' and section = '" . $rsection . "' and date_of_schedule = '" . $rdate . "';";
 	$rToSched = mysqli_query($db,$rToSched);
 	$rToSched = mysqli_fetch_assoc($rToSched);
-	$rToSched = reset($rToSched);
-	
+	if($rToSched > 0){
+		$rToSched = reset($rToSched);
+	}
 	if($rToSched == 'END'){
-		echo '<script>alert("Schedule is already ended!");window.location.href="dean-page.php";</script>';
+		if($_SESSION['accesslevel'] == "DEAN"){
+			echo '<script>alert("Schedule is already ended!");window.location.href="dean-page.php";</script>';
+		}
+		else{
+			echo '<script>alert("Schedule is already ended!");window.location.href="faculty-page.php";</script>';
+		}
 	}
 	elseif($rToSched == 'ON-GOING'){
 		//display all subjects and section
@@ -1030,7 +1203,241 @@ if (isset($_POST["returnClass"])){
 		header("location: dean-scannedqr.php");
 	}
 	else{
-		echo '<script>alert("Schedule is not Existing!");window.location.href="dean-page.php";</script>';
+		if($_SESSION['accesslevel'] == "DEAN"){
+			echo '<script>alert("Schedule is not Existing!");window.location.href="dean-page.php";</script>';
+		}
+		else{
+			echo '<script>alert("Schedule is not Existing!");window.location.href="faculty-page.php";</script>';
+		}
 	}
 }
+
+// drop subjects buttons until line : 1161
+
+if (isset($_POST["dropSubject1"])){
+	$delSubject = $_SESSION['subject1'];
+	$delStudent = mysqli_real_escape_string($db,$_POST['estudent_id']);
+	$sqlDel = "UPDATE courses_enrolled
+		SET subject1 = '', section1 = ''
+		WHERE student_id = $delStudent;";
+	$subjectDel = mysqli_query($db,$sqlDel);
+	echo '<script>alert("Subject Successfully Dropped!");window.location.href="dean-student-info.php";</script>';
+}
+
+if (isset($_POST["dropSubject2"])){
+	$delSubject = $_SESSION['subject2'];
+	$delStudent = mysqli_real_escape_string($db,$_POST['estudent_id']);
+	$sqlDel = "UPDATE courses_enrolled
+		SET subject2 = '', section2 = ''
+		WHERE student_id = $delStudent;";
+	$subjectDel = mysqli_query($db,$sqlDel);
+	echo '<script>alert("Subject Successfully Dropped!");window.location.href="dean-student-info.php";</script>';
+}
+
+if (isset($_POST["dropSubject3"])){
+	$delSubject = $_SESSION['subject3'];
+	$delStudent = mysqli_real_escape_string($db,$_POST['estudent_id']);
+	$sqlDel = "UPDATE courses_enrolled
+		SET subject3 = '', section3 = ''
+		WHERE student_id = $delStudent;";
+	$subjectDel = mysqli_query($db,$sqlDel);
+	echo '<script>alert("Subject Successfully Dropped!");window.location.href="dean-student-info.php";</script>';
+}
+
+if (isset($_POST["dropSubject4"])){
+	$delSubject = $_SESSION['subject4'];
+	$delStudent = mysqli_real_escape_string($db,$_POST['estudent_id']);
+	$sqlDel = "UPDATE courses_enrolled
+		SET subject4 = '', section4 = ''
+		WHERE student_id = $delStudent;";
+	$subjectDel = mysqli_query($db,$sqlDel);
+	echo '<script>alert("Subject Successfully Dropped!");window.location.href="dean-student-info.php";</script>';
+}
+
+if (isset($_POST["dropSubject5"])){
+	$delSubject = $_SESSION['subject5'];
+	$delStudent = mysqli_real_escape_string($db,$_POST['estudent_id']);
+	$sqlDel = "UPDATE courses_enrolled
+		SET subject5 = '', section5 = ''
+		WHERE student_id = $delStudent;";
+	$subjectDel = mysqli_query($db,$sqlDel);
+	echo '<script>alert("Subject Successfully Dropped!");window.location.href="dean-student-info.php";</script>';
+}
+
+if (isset($_POST["dropSubject6"])){
+	$delSubject = $_SESSION['subject6'];
+	$delStudent = mysqli_real_escape_string($db,$_POST['estudent_id']);
+	$sqlDel = "UPDATE courses_enrolled
+		SET subject6 = '', section6 = ''
+		WHERE student_id = $delStudent;";
+	$subjectDel = mysqli_query($db,$sqlDel);
+	echo '<script>alert("Subject Successfully Dropped!");window.location.href="dean-student-info.php";</script>';
+}
+
+if (isset($_POST["dropSubject7"])){
+	$delSubject = $_SESSION['subject7'];
+	$delStudent = mysqli_real_escape_string($db,$_POST['estudent_id']);
+	$sqlDel = "UPDATE courses_enrolled
+		SET subject7 = '', section7 = ''
+		WHERE student_id = $delStudent;";
+	$subjectDel = mysqli_query($db,$sqlDel);
+	echo '<script>alert("Subject Successfully Dropped!");window.location.href="dean-student-info.php";</script>';
+}
+
+if (isset($_POST["dropSubject8"])){
+	$delSubject = $_SESSION['subject8'];
+	$delStudent = mysqli_real_escape_string($db,$_POST['estudent_id']);
+	$sqlDel = "UPDATE courses_enrolled
+		SET subject8 = '', section8 = ''
+		WHERE student_id = $delStudent;";
+	$subjectDel = mysqli_query($db,$sqlDel);
+	echo '<script>alert("Subject Successfully Dropped!");window.location.href="dean-student-info.php";</script>';
+}
+
+if (isset($_POST["dropSubject9"])){
+	$delSubject = $_SESSION['subject9'];
+	$delStudent = mysqli_real_escape_string($db,$_POST['estudent_id']);
+	$sqlDel = "UPDATE courses_enrolled
+		SET subject9 = '', section9 = ''
+		WHERE student_id = $delStudent;";
+	$subjectDel = mysqli_query($db,$sqlDel);
+	echo '<script>alert("Subject Successfully Dropped!");window.location.href="dean-student-info.php";</script>';
+}
+
+if (isset($_POST["dropSubject10"])){
+	$delSubject = $_SESSION['subject10'];
+	$delStudent = mysqli_real_escape_string($db,$_POST['estudent_id']);
+	$sqlDel = "UPDATE courses_enrolled
+		SET subject10 = '', subject10 = ''
+		WHERE student_id = $delStudent;";
+	$subjectDel = mysqli_query($db,$sqlDel);
+	echo '<script>alert("Subject Successfully Dropped!");window.location.href="dean-student-info.php";</script>';
+}
+
+if (isset($_POST["sort"])){
+	$SortSubject=$_POST['subject'];
+	$SortSection=$_POST['section'];
+	if(($SortSubject == "Please Select") and ($SortSection == "Please Select")){
+		echo '<script>alert("Please Select Subject/Section");window.location.href="dean-attendance-viewer.php";</script>';
+	}
+	else{
+		$_SESSION['SortSubject'] = $SortSubject;
+		$_SESSION['SortSection'] = $SortSection;
+		if($_SESSION['accesslevel'] == "DEAN"){
+			header("location: dean-sortby-subsec.php");
+		}
+		else{
+			header("location: faculty-sortby-subsec.php");
+		}
+	}
+}
+
+if (isset($_POST["SortStudent"])){
+	 $SortStudent_viewer = $_POST["SortStudent"];
+	 //display lastname depends on student_id
+	 $lastquery = "SELECT lastname FROM student WHERE student_id = '$SortStudent_viewer'";
+	 $lquery = mysqli_query($db,$lastquery);
+	 $lastnamequery = mysqli_fetch_assoc($lquery);
+	 $lastname = reset($lastnamequery);
+		
+	 //display firstname depends on student_id
+	 $firstquery = "SELECT firstname FROM student WHERE student_id = '$SortStudent_viewer'";
+	 $fquery = mysqli_query($db,$firstquery);
+	 $firstnamequery = mysqli_fetch_assoc($fquery);
+	 $firstname = reset($firstnamequery);
+		
+	 //display middlename depends on student_id
+	 $midquery = "SELECT middlename FROM student WHERE student_id = '$SortStudent_viewer'";
+	 $mquery = mysqli_query($db,$midquery);
+	 $middlenamequery = mysqli_fetch_assoc($mquery);
+	 $middlename = reset($middlenamequery);
+		
+	 //display course depends on student_id
+	 $course = "SELECT course FROM student WHERE student_id = '$SortStudent_viewer'";
+	 $course = mysqli_query($db,$course);
+	 $course = mysqli_fetch_assoc($course);
+	 $course = reset($course);
+		
+	 //display year depends on student_id
+	 $year = "SELECT year FROM student WHERE student_id = '$SortStudent_viewer'";
+	 $year = mysqli_query($db,$year);
+	 $year = mysqli_fetch_assoc($year);
+	 $year = reset($year);
+		
+	 //display section depends on student_id
+	 $ssection = "SELECT section FROM student WHERE student_id = '$SortStudent_viewer'";
+	 $ssection = mysqli_query($db,$ssection);
+	 $ssection = mysqli_fetch_assoc($ssection);
+	 $ssection = reset($ssection);
+ 
+	 //display all subjects and section
+	 $all = "SELECT * FROM courses_enrolled WHERE student_id = '$SortStudent_viewer'";
+	 $all = mysqli_query($db,$all);
+	 $all = mysqli_fetch_assoc($all);
+	 $_SESSION['subject1'] = $all['subject1'];
+	 $_SESSION['subject2'] = $all['subject2'];
+	 $_SESSION['subject3'] = $all['subject3'];
+	 $_SESSION['subject4'] = $all['subject4'];
+	 $_SESSION['subject5'] = $all['subject5'];
+	 $_SESSION['subject6'] = $all['subject6'];
+	 $_SESSION['subject7'] = $all['subject7'];
+	 $_SESSION['subject8'] = $all['subject8'];
+	 $_SESSION['subject9'] = $all['subject9'];
+	 $_SESSION['subject10'] = $all['subject10'];
+	 
+	 $_SESSION['section1'] = $all['section1'];
+	 if($all['section1'] == 'Same as my Current Section'){
+		 $_SESSION['section1'] = $course . $year . '-' . $ssection;
+	 }
+	 $_SESSION['section2'] = $all['section2'];
+	 if($all['section2'] == 'Same as my Current Section'){
+		 $_SESSION['section2'] = $course . $year . '-' . $ssection;
+	 }
+	 $_SESSION['section3'] = $all['section3'];
+	 if($all['section3'] == 'Same as my Current Section'){
+		 $_SESSION['section3'] = $course . $year . '-' . $ssection;
+	 }
+	 $_SESSION['section4'] = $all['section4'];
+	 if($all['section4'] == 'Same as my Current Section'){
+		 $_SESSION['section4'] = $course . $year . '-' . $ssection;
+	 }
+	 $_SESSION['section5'] = $all['section5'];
+	 if($all['section5'] == 'Same as my Current Section'){
+		 $_SESSION['section5'] = $course . $year . '-' . $ssection;
+	 }
+	 $_SESSION['section6'] = $all['section6'];
+	 if($all['section6'] == 'Same as my Current Section'){
+		 $_SESSION['section6'] = $course . $year . '-' . $ssection;
+	 }
+	 $_SESSION['section7'] = $all['section7'];
+	 if($all['section7'] == 'Same as my Current Section'){
+		 $_SESSION['section7'] = $course . $year . '-' . $ssection;
+	 }
+	 $_SESSION['section8'] = $all['section8'];
+	 if($all['section8'] == 'Same as my Current Section'){
+		 $_SESSION['section8'] = $course . $year . '-' . $ssection;
+	 }
+	 $_SESSION['section9'] = $all['section9'];
+	 if($all['section9'] == 'Same as my Current Section'){
+		 $_SESSION['section9'] = $course . $year . '-' . $ssection;
+	 }
+	 $_SESSION['section10'] = $all['section10'];
+	 if($all['section10'] == 'Same as my Current Section'){
+		 $_SESSION['section10'] = $course . $year . '-' . $ssection;
+	 }
+ 
+	 $_SESSION['sstudent_id'] = $SortStudent_viewer ;
+	 $_SESSION['slastname'] = $lastname ;
+	 $_SESSION['sfirstname'] = $firstname ;
+	 $_SESSION['smiddlename'] = $middlename ;
+	 $_SESSION['scourse'] = $course ;
+	 $_SESSION['syear'] = $year ;
+	 $_SESSION['ssection'] = $ssection ;
+	 if($_SESSION['accesslevel'] == "DEAN"){
+	 	header("location: dean-sorted-stud_id.php");
+	 }
+	 else{
+		header("location: faculty-sorted-stud_id.php");
+	 }
+ }
 ?>

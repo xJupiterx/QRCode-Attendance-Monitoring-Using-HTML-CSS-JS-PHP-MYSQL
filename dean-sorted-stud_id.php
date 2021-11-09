@@ -126,9 +126,6 @@
                                 </div>
                                 <br>
                             </div>
-                            <div class="card-footer" style="background-color: gray; position:relative; height:30px">
-                                <a style="color: white; font-size:14px; position:relative; bottom:3px" href='dean-edit-student-info.php'><center>Click <u>here</u> to edit Student Information.</center></a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -147,6 +144,9 @@
                                             <tr>
                                                 <th style = "width:8%; font-size: 14px"><center>Subject</center></th>
                                                 <th style = "width:8%; font-size: 14px"><center>Section</center></th>
+                                                <th style = "width:8%; font-size: 14px"><center>On-Time</center></th>
+                                                <th style = "width:8%; font-size: 14px"><center>Late</center></th>
+                                                <th style = "width:8%; font-size: 14px"><center>Absent</center></th>
                                             </tr>
                                         </thead>
                                         <?php
@@ -160,6 +160,30 @@
                                                 <?php if($_SESSION[$subjectcounter] != ''): ?>
                                                     <td><center><?php  echo $_SESSION[$subjectcounter] ?></center></td>
                                                     <td><center><?php  echo $_SESSION[$sectioncounter] ?></center></td>
+                                                    <?php
+                                                        $ontimesql = "SELECT COUNT( * ) as 'rows'
+                                                            FROM student_attendance
+                                                            WHERE subject = '" . $_SESSION[$subjectcounter] . "' and section = '" . $_SESSION[$sectioncounter] . "' and student_id = '" . $_SESSION['sstudent_id'] . "' and remarks = 'ON-TIME';";
+                                                        $ontimeCount = mysqli_query($db, $ontimesql);
+                                                        $ontimeCount = mysqli_fetch_assoc($ontimeCount);
+                                                    ?>
+                                                    <td><center><?php echo $ontimeCount['rows'] ?></center></td>
+                                                    <?php
+                                                        $latesql = "SELECT COUNT( * ) as 'rows'
+                                                            FROM student_attendance
+                                                            WHERE subject = '" . $_SESSION[$subjectcounter] . "' and section = '" . $_SESSION[$sectioncounter] . "' and student_id = '" . $_SESSION['sstudent_id'] . "' and remarks = 'ON-TIME';";
+                                                        $lateCount = mysqli_query($db, $latesql);
+                                                        $lateCount = mysqli_fetch_assoc($lateCount);
+                                                    ?>
+                                                    <td><center><?php echo $lateCount['rows'] ?></center></td>
+                                                    <?php
+                                                        $absentsql = "SELECT COUNT( * ) as 'rows'
+                                                            FROM student_attendance
+                                                            WHERE subject = '" . $_SESSION[$subjectcounter] . "' and section = '" . $_SESSION[$sectioncounter] . "' and student_id = '" . $_SESSION['sstudent_id'] . "' and remarks = 'ON-TIME';";
+                                                        $absentCount = mysqli_query($db, $absentsql);
+                                                        $absentCount = mysqli_fetch_assoc($absentCount);
+                                                    ?>
+                                                    <td><center><?php echo $absentCount['rows'] ?></center></td>
                                                 <?php endif ?>
                                             </tr>
                                         <?php
@@ -169,9 +193,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                            <div class="card-footer" style="background-color: gray; position:relative; height:30px">
-                                <a style="color: white; font-size:14px; position:relative; bottom:3px" href='dean-edit-subject_section.php'><center>Click <u>here</u> to edit Student Subject/Section.</center></a>
                             </div>
                         </div>
                     </div>
