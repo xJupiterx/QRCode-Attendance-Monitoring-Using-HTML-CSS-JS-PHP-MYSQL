@@ -119,7 +119,7 @@
                                     <h3>Sign Up</h3>
                                     <p>Register Faculty Account.</p>
                                 </div>
-                                <form action="register.php" method="POST">
+                                <form action="dean-createacc.php" method="POST">
                                     <div class="row">
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
@@ -181,7 +181,7 @@
     <script src="assets/js/main.js"></script>
 	<script>
 		function myFunction() {
-		  alert("Congratulations, Database successfully Updated!");
+		  alert("Congratulations, Faculty Account Successfully Created!");
 		}
 	</script>
 </body>

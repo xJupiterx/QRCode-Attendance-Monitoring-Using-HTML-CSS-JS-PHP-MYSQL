@@ -9,6 +9,7 @@ $username = "";
 $email = "";
 $password = "";
 $accesslevel = "FACULTY";
+$status = 'ACTIVE';
 $errors = []; //array for errors in login and faculty account
 $sserrorcount = 0; // scanned student error counter for dean-qrscanner
 $db = mysqli_connect('localhost','root','','accounts') or die('could not connect ');
@@ -36,7 +37,7 @@ if (isset($_POST['Register'])) {
 	$query = mysqli_query($db,$userquery);
 	$user = mysqli_fetch_assoc($query);
 
-	if ($user) {
+	if ($user > 0) {
 		if ($user['username'] == $username) {
 			array_push($errors, 'username already exist');
 		}
@@ -47,11 +48,11 @@ if (isset($_POST['Register'])) {
 
 	if (count($errors) == 0) {
 
-		$query = "INSERT INTO user (lastname,firstname,middlename,username,email,password,accesslevel) 
-		VALUES ('$lastname','$firstname','$middlename','$username','$email','$password','$accesslevel')" ;
+		$query = "INSERT INTO user (lastname,firstname,middlename,username,email,password,accesslevel,status) 
+		VALUES ('$lastname','$firstname','$middlename','$username','$email','$password','$accesslevel','$status')" ;
 		mysqli_query($db,$query);
 		$_SESSION['username'] = $username ;
-		header("location: register.php");
+		header("location: dean-createacc.php");
 	}
 }
 

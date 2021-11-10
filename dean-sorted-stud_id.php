@@ -171,7 +171,7 @@
                                                     <?php
                                                         $latesql = "SELECT COUNT( * ) as 'rows'
                                                             FROM student_attendance
-                                                            WHERE subject = '" . $_SESSION[$subjectcounter] . "' and section = '" . $_SESSION[$sectioncounter] . "' and student_id = '" . $_SESSION['sstudent_id'] . "' and remarks = 'ON-TIME';";
+                                                            WHERE subject = '" . $_SESSION[$subjectcounter] . "' and section = '" . $_SESSION[$sectioncounter] . "' and student_id = '" . $_SESSION['sstudent_id'] . "' and remarks = 'LATE';";
                                                         $lateCount = mysqli_query($db, $latesql);
                                                         $lateCount = mysqli_fetch_assoc($lateCount);
                                                     ?>
@@ -179,7 +179,7 @@
                                                     <?php
                                                         $absentsql = "SELECT COUNT( * ) as 'rows'
                                                             FROM student_attendance
-                                                            WHERE subject = '" . $_SESSION[$subjectcounter] . "' and section = '" . $_SESSION[$sectioncounter] . "' and student_id = '" . $_SESSION['sstudent_id'] . "' and remarks = 'ON-TIME';";
+                                                            WHERE subject = '" . $_SESSION[$subjectcounter] . "' and section = '" . $_SESSION[$sectioncounter] . "' and student_id = '" . $_SESSION['sstudent_id'] . "' and remarks = 'ABSENT';";
                                                         $absentCount = mysqli_query($db, $absentsql);
                                                         $absentCount = mysqli_fetch_assoc($absentCount);
                                                     ?>
