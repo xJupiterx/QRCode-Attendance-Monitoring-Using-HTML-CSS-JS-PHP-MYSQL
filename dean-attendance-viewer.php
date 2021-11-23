@@ -122,7 +122,7 @@
 
             <div class="main-content container-fluid">
                 <div class="page-title">
-                    <h3>Recent Student Attendance</h3>
+                    <h3>Student Attendance</h3>
                 </div>
 				<br>
                 <section class="section">
@@ -132,7 +132,8 @@
                                 <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #3acf61">
                                     <h4 class="card-title" style="color: white"><strong>Recent Attendance</strong></h4>
                                     <div class="d-flex ">
-                                        <i data-feather="download"  style="color: white"></i>
+                                        <i data-feather="download"  style="color: white; position:relative; top:10px"></i>
+                                        <?php include('PHPRequestDatas/compile_attendance.php'); ?>
                                     </div>
                                 </div>
                                 <div class="card-body px-0 pb-0">
@@ -270,10 +271,7 @@
         </div>
     </div>
     <script src="assets/js/feather-icons/feather.min.js"></script>
-    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/app.js"></script>
-    <script src="assets/vendors/chartjs/Chart.min.js"></script>
-    <script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
     <script src="assets/js/pages/dashboard.js"></script>
     <script src="assets/js/main.js"></script>
     <script>

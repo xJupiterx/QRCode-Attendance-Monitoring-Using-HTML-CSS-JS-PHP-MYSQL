@@ -208,15 +208,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card" style="position:relative; height:140px; bottom:60px; border-top-style:hidden">
+                            <div class="card" style="position:relative; height:86px; bottom:60px; border-top-style:hidden">
                                 <div class="card-body">
                                     <br>
                                     <div>
                                         <div class="row">
-                                            <div class="col-md-6" style='position:relative; bottom:50px'>
+                                            <div class="col-md-12" style='position:relative; bottom:50px'>
                                                 <div>
                                                     <center>
-                                                        <p style= "font-size:13px;"><strong>Selected Time-In:</strong></p>
+                                                        <p style= "font-size:13px;"><strong>Class Start:</strong></p>
                                                     </center>
                                                     <center>
                                                         <input type="hidden" name="time-in" value = "<?php echo $_SESSION['currentTimein'] ?>" >
@@ -224,22 +224,6 @@
                                                     </center>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6" style='position:relative; bottom:50px'>
-                                                <div>
-                                                    <center>
-                                                        <p style= "font-size:13px;"><strong>Selected Time-Out:</strong></p>
-                                                    </center>
-                                                    <center>
-                                                        <input type="hidden" name="time-out" value = "<?php echo $_SESSION['currentTimeout'] ?>" >
-                                                        <p style= "font-size:14px;"><strong><u><?php echo $_SESSION['currentTimeout'] ?></u></strong></p>
-                                                    </center>
-                                                </div>
-                                            </div>
-                                            <?php if($sserrorcount > 0):?>
-                                                <div style='position:relative; bottom:50px'>
-                                                    <center><p style="color:red;"><?php echo $sserrors?></p></center>
-                                                </div>
-                                            <?php endif ?>
                                         </div>
                                     </div>
                                 </div>

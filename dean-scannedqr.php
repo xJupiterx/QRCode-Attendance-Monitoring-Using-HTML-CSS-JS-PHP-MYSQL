@@ -181,8 +181,7 @@
                                             <p><center><strong>Section: </strong><u><?php echo $_SESSION['selectedsection'] ?></u></center></p>
                                         </div>
                                         <div class = 'col-md-6'>
-                                            <p><center><strong>Time-In: </strong><?php echo $_SESSION['classTimeIn'] ?></center></p>
-                                            <p><center><strong>Time-Out: </strong><?php echo $_SESSION['classTimeOut'] ?></center></p>
+                                            <p><center><strong>Class Start: </strong><?php echo $_SESSION['classTimeIn'] ?></center></p>
                                         </div>
                                     </div>
                                 </div>
@@ -321,10 +320,7 @@
         </div>
     </div>
     <script src="assets/js/feather-icons/feather.min.js"></script>
-    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/app.js"></script>
-    <script src="assets/vendors/chartjs/Chart.min.js"></script>
-    <script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
     <script src="assets/js/pages/dashboard.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/sweetAlert.js"></script>

@@ -1,5 +1,12 @@
 <?php
-    
+    $db->set_charset("utf8");
+    $exp_table = "compiled_attendance"; // Table to export
+    if (!$db){
+        die("ERROR: Could not connect. " . mysqli_connect_error());
+    }
+    // Create and open new csv file
+    $csv  = $exp_table . "-" . date('d-m-Y-his') . '.csv';
+    $file = fopen($csv, 'w');
     //selecting all student in student_table
     $StudentSelect = "SELECT * FROM student";
     $result = mysqli_query($db, $StudentSelect);
@@ -7,7 +14,6 @@
         //looping student 1 by 1
         while ($row = mysqli_fetch_array($result)) {
             $selectedStudent = $row['student_id'];
-                                           
             
             //display course depends on student_id
             $course = "SELECT course FROM student WHERE student_id = '$selectedStudent'";
@@ -110,11 +116,11 @@
                             $absentCount = mysqli_fetch_assoc($absentCount);
 
                             // create variable which displays ontime/late/absent=total
-                            $remarks = $ontimeCount . "/" . $lateCount . "/" . $absentCount;
+                            $remarks = $ontimeCount['rows1'] . "/" . $lateCount['rows2'] . "/" . $absentCount['rows3'];
                             //convert counts into int then add
-                            $count1 = intval($ontimeCount);
-                            $count2 = intval($lateCount);
-                            $count3 = intval($absentCount);
+                            $count1 = intval($ontimeCount['rows1']);
+                            $count2 = intval($lateCount['rows2']);
+                            $count3 = intval($absentCount['rows3']);
                             $totalCount = $count1 + $count2 + $count3;
                             $remarks = $remarks . "=" . $totalCount;
                             $insertData = "
@@ -130,14 +136,6 @@
     }
     $j=3;
     if($j==1){
-        $db->set_charset("utf8");
-        $exp_table = "compiled_attendance"; // Table to export
-        if (!$db){
-            die("ERROR: Could not connect. " . mysqli_connect_error());
-        }
-        // Create and open new csv file
-        $csv  = $exp_table . "-" . date('d-m-Y-his') . '.csv';
-        $file = fopen($csv, 'w');
         // Get the table
         if (!$mysqli_result = mysqli_query($db, "SELECT * FROM {$exp_table}"))
             printf("Error: %s\n", $db->error);
