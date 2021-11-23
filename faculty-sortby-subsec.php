@@ -141,27 +141,31 @@
                                                 <thead>
                                                     <tr>
                                                         <th style = "width:8%; font-size: 14px">Subject</th>
-                                                        <th style = "width:10%; font-size: 14px">Section</th>
+                                                        <th style = "width:12%; font-size: 14px">Section</th>
                                                         <th style = "width:8%; font-size: 14px">Student_ID</th>
-                                                        <th style = "width:8%; font-size: 14px">First name</th>
-                                                        <th style = "width:8%; font-size: 14px">Last name</th>
+                                                        <th style = "width:32%; font-size: 14px">Name</th>
                                                         <th style = "width:8%; font-size: 14px">Time-In</th>
-                                                        <th style = "width:8%; font-size: 14px">Remarks</th>
                                                         <th style = "width:8%; font-size: 14px">Date</th>
+                                                        <th style = "width:8%; font-size: 14px">Remarks</th>
 
                                                     </tr>
                                                 </thead>
                                                 <?php
                                                 while ($row = mysqli_fetch_array($result)) {
+                                                    $m = "SELECT middlename FROM student WHERE student_id = '" . $row['student_id'] . "'";
+                                                    $m = mysqli_query($db,$m);
+                                                    $m = mysqli_fetch_assoc($m);
+                                                    $m = reset($m);
+                                                    $m = substr($m, 0, 1);
                                                 ?>
                                                 <tbody>
                                                     <tr>
                                                         <td><?php  echo $row['subject']; ?></td>
                                                         <td><?php  echo $row['section']; ?></td>
                                                         <td><?php  echo $row['student_id']; ?></td>
-                                                        <td><?php  echo $row['firstname']; ?></td>
-                                                        <td><?php  echo $row['lastname']; ?></td>
+                                                        <td><?php  echo $row['lastname']; ?>, <?php  echo $row['firstname']; ?> <?php  echo $m; ?></td>
                                                         <td><?php  echo $row['stud_time_in']; ?></td>
+                                                        <td><?php  echo $row['date_of_schedule']; ?></td>
                                                         <?php if($row['remarks']=="ON-TIME"): ?>
                                                             <td style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
                                                         <?php endif ?>
@@ -171,7 +175,6 @@
                                                         <?php if($row['remarks']=="ABSENT"): ?>
                                                             <td style="background-color: #df4759; color: #fef8f8; border-color:#cf4455; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
                                                         <?php endif ?>
-                                                        <td><?php  echo $row['date_of_schedule']; ?></td>
                                                     </tr>
                                                 <?php } ?>
                                                 </tbody>

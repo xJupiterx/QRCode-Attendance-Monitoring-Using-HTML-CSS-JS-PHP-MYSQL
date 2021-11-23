@@ -105,9 +105,7 @@
                                 <center><p class="col-md-12 col-12" style='font-size:18px'><b>Student ID: </b><?php echo $_SESSION['sstudent_id']; ?></p></center>
                                 <p class="col-12" style='font-size:18px'><b>Course/Year/Section: </b><?php echo $_SESSION['scourse']; ?> <?php echo $_SESSION['syear']; ?>-<?php echo $_SESSION['ssection']; ?></p>
                                 <div class="row">
-                                    <p class="col-md-4 col-12" style='font-size:18px'><b>Last name: </b><u><?php echo $_SESSION['slastname']; ?></u></p>
-                                    <p class="col-md-4 col-12" style='font-size:18px'><b>First name: </b><u><?php echo $_SESSION['sfirstname']; ?></u></p>
-                                    <p class="col-md-4 col-12" style='font-size:18px'><b>Middle name: </b><u><?php echo $_SESSION['smiddlename']; ?></u></p>
+                                    <p class="col-md-4 col-12" style='font-size:18px'><b>Name: </b><?php echo $_SESSION['slastname']; ?>, <?php echo $_SESSION['sfirstname']; ?> <?php echo substr($_SESSION['smiddlename'], 0, 1); ?>.</p>
                                 </div>
                                 <br>
                             </div>

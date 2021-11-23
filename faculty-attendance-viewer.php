@@ -143,22 +143,25 @@
                                                         <th style = "width:8%; font-size: 14px">Subject</th>
                                                         <th style = "width:8%; font-size: 14px">Section</th>
                                                         <th style = "width:8%; font-size: 14px">Student_ID</th>
-                                                        <th style = "width:8%; font-size: 14px">First name</th>
-                                                        <th style = "width:8%; font-size: 14px">Last name</th>
+                                                        <th style = "width:24%; font-size: 14px">Name</th>
                                                         <th style = "width:8%; font-size: 14px">Remarks</th>
 
                                                     </tr>
                                                 </thead>
                                                 <?php
                                                 while ($row = mysqli_fetch_array($result)) {
+                                                    $m = "SELECT middlename FROM student WHERE student_id = '" . $row['student_id'] . "'";
+                                                    $m = mysqli_query($db,$m);
+                                                    $m = mysqli_fetch_assoc($m);
+                                                    $m = reset($m);
+                                                    $m = substr($m, 0, 1);
                                                 ?>
                                                 <tbody>
                                                     <tr>
                                                         <td><?php  echo $row['subject']; ?></td>
                                                         <td><?php  echo $row['section']; ?></td>
                                                         <td><?php  echo $row['student_id']; ?></td>
-                                                        <td><?php  echo $row['firstname']; ?></td>
-                                                        <td><?php  echo $row['lastname']; ?></td>
+                                                        <td><?php  echo $row['lastname']; ?>, <?php  echo $row['firstname']; ?> <?php  echo $m; ?>.</td>
                                                         <?php if($row['remarks']=="ON-TIME"): ?>
                                                             <td style="color: #f7fcfb; background-color: #42ba96; border-color: #3ead8e; padding:6px"><center><?php  echo $row['remarks']; ?></center></td>
                                                         <?php endif ?>

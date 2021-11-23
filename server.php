@@ -509,28 +509,6 @@ if (isset($_POST['selectStud'])) {
 						}
 						$_SESSION['sectionoutcome'] = $outcome;
 						$_SESSION['subjectoutcome'] = $soutcome;
-						// if(($timein == 'Please Select') or ($timeout == 'Please Select')){
-						// 	if($ssval == 'Select Student'){
-						// 		if($_SESSION['accesslevel'] == "DEAN"){
-						// 			echo '<script>alert("Please Select Time-In/ Time-Out!");window.location.href="dean-qrscanner.php";</script>';
-						// 			exit();
-						// 		}
-						// 		else{
-						// 			echo '<script>alert("Please Select Time-In/ Time-Out!");window.location.href="faculty-qrscanner.php";</script>';
-						// 			exit();
-						// 		}
-						// 	}
-						// 	else{
-						// 		if($_SESSION['accesslevel'] == "DEAN"){
-						// 			echo '<script>alert("Please Select Time-In/ Time-Out!");window.location.href="dean-qrscannerAS.php";</script>';
-						// 			exit();
-						// 		}
-						// 		else{
-						// 			echo '<script>alert("Please Select Time-In/ Time-Out!");window.location.href="faculty-qrscannerAS.php";</script>';
-						// 			exit();
-						// 		}
-						// 	}	
-						// }
 					
 						$StudAttendTime = gmdate("H:i", time() + 3600*(8+date("I"))); //time - in ni student
 						$SATHour = substr($StudAttendTime, -5,2); // return yung hour *00*:00 ng time-in ni student
@@ -546,29 +524,6 @@ if (isset($_POST['selectStud'])) {
 						
 						$_SESSION['classTimeIn'] = $FACtimein;
 						$_SESSION['classTimeOut'] = $timeout;
-						// if($SATHM_int < ($FACHM_int)){
-						// 	if($ssval == 'Select Student'){
-						// 		if($_SESSION['accesslevel'] == "DEAN"){
-						// 			echo '<script>alert("The schedule has not yet been started!");window.location.href="dean-qrscanner.php";</script>';
-						// 			exit();
-						// 		}
-						// 		else{
-						// 			echo '<script>alert("The schedule has not yet been started!");window.location.href="faculty-qrscanner.php";</script>';
-						// 			exit();
-						// 		}
-						// 	}
-						// 	else{
-						// 		if($_SESSION['accesslevel'] == "DEAN"){
-						// 			echo '<script>alert("The schedule has not yet been started!");window.location.href="dean-qrscannerAS.php";</script>';
-						// 			exit();
-						// 		}
-						// 		else{
-						// 			echo '<script>alert("The schedule has not yet been started!");window.location.href="faculty-qrscannerAS.php";</script>';
-						// 			exit();
-						// 		}
-						// 	}
-						// }
-						// else{
 							// perform checker in recent_schedule
 						$DateChecker = gmdate("Y/m/j");
 						$rschecker = "SELECT * FROM recent_schedule 
@@ -763,7 +718,6 @@ if (isset($_POST['selectStud'])) {
 								}	
 							}
 						}
-						// }
 					}
 				}
 			}
@@ -1104,6 +1058,7 @@ if (isset($_POST["EndClass"])){
 			$_SESSION['smiddlename'] = 'Select Student';
 			$_SESSION['sectionSelector'] = 'Select Student';
 			$_SESSION['timeRemarks'] = '';
+			unset($_SESSION['faculty_time']);
 			header("location: dean-page.php");
 		}
 		else{
@@ -1117,6 +1072,7 @@ if (isset($_POST["EndClass"])){
 			$_SESSION['smiddlename'] = 'Select Student';
 			$_SESSION['sectionSelector'] = 'Select Student';
 			$_SESSION['timeRemarks'] = '';
+			unset($_SESSION['faculty_time']);
 			header("location: faculty-page.php");
 		}
 	}

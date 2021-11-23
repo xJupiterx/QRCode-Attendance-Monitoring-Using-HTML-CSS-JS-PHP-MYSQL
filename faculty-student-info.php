@@ -113,16 +113,14 @@
                                 </div>
                             </div>
                         </div>
-						<form class="table-responsive" method='post'>
+						<form class="table-responsive" method='post' style = "height: 410px; overflow: scroll">
 							<table id="myTable" class="table table-bordered table-sm" cellspacing="0" width="100%">
 								<thead>
 									<tr>
 										<th style = "width:8%; font-size: 14px" onclick="sort(0)">Student_ID</th>
-										<th style = "width:8%; font-size: 14px" onclick="sort(1)">Last name</th>
-										<th style = "width:8%; font-size: 14px" onclick="sort(2)">First name</th>
-										<th style = "width:8%; font-size: 14px" onclick="sort(3)">Middle name</th>
-										<th style = "width:8%; font-size: 14px" onclick="sort(4)">Email</th>
-										<th style = "width:8%; font-size: 14px" onclick="sort(5)">Course-Year-Section</th>
+										<th style = "width:24%; font-size: 14px" onclick="sort(1)">Name</th>
+										<th style = "width:8%; font-size: 14px" onclick="sort(2)">Email</th>
+										<th style = "width:8%; font-size: 14px" onclick="sort(3)">Course-Year-Section</th>
 									</tr>
 								</thead>
 								<?php
@@ -135,9 +133,7 @@
 												<input type="submit" name="StudentViewer" value=<?php  echo $row['student_id']; ?> style="background-color:white; border:none; color: blue; position:relative; bottom:14px">
 											</div>
 										</td>
-										<td><?php  echo $row['lastname']; ?></td>
-										<td><?php  echo $row['firstname']; ?></td>
-										<td><?php  echo $row['middlename']; ?></td>
+										<td><?php  echo $row['lastname']; ?>, <?php  echo $row['firstname']; ?> <?php  echo substr($row['middlename'], 0, 1); ?>.</td>
 										<td><?php  echo $row['email']; ?></td>
 										<td><center><?php  echo $row['course']; ?><?php  echo $row['year']; ?>-<?php  echo $row['section']; ?></center></td>
 									</tr>
